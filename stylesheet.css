@@ -16,7 +16,9 @@ body {
   height: 100%;
 }
 #sticky-footer {
-    position: sticky;
+    position: fixed;
+    bottom:0%;
+    width: 100%;
 }
 #content {
   flex: 1 0 auto;
