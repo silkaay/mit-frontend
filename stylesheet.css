@@ -1,10 +1,15 @@
 
-#navbar{
-    display: inline-block;
-    
-}
 #banner{
     background-color: darkseagreen;
+	position: fixed;
+	top: 0%;
+	width: 100%;
+}
+#navbar{
+	width: 100%;
+}
+#text{
+	padding-top: 150px;
 }
 html,
 body {
