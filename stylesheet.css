@@ -19,10 +19,14 @@ body {
     position: fixed;
     bottom:0%;
     width: 100%;
-    background-color: rgb(173, 227, 173);
+    background-color: darkseagreen;
 }
 #content {
   flex: 1 0 auto;
+}
+
+small {
+  color: white;
 }
 
 #navbar :hover{
