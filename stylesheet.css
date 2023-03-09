@@ -31,6 +31,9 @@ small {
 a {
   color: white;
 }
+a:hover {
+  color: darkgreen;
+}
 #navbar :hover{
   text-decoration: underline white;
 }
