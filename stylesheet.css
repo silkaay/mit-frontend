@@ -19,7 +19,7 @@ body {
     position: fixed;
     bottom:0%;
     width: 100%;
-    background-color: darkseagreen;
+    background-color: rgb(173, 227, 173);
 }
 #content {
   flex: 1 0 auto;
