@@ -28,7 +28,9 @@ body {
 small {
   color: white;
 }
-
+a {
+  color: white;
+}
 #navbar :hover{
   text-decoration: underline white;
 }
