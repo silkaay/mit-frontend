@@ -8,13 +8,14 @@
 #navbar{
 	width: 100%;
 }
-.nav-link:hover {
-  text-decoration: underline white;
+li{
+	padding-right: 40px;
+	padding-left: 40px;
+	font-size: 20px;
 }
 #text{
 	padding-top: 150px;
 }
-html,
 body {
   height: 100%;
 }
@@ -22,18 +23,7 @@ body {
     position: fixed;
     bottom:0%;
     width: 100%;
-    background-color: darkseagreen;
 }
 #content {
   flex: 1 0 auto;
-}
-
-small {
-  color: white;
-}
-a {
-  color: white;
-}
-a:hover {
-  color: darkgreen;
 }
