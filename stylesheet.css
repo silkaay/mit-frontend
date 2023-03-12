@@ -26,6 +26,12 @@ body {
     width: 100%;
     background-color: darkseagreen;
 }
+#to-top {
+	color: seagreen;
+}
+#to-top:hover {
+	color: darkgreen;
+}
 #content {
   flex: 1 0 auto;
 }
