@@ -25,6 +25,8 @@ body {
 #nett {
 	display: block;
 	margin: auto;
+	width: 500px;
+	height: auto;
 }
 #sticky-footer {
     position: fixed;
