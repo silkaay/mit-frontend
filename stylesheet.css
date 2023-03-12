@@ -20,7 +20,7 @@ li{
 	padding-bottom: 20px;
 }
 body {
-  height: 100%;
+  min-height: 100%;
 }
 #nett {
 	display: block;
