@@ -22,6 +22,10 @@ li{
 body {
   height: 100%;
 }
+#nett {
+	display: block;
+	margin: auto;
+}
 #sticky-footer {
     position: fixed;
     bottom:0%;
