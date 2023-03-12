@@ -29,6 +29,10 @@ body {
     background-color: darkseagreen;
 }
 
+#to-top {
+	color:white;
+}
+
 #to-top:hover {
 	color: darkgreen;
 }
