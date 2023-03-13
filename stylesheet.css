@@ -1,47 +1,72 @@
-
 #banner{
     background-color: darkseagreen;
 	position: fixed;
 	top: 0%;
 	width: 100%;
+	font-family:Courier New;
+	z-index: 1;
 }
 #navbar{
 	width: 100%;
+}
+hr{
+	z-index: 0;
+}
+body{
+	font-family:Courier New;
 }
 li{
 	padding-right: 40px;
 	padding-left: 40px;
 	font-size: 20px;
-}
-#text{
-	padding-top: 130px;
-}
-#last-text {
-	padding-bottom: 20px;
-}
-body {
-  min-height: 100%;
-}
-#nett {
-	display: block;
-	margin: auto;
-	width: 500px;
-	height: auto;
-}
-#sticky-footer {
-    position: fixed;
-    bottom:0%;
-    width: 100%;
-    background-color: darkseagreen;
+	font-family:Courier New;
 }
 
-#to-top {
+#Input{
+	padding-top: 180px;
+	padding-bottom: 20px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+#blogpic{
+	padding-left: 60;
+}
+p{
+	text-align:center;
+	font-family:Courier New;
+}
+h2{
+	text-align: center;
+	font-family:Courier New;
+}
+
+#backhome{
+	text-decoration: none;
 	color:white;
 }
-
-#to-top:hover {
+#linktop{
+	text-decoration: none;
+	color:white;
+}
+#linktop:hover{
+	color: darkgreen;
+	
+}
+#backhome:hover{
 	color: darkgreen;
 }
-#content {
-  flex: 1 0 auto;
+#trennung{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#sticky-footer {
+    bottom:0%;
+    width: 100%;
+	background-color: darkseagreen;
+	color:white;
+	text-align: right;
+}
+small{
+	padding-left:30%;
+	padding-right: 20px;
 }
