@@ -45,10 +45,22 @@
     <div id="form-overlay"></div>
     <div id="myForm" class="form-popup">
       <form action="/submit-form">
-        <input type="text" placeholder="Enter your name" name="name" required>
-        <input type="email" placeholder="Enter your email" name="email" required>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        <button type="submit" class="btn">Submit</button>
+        <div class="input-container"> 
+          <input type="text" placeholder="Title" name="title" required>
+          <input type="date" id="blog-date" name="entrydate">
+          <input type="text" placeholder="Author" name="author" required><br>
+        </div>
+        <div id="radios">
+          <input type="radio" id="place" name="poi_journey" value="Place">
+          <label for="Place">Place</label>
+          <input type="radio" id="journey" name="poi_journey" value="Journey">
+          <label for="Journey">Journey</label><br>
+        </div>
+        <textarea id="blogtext" name="blogtext"></textarea>
+        <div class="button-align">
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          <button type="submit" class="btn">Submit</button>
+        </div>
       </form>
     </div>
   </div>
