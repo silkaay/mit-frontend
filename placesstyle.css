@@ -44,7 +44,7 @@
 .star-form > input:checked ~ label,
 .star-form > input:focus ~ label,
 .star-form > input:hover ~ label {
-  color: #00ea04;
+  color: #41ea44;
 }
 
 .star-form > input:focus + label {
