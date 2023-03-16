@@ -67,6 +67,43 @@ small{
 	padding-left:30%;
 	padding-right: 20px;
 }
+.nav-link {
+	font-weight: bold;
+	font-size: 14px;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #031D44;
+	padding: 20px 0px;
+	margin: 0px 20px;
+	display: inline-block;
+	position: relative;
+	opacity: 0.75;
+  }
+  .navbar {
+	border-bottom: 1px solid #BBBBBB;
+  }
+  
+  .nav-link:hover {
+	opacity: 1;
+  }
+  
+  .nav-link::before {
+	transition: 300ms;
+	height: 3px;
+	content: "";
+	position: absolute;
+	background-color: white;
+  }
+  
+  .nav-link-ltr::before {
+	width: 0%;
+	bottom: 10px;
+  }
+  
+  .nav-link-ltr:hover::before {
+	width: 100%;
+  }
+
 body::-webkit-scrollbar {
 	width: 10px;  
 	  height: 5px;/* width of the entire scrollbar */
