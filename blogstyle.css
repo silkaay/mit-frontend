@@ -12,6 +12,18 @@
 #blog-button:hover {
   opacity: 0.8;
 }
+.traveldrop {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+}
+#travel {
+  width: 75%;
+    padding: 6px 6px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+}
 
 #form-overlay {
   position: absolute;
@@ -43,25 +55,19 @@
     border-radius: 5px;
   }
   
-  .form-popup input[type=text] {
-    width: 30%;
+  .form-popup input[type=text], .form-popup input[type=date] {
+    width: 32%;
     padding: 6px 6px;
     margin: 8px 0;
     border: 1px solid #ccc;
     /*box-sizing: border-box;*/
   }
-  
-  .form-popup input[type=date] {
-    width: 30%;
-    color: darkgreen;
-    padding: 6px 6px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-  }
   #radios {
-    text-align: center;
-    padding: 3px 24px;
-    margin: 6px 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  #radio-label {
+    left: 0px;
   }
   .input-container {
     display: flex;
@@ -94,6 +100,7 @@
   .form-popup .cancel {
     background-color: #f44336;
   }
+  
 
   #sticky-footer{
     position: absolute;
