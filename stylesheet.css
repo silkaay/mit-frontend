@@ -103,7 +103,7 @@ body::-webkit-scrollbar {
   }
   
   body::-webkit-scrollbar-track {
-	background: darkseagreen;  /* color of the tracking area */
+	background: #8fbc8f;  /* color of the tracking area */
   
    
   }
