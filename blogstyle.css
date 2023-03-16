@@ -94,4 +94,9 @@
   .form-popup .cancel {
     background-color: #f44336;
   }
+
+  .sticky-footer{
+    position: absolute;
+    bottom: 0px;
+  }
   
