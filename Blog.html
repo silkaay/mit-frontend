@@ -48,13 +48,27 @@
         <div class="input-container"> 
           <input type="text" placeholder="Title" name="title" required>
           <input type="date" id="blog-date" name="entrydate">
-          <input type="text" placeholder="Author" name="author" required><br>
+          <input type="text" id="author" placeholder="Author" name="author" required>
         </div>
         <div id="radios">
-          <input type="radio" id="place" name="poi_journey" value="Place">
-          <label for="Place">Place</label>
-          <input type="radio" id="journey" name="poi_journey" value="Journey">
-          <label for="Journey">Journey</label><br>
+          <label id = "radio_label" for="poi_journey">Place or Journey?: </label>
+          <div> 
+            <input type="radio" id="place" name="poi_journey" value="Place">
+            <label for="place">Place</label>
+          </div>
+          <div>
+            <input type="radio" id="journey" name="poi_journey" value="Journey">
+            <label for="journey">Journey</label>
+          </div>
+        </div>
+        <div class="traveldrop">
+          <label for="travel">Choose one:   </label>
+          <select id="travel" name="travel">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+          </select>
         </div>
         <textarea id="blogtext" name="blogtext"></textarea>
         <div class="button-align">
