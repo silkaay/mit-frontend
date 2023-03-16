@@ -1,8 +1,8 @@
 #imageImprint{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    object-position: center;
+    width: 90%;
+    height: auto;
+    justify-content: center;
 
 }
 
