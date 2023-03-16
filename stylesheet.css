@@ -80,7 +80,7 @@ small{
 	opacity: 0.75;
   }
   .navbar {
-	border-bottom: 1px solid #BBBBBB;
+	border-bottom: 1px solid white;
   }
   
   .nav-link:hover {
