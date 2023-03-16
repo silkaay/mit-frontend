@@ -68,16 +68,9 @@ small{
 	padding-right: 20px;
 }
 .nav-link {
-	font-weight: bold;
-	font-size: 14px;
-	text-transform: uppercase;
-	text-decoration: none;
 	color: white;
-	padding: 20px 0px;
-	margin: 0px 20px;
 	display: inline-block;
 	position: relative;
-	opacity: 0.75;
   }
   .navbar {
 	border-bottom: 1px solid white;
