@@ -57,11 +57,12 @@ h2{
 	padding-right: 10px;
 }
 #sticky-footer {
-    bottom:0%;
+    bottom:0px;
     width: 100%;
 	background-color: darkseagreen;
 	color:white;
 	text-align: right;
+	position: absolute;
 }
 small{
 	padding-left:30%;
