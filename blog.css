@@ -1,0 +1,105 @@
+#blog-button {
+    position: absolute;
+    top: 32%;
+    right: 20px; /* adjust the value to move the button left or right */
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 4px 24px;
+    background-color: darkseagreen;
+  }
+  #blog-button:hover {
+    opacity: 0.8;
+  }
+  .traveldrop {
+    display: flex;
+      justify-content: space-between;
+      align-items: center;
+    
+  }
+  #travel {
+    width: 75%;
+      padding: 6px 6px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+  }
+  
+  #form-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+    display: none; /* hide the overlay by default */
+  }
+  .form-popup {
+      display: none;
+      transform: translate(-50%, -50%);
+      position: fixed;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      overflow: auto;
+      
+    }
+    
+    .form-popup form {
+      background-color: #e6f7e7;
+      margin: 5% auto;
+      padding: 15px;
+      border: 1px solid #888;
+      width: 90%;
+      border-radius: 5px;
+    }
+    
+    .form-popup input[type=text], .form-popup input[type=date] {
+      width: 32%;
+      padding: 6px 6px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      /*box-sizing: border-box;*/
+    }
+    #radios {
+      display: flex;
+      justify-content: space-between;
+    }
+    #radio-label {
+      left: 0px;
+    }
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    #blogtext {
+      width: 100%;
+      height: 120px;
+      border: 1px solid #ccc;
+    }
+    .button-align {
+      text-align: right;
+      bottom: 2%;
+    }
+    .form-popup button[type=submit], .form-popup button[type=button] {
+      background-color: darkseagreen;
+      color: white;
+      padding: 3px 24px;
+      margin: 6px 6px;
+      border: none;
+      cursor: pointer;
+     
+    }
+    
+    .form-popup button[type=submit]:hover, .form-popup button[type=button]:hover {
+      opacity: 0.8;
+    }
+    
+    .form-popup .cancel {
+      background-color: #f44336;
+    }
+    
+  
+   

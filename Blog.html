@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home MIT-Reisen</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="blog.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="blog.js"></script>
+
+</head>
+<body>
+    <!--Hier Beginnt Banner und Navbar-->
+    <div id="banner">
+        <div id="logo" class="container-fluid p-3 text-white text-center">
+            <h1>MIT <b>&#9992</b> Reisen</h1>
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-dark">
+              <div id="navbar" class="container-fluid justify-content-center">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link nav-link-ltr" href="Home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-link-ltr" href="Blog.html">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-link-ltr" href="Places.html">Places</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-link-ltr" href="Journeys.html">Journeys</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-link-ltr" href="Imprint.html">Imprint</a>
+                </li>
+                </ul>
+              </div>
+        </nav>
+    </div>
+    <!--Hier endet Banner und Navbar-->
+
+    <!--Hier startet Inhalt-->
+    <div class="content">
+    <!--Hier startet Inhalt-->
+
+      
+    <div id="button-container">
+      <button id="blog-button" onclick="openForm()">+ Create Blogpost</button>
+      <div id="form-overlay"></div>
+      <div id="myForm" class="form-popup">
+        <form action="/submit-form">
+          <div class="input-container"> 
+            <input type="text" placeholder="Title" name="title" required>
+            <input type="date" id="blog-date" name="entrydate">
+            <input type="text" id="author" placeholder="Author" name="author" required>
+          </div>
+          <div id="radios">
+            <label id = "radio_label" for="poi_journey">Place or Journey?: </label>
+            <div> 
+              <input type="radio" id="place" name="poi_journey" value="Place">
+              <label for="place">Place</label>
+            </div>
+            <div>
+              <input type="radio" id="journey" name="poi_journey" value="Journey">
+              <label for="journey">Journey</label>
+            </div>
+          </div>
+          <div class="traveldrop">
+            <label for="travel">Choose one:   </label>
+            <select id="travel" name="travel">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+          </div>
+          <textarea id="blogtext" name="blogtext"></textarea>
+          <div class="button-align">
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <button type="submit" class="btn">Submit</button>
+          </div>
+        </form>
+    </div>
+
+    <!--Hier endet Inhalt-->
+    </div>
+    <!--Hier endet Inhalt-->
+
+
+    <!--Hier Beginnt Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="Home.html" id="backhome">Home</a>
+        <a href="#top" id="linktop">Jump to top &#8593</a>
+      </div>
+      <div class="footer-copyright">
+        &copy; MIT-Reisen
+      </div>
+    </footer>
+    <!--Hier endet Footer -->
+
+
+</body>
+</html>
