@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MITReisen">
+  <database-model serializer="dbm" dbms="H2" family-id="H2" format-version="4.43">
+    <root id="1">
+      <ServerVersion>2.1.214</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="MITREISEN">
+      <Current>1</Current>
+    </database>
+    <collation id="3" parent="2" name="ALBANIAN"/>
+    <collation id="4" parent="2" name="ALBANIAN_ALBANIA"/>
+    <collation id="5" parent="2" name="ARABIC"/>
+    <collation id="6" parent="2" name="ARABIC_ALGERIA"/>
+    <collation id="7" parent="2" name="ARABIC_BAHRAIN"/>
+    <collation id="8" parent="2" name="ARABIC_EGYPT"/>
+    <collation id="9" parent="2" name="ARABIC_IRAQ"/>
+    <collation id="10" parent="2" name="ARABIC_JORDAN"/>
+    <collation id="11" parent="2" name="ARABIC_KUWAIT"/>
+    <collation id="12" parent="2" name="ARABIC_LEBANON"/>
+    <collation id="13" parent="2" name="ARABIC_LIBYA"/>
+    <collation id="14" parent="2" name="ARABIC_MOROCCO"/>
+    <collation id="15" parent="2" name="ARABIC_OMAN"/>
+    <collation id="16" parent="2" name="ARABIC_QATAR"/>
+    <collation id="17" parent="2" name="ARABIC_SAUDI_ARABIA"/>
+    <collation id="18" parent="2" name="ARABIC_SUDAN"/>
+    <collation id="19" parent="2" name="ARABIC_SYRIA"/>
+    <collation id="20" parent="2" name="ARABIC_TUNISIA"/>
+    <collation id="21" parent="2" name="ARABIC_UNITED_ARAB_EMIRATES"/>
+    <collation id="22" parent="2" name="ARABIC_YEMEN"/>
+    <collation id="23" parent="2" name="BELARUSIAN"/>
+    <collation id="24" parent="2" name="BELARUSIAN_BELARUS"/>
+    <collation id="25" parent="2" name="BULGARIAN"/>
+    <collation id="26" parent="2" name="BULGARIAN_BULGARIA"/>
+    <collation id="27" parent="2" name="CATALAN"/>
+    <collation id="28" parent="2" name="CATALAN_SPAIN"/>
+    <collation id="29" parent="2" name="CHINESE"/>
+    <collation id="30" parent="2" name="CHINESE_CHINA"/>
+    <collation id="31" parent="2" name="CHINESE_HONG_KONG_SAR_CHINA"/>
+    <collation id="32" parent="2" name="CHINESE_SINGAPORE"/>
+    <collation id="33" parent="2" name="CHINESE_TAIWAN"/>
+    <collation id="34" parent="2" name="CROATIAN"/>
+    <collation id="35" parent="2" name="CROATIAN_CROATIA"/>
+    <collation id="36" parent="2" name="CZECH"/>
+    <collation id="37" parent="2" name="CZECH_CZECHIA"/>
+    <collation id="38" parent="2" name="DANISH"/>
+    <collation id="39" parent="2" name="DANISH_DENMARK"/>
+    <collation id="40" parent="2" name="DUTCH"/>
+    <collation id="41" parent="2" name="DUTCH_BELGIUM"/>
+    <collation id="42" parent="2" name="DUTCH_NETHERLANDS"/>
+    <collation id="43" parent="2" name="ENGLISH"/>
+    <collation id="44" parent="2" name="ENGLISH_AUSTRALIA"/>
+    <collation id="45" parent="2" name="ENGLISH_CANADA"/>
+    <collation id="46" parent="2" name="ENGLISH_INDIA"/>
+    <collation id="47" parent="2" name="ENGLISH_IRELAND"/>
+    <collation id="48" parent="2" name="ENGLISH_MALTA"/>
+    <collation id="49" parent="2" name="ENGLISH_NEW_ZEALAND"/>
+    <collation id="50" parent="2" name="ENGLISH_PHILIPPINES"/>
+    <collation id="51" parent="2" name="ENGLISH_SINGAPORE"/>
+    <collation id="52" parent="2" name="ENGLISH_SOUTH_AFRICA"/>
+    <collation id="53" parent="2" name="ENGLISH_UNITED_KINGDOM"/>
+    <collation id="54" parent="2" name="ENGLISH_UNITED_STATES"/>
+    <collation id="55" parent="2" name="ESTONIAN"/>
+    <collation id="56" parent="2" name="ESTONIAN_ESTONIA"/>
+    <collation id="57" parent="2" name="FINNISH"/>
+    <collation id="58" parent="2" name="FINNISH_FINLAND"/>
+    <collation id="59" parent="2" name="FRENCH"/>
+    <collation id="60" parent="2" name="FRENCH_BELGIUM"/>
+    <collation id="61" parent="2" name="FRENCH_CANADA"/>
+    <collation id="62" parent="2" name="FRENCH_FRANCE"/>
+    <collation id="63" parent="2" name="FRENCH_LUXEMBOURG"/>
+    <collation id="64" parent="2" name="FRENCH_SWITZERLAND"/>
+    <collation id="65" parent="2" name="GERMAN"/>
+    <collation id="66" parent="2" name="GERMAN_AUSTRIA"/>
+    <collation id="67" parent="2" name="GERMAN_GERMANY"/>
+    <collation id="68" parent="2" name="GERMAN_LUXEMBOURG"/>
+    <collation id="69" parent="2" name="GERMAN_SWITZERLAND"/>
+    <collation id="70" parent="2" name="GREEK"/>
+    <collation id="71" parent="2" name="GREEK_CYPRUS"/>
+    <collation id="72" parent="2" name="GREEK_GREECE"/>
+    <collation id="73" parent="2" name="HEBREW"/>
+    <collation id="74" parent="2" name="HEBREW_ISRAEL"/>
+    <collation id="75" parent="2" name="HINDI"/>
+    <collation id="76" parent="2" name="HINDI_INDIA"/>
+    <collation id="77" parent="2" name="HUNGARIAN"/>
+    <collation id="78" parent="2" name="HUNGARIAN_HUNGARY"/>
+    <collation id="79" parent="2" name="ICELANDIC"/>
+    <collation id="80" parent="2" name="ICELANDIC_ICELAND"/>
+    <collation id="81" parent="2" name="INDONESIAN"/>
+    <collation id="82" parent="2" name="INDONESIAN_INDONESIA"/>
+    <collation id="83" parent="2" name="IRISH"/>
+    <collation id="84" parent="2" name="IRISH_IRELAND"/>
+    <collation id="85" parent="2" name="ITALIAN"/>
+    <collation id="86" parent="2" name="ITALIAN_ITALY"/>
+    <collation id="87" parent="2" name="ITALIAN_SWITZERLAND"/>
+    <collation id="88" parent="2" name="JAPANESE"/>
+    <collation id="89" parent="2" name="JAPANESE_JAPAN"/>
+    <collation id="90" parent="2" name="JAPANESE_JAPAN_JP"/>
+    <collation id="91" parent="2" name="KOREAN"/>
+    <collation id="92" parent="2" name="KOREAN_SOUTH_KOREA"/>
+    <collation id="93" parent="2" name="LATVIAN"/>
+    <collation id="94" parent="2" name="LATVIAN_LATVIA"/>
+    <collation id="95" parent="2" name="LITHUANIAN"/>
+    <collation id="96" parent="2" name="LITHUANIAN_LITHUANIA"/>
+    <collation id="97" parent="2" name="MACEDONIAN"/>
+    <collation id="98" parent="2" name="MACEDONIAN_NORTH_MACEDONIA"/>
+    <collation id="99" parent="2" name="MALAY"/>
+    <collation id="100" parent="2" name="MALAY_MALAYSIA"/>
+    <collation id="101" parent="2" name="MALTESE"/>
+    <collation id="102" parent="2" name="MALTESE_MALTA"/>
+    <collation id="103" parent="2" name="NORWEGIAN"/>
+    <collation id="104" parent="2" name="NORWEGIAN_BOKMÅL"/>
+    <collation id="105" parent="2" name="NORWEGIAN_BOKMÅL_NORWAY"/>
+    <collation id="106" parent="2" name="NORWEGIAN_NORWAY"/>
+    <collation id="107" parent="2" name="NORWEGIAN_NORWAY_NY"/>
+    <collation id="108" parent="2" name="NORWEGIAN_NYNORSK_NORWAY"/>
+    <collation id="109" parent="2" name="OFF"/>
+    <collation id="110" parent="2" name="POLISH"/>
+    <collation id="111" parent="2" name="POLISH_POLAND"/>
+    <collation id="112" parent="2" name="PORTUGUESE"/>
+    <collation id="113" parent="2" name="PORTUGUESE_BRAZIL"/>
+    <collation id="114" parent="2" name="PORTUGUESE_PORTUGAL"/>
+    <collation id="115" parent="2" name="ROMANIAN"/>
+    <collation id="116" parent="2" name="ROMANIAN_ROMANIA"/>
+    <collation id="117" parent="2" name="RUSSIAN"/>
+    <collation id="118" parent="2" name="RUSSIAN_RUSSIA"/>
+    <collation id="119" parent="2" name="SERBIAN"/>
+    <collation id="120" parent="2" name="SERBIAN_BOSNIA_&amp;_HERZEGOVINA"/>
+    <collation id="121" parent="2" name="SERBIAN_MONTENEGRO"/>
+    <collation id="122" parent="2" name="SERBIAN_SERBIA"/>
+    <collation id="123" parent="2" name="SERBIAN_SERBIA_AND_MONTENEGRO"/>
+    <collation id="124" parent="2" name="SLOVAK"/>
+    <collation id="125" parent="2" name="SLOVAK_SLOVAKIA"/>
+    <collation id="126" parent="2" name="SLOVENIAN"/>
+    <collation id="127" parent="2" name="SLOVENIAN_SLOVENIA"/>
+    <collation id="128" parent="2" name="SPANISH"/>
+    <collation id="129" parent="2" name="SPANISH_ARGENTINA"/>
+    <collation id="130" parent="2" name="SPANISH_BOLIVIA"/>
+    <collation id="131" parent="2" name="SPANISH_CHILE"/>
+    <collation id="132" parent="2" name="SPANISH_COLOMBIA"/>
+    <collation id="133" parent="2" name="SPANISH_COSTA_RICA"/>
+    <collation id="134" parent="2" name="SPANISH_CUBA"/>
+    <collation id="135" parent="2" name="SPANISH_DOMINICAN_REPUBLIC"/>
+    <collation id="136" parent="2" name="SPANISH_ECUADOR"/>
+    <collation id="137" parent="2" name="SPANISH_EL_SALVADOR"/>
+    <collation id="138" parent="2" name="SPANISH_GUATEMALA"/>
+    <collation id="139" parent="2" name="SPANISH_HONDURAS"/>
+    <collation id="140" parent="2" name="SPANISH_MEXICO"/>
+    <collation id="141" parent="2" name="SPANISH_NICARAGUA"/>
+    <collation id="142" parent="2" name="SPANISH_PANAMA"/>
+    <collation id="143" parent="2" name="SPANISH_PARAGUAY"/>
+    <collation id="144" parent="2" name="SPANISH_PERU"/>
+    <collation id="145" parent="2" name="SPANISH_PUERTO_RICO"/>
+    <collation id="146" parent="2" name="SPANISH_SPAIN"/>
+    <collation id="147" parent="2" name="SPANISH_UNITED_STATES"/>
+    <collation id="148" parent="2" name="SPANISH_URUGUAY"/>
+    <collation id="149" parent="2" name="SPANISH_VENEZUELA"/>
+    <collation id="150" parent="2" name="SWEDISH"/>
+    <collation id="151" parent="2" name="SWEDISH_SWEDEN"/>
+    <collation id="152" parent="2" name="THAI"/>
+    <collation id="153" parent="2" name="THAI_THAILAND"/>
+    <collation id="154" parent="2" name="THAI_THAILAND_TH"/>
+    <collation id="155" parent="2" name="TURKISH"/>
+    <collation id="156" parent="2" name="TURKISH_TURKEY"/>
+    <collation id="157" parent="2" name="UKRAINIAN"/>
+    <collation id="158" parent="2" name="UKRAINIAN_UKRAINE"/>
+    <collation id="159" parent="2" name="VIETNAMESE"/>
+    <collation id="160" parent="2" name="VIETNAMESE_VIETNAM"/>
+    <role id="161" parent="2" name="PUBLIC"/>
+    <schema id="162" parent="2" name="INFORMATION_SCHEMA"/>
+    <schema id="163" parent="2" name="PUBLIC">
+      <Current>1</Current>
+    </schema>
+    <user id="164" parent="2" name="MITREISEN">
+      <Admin>1</Admin>
+    </user>
+    <sequence id="165" parent="163" name="BLOGPOST_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="166" parent="163" name="CATEGORY_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(101)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="167" parent="163" name="COMMENT_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="168" parent="163" name="FILEDB_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="169" parent="163" name="JOURNEY_COMMENT_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="170" parent="163" name="JOURNEY_REVIEW_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="171" parent="163" name="JOURNEY_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="172" parent="163" name="POI_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(101)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="173" parent="163" name="REVIEW_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(1)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="174" parent="163" name="SEASON_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(101)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <sequence id="175" parent="163" name="TAG_SEQ">
+      <DataType>BIGINT|0s</DataType>
+      <SequenceIdentity>1(101)+50..9223372036854775807</SequenceIdentity>
+    </sequence>
+    <table id="176" parent="163" name="BLOGPOST"/>
+    <table id="177" parent="163" name="CATEGORY"/>
+    <table id="178" parent="163" name="COMMENT"/>
+    <table id="179" parent="163" name="FILEDB"/>
+    <table id="180" parent="163" name="JOURNEY"/>
+    <table id="181" parent="163" name="JOURNEYS_SEASONS"/>
+    <table id="182" parent="163" name="JOURNEYS_TAGS"/>
+    <table id="183" parent="163" name="JOURNEY_COMMENT"/>
+    <table id="184" parent="163" name="JOURNEY_REVIEW"/>
+    <table id="185" parent="163" name="POI"/>
+    <table id="186" parent="163" name="POIS_JOURNEYS"/>
+    <table id="187" parent="163" name="POIS_SEASONS"/>
+    <table id="188" parent="163" name="POIS_TAGS"/>
+    <table id="189" parent="163" name="REVIEW"/>
+    <table id="190" parent="163" name="SEASON"/>
+    <table id="191" parent="163" name="TAG"/>
+    <column id="192" parent="176" name="BLOGPOST_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="193" parent="176" name="BLOGPOST_AUTHOR">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="194" parent="176" name="BLOGPOST_CREATION_DATE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="195" parent="176" name="BLOGPOST_TEXT">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="196" parent="176" name="BLOGPOST_TITLE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="197" parent="176" name="BLOGPOST_JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="198" parent="176" name="BLOGPOSTPOI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <foreign-key id="199" parent="176" name="FKOOWHH7BU9QLVXLCCKFQY70Y78">
+      <ColNames>BLOGPOST_JOURNEY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_D</RefKeyName>
+      <RefTableName>JOURNEY</RefTableName>
+    </foreign-key>
+    <foreign-key id="200" parent="176" name="FKT3A0PVDD2V47TQQ5166H2BOPP">
+      <ColNames>BLOGPOSTPOI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <index id="201" parent="176" name="PRIMARY_KEY_7">
+      <ColNames>BLOGPOST_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="202" parent="176" name="FKOOWHH7BU9QLVXLCCKFQY70Y78_INDEX_7">
+      <ColNames>BLOGPOST_JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="203" parent="176" name="FKT3A0PVDD2V47TQQ5166H2BOPP_INDEX_7">
+      <ColNames>BLOGPOSTPOI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="204" parent="176" name="CONSTRAINT_7">
+      <ColNames>BLOGPOST_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="205" parent="177" name="CATEGORY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="206" parent="177" name="CATEGORY_NAME">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <index id="207" parent="177" name="PRIMARY_KEY_3">
+      <ColNames>CATEGORY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="208" parent="177" name="CONSTRAINT_3">
+      <ColNames>CATEGORY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="209" parent="178" name="COMMENT_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="210" parent="178" name="COMMENT_AUTHOR">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="211" parent="178" name="COMMENT_DATE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="212" parent="178" name="COMMENT_TEXT">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="213" parent="178" name="COMMENT_POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="214" parent="178" name="FKPDCKTLS9289MLQ5H6XYAV41L0">
+      <ColNames>COMMENT_POI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <index id="215" parent="178" name="PRIMARY_KEY_6">
+      <ColNames>COMMENT_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="216" parent="178" name="FKPDCKTLS9289MLQ5H6XYAV41L0_INDEX_6">
+      <ColNames>COMMENT_POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="217" parent="178" name="CONSTRAINT_6">
+      <ColNames>COMMENT_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="218" parent="179" name="FILE_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="219" parent="179" name="FILE_DATA">
+      <DataType>BINARY LARGE OBJECT|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="220" parent="179" name="FILE_NAME">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="221" parent="179" name="FILE_TYPE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="222" parent="179" name="POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="223" parent="179" name="FK30M5R9LM0DYOKT5UIDHXVGXR0">
+      <ColNames>POI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <index id="224" parent="179" name="PRIMARY_KEY_7B">
+      <ColNames>FILE_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="225" parent="179" name="FK30M5R9LM0DYOKT5UIDHXVGXR0_INDEX_7">
+      <ColNames>POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="226" parent="179" name="CONSTRAINT_7B">
+      <ColNames>FILE_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="227" parent="180" name="JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="228" parent="180" name="JOURNEY_DESCRIPTION">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="229" parent="180" name="JOURNEY_TITLE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="230" parent="180" name="JOURNEY_CATEGORY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="231" parent="180" name="FK8E589L1U1H60D8WGTIFIE9B7Y">
+      <ColNames>JOURNEY_CATEGORY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_3</RefKeyName>
+      <RefTableName>CATEGORY</RefTableName>
+    </foreign-key>
+    <index id="232" parent="180" name="PRIMARY_KEY_D">
+      <ColNames>JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="233" parent="180" name="FK8E589L1U1H60D8WGTIFIE9B7Y_INDEX_D">
+      <ColNames>JOURNEY_CATEGORY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="234" parent="180" name="CONSTRAINT_D">
+      <ColNames>JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="235" parent="181" name="JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="236" parent="181" name="SEASON_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="237" parent="181" name="FKFS2M0MGSAQBXDW812NG65YH6P">
+      <ColNames>JOURNEY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_D</RefKeyName>
+      <RefTableName>JOURNEY</RefTableName>
+    </foreign-key>
+    <foreign-key id="238" parent="181" name="FKKH1YI89CU24PL7HPNPU3OTO7T">
+      <ColNames>SEASON_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_9</RefKeyName>
+      <RefTableName>SEASON</RefTableName>
+    </foreign-key>
+    <index id="239" parent="181" name="FKFS2M0MGSAQBXDW812NG65YH6P_INDEX_F">
+      <ColNames>JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="240" parent="181" name="FKKH1YI89CU24PL7HPNPU3OTO7T_INDEX_F">
+      <ColNames>SEASON_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <column id="241" parent="182" name="JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="242" parent="182" name="TAG_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="243" parent="182" name="FKOQNOPOXAYE5COSXD7D54D6GIG">
+      <ColNames>JOURNEY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_D</RefKeyName>
+      <RefTableName>JOURNEY</RefTableName>
+    </foreign-key>
+    <foreign-key id="244" parent="182" name="FKEEUG10CS4935TECN267JM9FJ1">
+      <ColNames>TAG_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_14</RefKeyName>
+      <RefTableName>TAG</RefTableName>
+    </foreign-key>
+    <index id="245" parent="182" name="FKOQNOPOXAYE5COSXD7D54D6GIG_INDEX_2">
+      <ColNames>JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="246" parent="182" name="FKEEUG10CS4935TECN267JM9FJ1_INDEX_2">
+      <ColNames>TAG_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <column id="247" parent="183" name="COMMENT_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="248" parent="183" name="COMMENT_AUTHOR">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="249" parent="183" name="COMMENT_DATE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="250" parent="183" name="COMMENT_TEXT">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="251" parent="183" name="COMMENT_TITLE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="252" parent="183" name="COMMENT_JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="253" parent="183" name="FK239MXI3IID3VCPXLHIJR05AFW">
+      <ColNames>COMMENT_JOURNEY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_D</RefKeyName>
+      <RefTableName>JOURNEY</RefTableName>
+    </foreign-key>
+    <index id="254" parent="183" name="PRIMARY_KEY_68">
+      <ColNames>COMMENT_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="255" parent="183" name="FK239MXI3IID3VCPXLHIJR05AFW_INDEX_6">
+      <ColNames>COMMENT_JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="256" parent="183" name="CONSTRAINT_68">
+      <ColNames>COMMENT_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="257" parent="184" name="RATING_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="258" parent="184" name="REVIEW_CLEAN_RATING">
+      <DataType>INTEGER|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="259" parent="184" name="REVIEW_LOCATION_RATING">
+      <DataType>INTEGER|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="260" parent="184" name="REVIEW_MUST_SEE_RATING">
+      <DataType>INTEGER|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="261" parent="184" name="REVIEW_JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="262" parent="184" name="FK4ORLOGK9I6YJ1V3FKLAKIW95B">
+      <ColNames>REVIEW_JOURNEY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_D</RefKeyName>
+      <RefTableName>JOURNEY</RefTableName>
+    </foreign-key>
+    <index id="263" parent="184" name="PRIMARY_KEY_D7">
+      <ColNames>RATING_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="264" parent="184" name="FK4ORLOGK9I6YJ1V3FKLAKIW95B_INDEX_D">
+      <ColNames>REVIEW_JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="265" parent="184" name="CONSTRAINT_D7">
+      <ColNames>RATING_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="266" parent="185" name="POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="267" parent="185" name="POI_DESCRIPTION">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="268" parent="185" name="POI_LATITUDE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="269" parent="185" name="POI_LOCATION">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="270" parent="185" name="POI_LONGITUDE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="271" parent="185" name="POI_TITLE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="272" parent="185" name="POI_CATEGORY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <foreign-key id="273" parent="185" name="FKP2FXAYRN8MW7P2OCIQKFQ29U8">
+      <ColNames>POI_CATEGORY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_3</RefKeyName>
+      <RefTableName>CATEGORY</RefTableName>
+    </foreign-key>
+    <index id="274" parent="185" name="PRIMARY_KEY_1">
+      <ColNames>POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="275" parent="185" name="FKP2FXAYRN8MW7P2OCIQKFQ29U8_INDEX_1">
+      <ColNames>POI_CATEGORY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="276" parent="185" name="CONSTRAINT_1">
+      <ColNames>POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="277" parent="186" name="POIS_JOURNEYS_JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="278" parent="186" name="POIS_JOURNEYS_POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="279" parent="186" name="DATE">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="280" parent="186" name="TIME">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="281" parent="186" name="POIS_JOURNEYS_JOURNEY_JOURNEY_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="282" parent="186" name="POIS_JOURNEYS_POI_POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="283" parent="186" name="FKM89ITLWHH471VI5BK82G1QFA">
+      <ColNames>POIS_JOURNEYS_JOURNEY_JOURNEY_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_D</RefKeyName>
+      <RefTableName>JOURNEY</RefTableName>
+    </foreign-key>
+    <foreign-key id="284" parent="186" name="FK6R4U1KAGWEB2NBWVIVN7R4L9D">
+      <ColNames>POIS_JOURNEYS_POI_POI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <index id="285" parent="186" name="PRIMARY_KEY_8">
+      <ColNames>POIS_JOURNEYS_JOURNEY_ID
+POIS_JOURNEYS_POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="286" parent="186" name="FKM89ITLWHH471VI5BK82G1QFA_INDEX_8">
+      <ColNames>POIS_JOURNEYS_JOURNEY_JOURNEY_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="287" parent="186" name="FK6R4U1KAGWEB2NBWVIVN7R4L9D_INDEX_8">
+      <ColNames>POIS_JOURNEYS_POI_POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="288" parent="186" name="CONSTRAINT_8">
+      <ColNames>POIS_JOURNEYS_JOURNEY_ID
+POIS_JOURNEYS_POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="289" parent="187" name="POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="290" parent="187" name="SEASON_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="291" parent="187" name="FKN4W590H2ER1HCUKH6Q9HNQES2">
+      <ColNames>POI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <foreign-key id="292" parent="187" name="FKTF54A1OEEY5W1C1QJKAC4EY82">
+      <ColNames>SEASON_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_9</RefKeyName>
+      <RefTableName>SEASON</RefTableName>
+    </foreign-key>
+    <index id="293" parent="187" name="FKN4W590H2ER1HCUKH6Q9HNQES2_INDEX_4">
+      <ColNames>POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="294" parent="187" name="FKTF54A1OEEY5W1C1QJKAC4EY82_INDEX_4">
+      <ColNames>SEASON_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <column id="295" parent="188" name="POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="296" parent="188" name="TAG_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="297" parent="188" name="FKHA0BNJO1ELXQ8NK816V3HUAT9">
+      <ColNames>POI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <foreign-key id="298" parent="188" name="FKIURI5V47ICMJSESQK4HVPM8N1">
+      <ColNames>TAG_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_14</RefKeyName>
+      <RefTableName>TAG</RefTableName>
+    </foreign-key>
+    <index id="299" parent="188" name="FKHA0BNJO1ELXQ8NK816V3HUAT9_INDEX_C">
+      <ColNames>POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="300" parent="188" name="FKIURI5V47ICMJSESQK4HVPM8N1_INDEX_C">
+      <ColNames>TAG_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <column id="301" parent="189" name="RATING_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="302" parent="189" name="REVIEW_CLEAN_RATING">
+      <DataType>INTEGER|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="303" parent="189" name="REVIEW_LOCATION_RATING">
+      <DataType>INTEGER|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="304" parent="189" name="REVIEW_MUST_SEE_RATING">
+      <DataType>INTEGER|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="305" parent="189" name="REVIEW_POI_ID">
+      <DataType>BIGINT|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="306" parent="189" name="FK8P0QELIVLFOGE8XWKXHKGV61Q">
+      <ColNames>REVIEW_POI_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_1</RefKeyName>
+      <RefTableName>POI</RefTableName>
+    </foreign-key>
+    <index id="307" parent="189" name="PRIMARY_KEY_8F">
+      <ColNames>RATING_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="308" parent="189" name="FK8P0QELIVLFOGE8XWKXHKGV61Q_INDEX_8">
+      <ColNames>REVIEW_POI_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <key id="309" parent="189" name="CONSTRAINT_8F">
+      <ColNames>RATING_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="310" parent="190" name="SEASON_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="311" parent="190" name="SEASON_NAME">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <index id="312" parent="190" name="PRIMARY_KEY_9">
+      <ColNames>SEASON_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="313" parent="190" name="CONSTRAINT_9">
+      <ColNames>SEASON_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="314" parent="191" name="TAG_ID">
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="315" parent="191" name="TAG_NAME">
+      <DataType>CHARACTER VARYING(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <index id="316" parent="191" name="PRIMARY_KEY_14">
+      <ColNames>TAG_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="317" parent="191" name="CONSTRAINT_14">
+      <ColNames>TAG_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
