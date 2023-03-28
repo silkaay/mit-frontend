@@ -29,7 +29,7 @@
                   <a class="nav-link nav-link-ltr" href="Blog.html">Blog</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-link-ltr" href="Places.html">Places</a>
+                  <a class="nav-link active nav-link-ltr" href="Places.html">Places</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link nav-link-ltr" href="Journeys.html">Journeys</a>
@@ -42,9 +42,116 @@
         </nav>
     </div>
     <!--Hier endet Banner und Navbar-->
-
     <div class="content">
-      <!--Das hier drüber muss bleiben-->
+        <!--Das hier drüber muss bleiben-->
+
+
+    <div id="button-container"> <!-- Create POI Button-->
+        <button id="blog-button" onclick="openForm()">+ Create Place</button>
+        <!-- Pop-up zum erstellen-->
+        <div id="form-overlay"></div>
+        <div id="myForm" class="form-popup">
+            <form action="/submit-form">
+                <div class="input-container">
+                    <input id="NamePOI" type="text" placeholder="Name" name="Name" required>
+                    <input id="Place" type="text" placeholder="Place" name="Place" required>
+                    <input id="NameOfPlace" type="text" placeholder="Name of Place" name="Name of Place">
+                </div>
+                <div class="input-container ">
+                    <input id="LatitudePOI" type="text" placeholder="Latitude" name="Latitude" required>
+                    <input id="Longitude" type="text" placeholder="Longitude" name="Longitude" required>
+
+                </div>
+                <div class="input-container">
+
+                    <select id="seasons">
+                        <option value="">Choose a seasons</option>
+                        <option value="Spring">&#127799 Spring</option>
+                        <option value="Summer">&#127774 Summer</option>
+                        <option value="Autumn">&#127810 Autumn</option>
+                        <option value="Winter">&#9924 Winter</option>
+                    </select>
+                    <select id="categories">
+                        <option value="">Choose a category</option>
+                    </select>
+
+                    <select id="tags">
+                        <option value="">Choose tags</option>
+                    </select>
+
+
+                </div>
+
+                <div  class="container mt-5">
+                <div class="row">
+                    <div class="col-md-8" id="DragAndDrop">
+                        <div class="drop-container">
+                            <div class="drop-message">
+                                <p>Drop files here</p>
+                            </div>
+                        </div>
+                        <button id="add-button" class="hidden">Add Images</button>
+                        <button id="clear-button">Clear Images</button>
+                    </div>
+
+                    <div class="col-md-4 justify-content-center" id="Sternebewertung">
+                        <ul class="ratings">
+                            <li>
+                                <h6>Cleanliness: </h6>
+                                <input type="checkbox" id="rating1" name="rating1" value="1">
+                                <label for="rating1"></label>
+                                <input type="checkbox" id="rating2" name="rating1" value="2">
+                                <label for="rating2"></label>
+                                <input type="checkbox" id="rating3" name="rating1" value="3">
+                                <label for="rating3"></label>
+                                <input type="checkbox" id="rating4" name="rating1" value="4">
+                                <label for="rating4"></label>
+                                <input type="checkbox" id="rating5" name="rating1" value="5">
+                                <label for="rating5"></label>
+                            </li>
+                            <li>
+                                <h6>Must See: </h6>
+                                <input type="checkbox" id="rating6" name="rating2" value="1">
+                                <label for="rating6"></label>
+                                <input type="checkbox" id="rating7" name="rating2" value="2">
+                                <label for="rating7"></label>
+                                <input type="checkbox" id="rating8" name="rating2" value="3">
+                                <label for="rating8"></label>
+                                <input type="checkbox" id="rating9" name="rating2" value="4">
+                                <label for="rating9"></label>
+                                <input type="checkbox" id="rating10" name="rating2" value="5">
+                                <label for="rating10"></label>
+                            </li>
+                            <li>
+                                <h6>Location:</h6>
+                                <input type="checkbox" id="rating11" name="rating3" value="1">
+                                <label for="rating11"></label>
+                                <input type="checkbox" id="rating12" name="rating3" value="2">
+                                <label for="rating12"></label>
+                                <input type="checkbox" id="rating13" name="rating3" value="3">
+                                <label for="rating13"></label>
+                                <input type="checkbox" id="rating14" name="rating3" value="4">
+                                <label for="rating14"></label>
+                                <input type="checkbox" id="rating15" name="rating3" value="5">
+                                <label for="rating15"></label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+                <textarea id="blogtext" name="blogtext"></textarea>
+                <div class="button-align">
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- ende pop-up-->
+    </div>
+
       <h1>Show Places</h1>
       <button id="show-places-button">Show Places</button>
        <ul id="places-list"></ul>
