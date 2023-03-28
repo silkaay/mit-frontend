@@ -98,7 +98,10 @@ border: 1px solid #ccc;
 display: flex;
 justify-content: space-between;
 }
-
+.gps-container {
+  display: flex;
+  justify-content: space-around;
+}
 #blogtext {
 width: 100%;
 height: 120px;
