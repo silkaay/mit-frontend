@@ -1,3 +1,11 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
 button {
   padding: 10px 20px;
   background-color: #4CAF50;
@@ -98,10 +106,7 @@ border: 1px solid #ccc;
 display: flex;
 justify-content: space-between;
 }
-.gps-container {
-  display: flex;
-  justify-content: space-around;
-}
+
 #blogtext {
 width: 100%;
 height: 120px;
@@ -141,14 +146,14 @@ border-radius: 5px;
 
 /* drag and drop box*/
 .drop-container {
-width: 180px;
+text-align: center;
+width: 400px;
 height: 180px;
 border: 2px dashed #ccc;
-display: flex;
+/*display: flex;*/
 justify-content: center;
 align-items: center;
 overflow-x: scroll;
-overflow-y:hidden;
 white-space: nowrap;
 }
 
@@ -250,3 +255,4 @@ color: #ccc;
 .ratings input[type="checkbox"]:checked ~ label:before {
 color: #f90;
 }
+

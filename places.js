@@ -79,6 +79,7 @@ function handleFiles(files) {
       dropContainer.appendChild(video);
     }
   }
+  drop_here.style.display = 'none';
 }
 
 // Clear images when clear button is clicked
