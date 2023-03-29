@@ -14,11 +14,11 @@ li{
 .navbar {
     border-bottom: 1px solid white;
 }
-/*
+69-
 .nav-link:hover {
     opacity: 1;
 }
-*/
+
 .nav-link::before {
     transition: 300ms;
     height: 3px;
