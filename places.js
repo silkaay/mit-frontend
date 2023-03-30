@@ -1,34 +1,3 @@
-window.onload = () => {
-  const showPlacesButton = document.getElementById("show-places-button");
-  const placesList = document.getElementById("places-list");
-
-  showPlacesButton.addEventListener("click", async () => {
-    try {
-      const response = await fetch("http://localhost:8080/getAllPOIs");
-      const places = await response.json();
-      placesList.innerHTML = "";
-      places.forEach(place => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <h2>${place.poiTitle}</h2>
-          <p><strong>Place ID:</strong> ${place.poiId}</p>
-          <p><strong>Location:</strong> ${place.poiLocation}</p>
-          <p><strong>Rating:</strong> ${place.poiReviewAvg ? Number.parseFloat(place.poiReviewAvg).toFixed(2) : "N/A"}</p>
-          <p><strong>Tags:</strong> ${place.poiTags || "N/A"}</p>
-          <img src="${place.poiFileAccessLink}" alt="Image of ${place.poiTitle}">
-        `;
-        placesList.appendChild(li);
-      });
-    } catch (error) {
-      console.error(error);
-      placesList.innerHTML = "An error occurred while loading the places.";
-    }
-  });
-};
-
-
-
-
 // POI erstellen overlay
 function openForm() {
   document.getElementById("myForm").style.display = "block";
@@ -174,4 +143,58 @@ fetch("http://localhost:8080/getTags")
       });
     })
     .catch(error => console.error(error));
+// Ende Categorien und tags sich holen
 
+
+//Poi Liste mit detail bewertung
+
+const poiList = document.getElementById("poiList");
+const poiDetails = document.getElementById("poiDetails");
+
+function displayPOIDetails(poiId) {
+    fetch("http://localhost:8080/getPOIDetails/" + poiId)
+        .then(response => response.json())
+        .then(data => {
+            poiDetails.innerHTML = `
+        <h2>${data.poiTitle}</h2>
+        <p>Location: ${data.poiLocation}</p>
+        <p>Latitude: ${data.poiLatitude}</p>
+        <p>Longitude: ${data.poiLongitude}</p>
+        <p>Description: ${data.poiDescription}</p>
+        <p>Review Count: ${data.poiReviewCount}</p>
+        <p>Review Clean Average: ${data.poiReviewCleanAvg}</p>
+        <p>Review Must-See Average: ${data.poiReviewMustSeeAvg}</p>
+        <p>Review Location Average: ${data.poiReviewLocationAvg}</p>
+        <p>Seasons: ${data.poiSeasons.join(", ")}</p>
+        <p>Tags: ${data.poiTags.join(", ")}</p>
+        <p>Category: ${data.poiCategory}</p>
+        <img src="${data.poiFileAccessLinks[0]}" />
+      `;
+        })
+        .catch(error => console.error(error));
+}
+
+function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileAccessLink) {
+    const poi = document.createElement("div");
+    poi.className = "poi";
+    poi.innerHTML = `
+    <h2>${poiTitle}</h2>
+    <p>Location: ${poiLocation}</p>
+    <p>Review Average: ${poiReviewAvg}</p>
+    <p>Tags: ${poiTags.join(", ")}</p>
+    <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
+    <img src="${poiFileAccessLink}" />
+  `;
+    poiList.appendChild(poi);
+}
+
+fetch("http://localhost:8080/getAllPOIs")
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(poi => {
+            createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, poi.poiFileAccessLink);
+        });
+    })
+    .catch(error => console.error(error));
+
+//ende Poi liste mit detail bewertung
