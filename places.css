@@ -39,7 +39,7 @@ img {
  */
 #blog-button {
 position: absolute;
-top: 32%;
+top: 180px;
 right: 20px; /* adjust the value to move the button left or right */
 transform: translateY(-50%);
 border: none;
