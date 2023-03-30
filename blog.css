@@ -1,3 +1,8 @@
+#heading {
+  text-align: center;
+  color: rgb(0, 80, 0);
+}
+
 #blog-button {
     position: absolute;
     top: 180px;
@@ -11,10 +16,6 @@
   }
   #blog-button:hover {
     opacity: 0.8;
-  }
-  #heading {
-    text-align: center;
-    color: rgb(0, 80, 0);
   }
   
   .traveldrop {
@@ -104,6 +105,42 @@
     
     .form-popup .cancel {
       background-color: #f44336;
+    }
+    #blogcontainer {
+      background-color: rgb(170, 217, 170);
+      border-radius: 5px;
+    }
+
+    #bloghead {
+      display: flex;
+      align-items: baseline;
+    }
+
+    #author {
+      flex: 1;
+    }
+
+    #blogfoot {
+      display: flex;
+      align-items: baseline;
+    }
+    #innerbtn {
+      background-color: white;
+      color: grey;
+      border-color: rgb(80, 80, 80);
+      padding: 3px 24px;
+      margin: 6px 6px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #innerbtn:hover {
+        opacity: 0.8;
+    }
+    #place-link {
+      color: grey;
+      text-decoration: underline;
+      margin-left: auto;
     }
     
   
