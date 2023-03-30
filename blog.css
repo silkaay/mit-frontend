@@ -9,13 +9,14 @@
     padding: 4px 24px;
     background-color: darkseagreen;
   }
+  #blog-button:hover {
+    opacity: 0.8;
+  }
   #heading {
     text-align: center;
     color: rgb(0, 80, 0);
   }
-  #blog-button:hover {
-    opacity: 0.8;
-  }
+  
   .traveldrop {
     display: flex;
       justify-content: space-between;
