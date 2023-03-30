@@ -116,7 +116,7 @@ form.addEventListener('submit', (event) => {
 });
 
 
-//Categorien und tags sich holen
+//Categorien und tags und seasons sich holen
 const categorySelect = document.getElementById("categories");
 const tagSelect = document.getElementById("tags");
 
@@ -143,7 +143,21 @@ fetch("http://localhost:8080/getTags")
       });
     })
     .catch(error => console.error(error));
-// Ende Categorien und tags sich holen
+
+ const seasonSelect = document.getElementById("seasons");
+
+fetch("http://localhost:8080/getSeasons")
+    .then(response => response.json())
+    .then(seasons => {
+        Object.entries(seasons).forEach(([id, season]) => {
+            const option = document.createElement("option");
+            option.value = id;
+            option.innerHTML = season.displayName;
+            seasonSelect.appendChild(option);
+        });
+    })
+    .catch(error => console.error(error))
+// Ende Categorien und tags seasons sich holen
 
 
 //Poi Liste mit detail bewertung
