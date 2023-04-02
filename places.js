@@ -222,7 +222,7 @@ function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileA
     <h2>${poiTitle}</h2>
     <img src="${poiFileAccessLink}" />
     <p>Location: ${poiLocation}</p>
-    <p>Review Average: ${poiReviewAvg}</p>
+    <p>Rating: ${displayStars(poiReviewAvg)}</p>
     <p>Tags: ${poiTags.join(", ")}</p>
     <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
   `;
@@ -237,5 +237,23 @@ fetch("http://localhost:8080/getAllPOIs")
         });
     })
     .catch(error => console.error(error));
+
+function displayStars(rating) {
+    const roundedRating = Math.round(rating * 2) / 2; // Rundet die Bewertung auf den nächsten halben Stern
+    const stars = [];
+
+    for (let i = 0; i < 5; i++) {
+        if (i < roundedRating) {
+            stars.push('<i class="bi bi-star-fill"></i>'); // Fügt volle Sterne hinzu
+        } else if (i < roundedRating + 0.5) {
+            stars.push('<i class="bi bi-star-half"></i>'); // Fügt halben Stern hinzu
+        } else {
+            stars.push('<i class="bi bi-star"></i>'); // Fügt leeren Stern hinzu
+        }
+    }
+
+    return stars.join(''); // Gibt die Sterne als HTML-String zurück
+}
+
 
 //ende Poi liste mit detail bewertung

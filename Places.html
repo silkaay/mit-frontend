@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" integrity="sha512-krZvabJFdeMF+9Xq3/zCJYEqy5gl5k5w5ox/g33HJdGIXZt1eDgHQ9n04neW6H8+yoN1tzBwAL0o+P0o/8CC/w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js" integrity="sha512-WF/kxzzJCU89iK34o0Yzv5yH88Cxw5N5b5KnWqw0HjGdnD2PhL/q9NtO2iYd4PtdRni14gs4+hOySdSjvDRpZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- <script src="places.js"></script> -->
 
@@ -155,7 +156,7 @@
        <!-- Der Teil könnte noch relevant sein wenn ich später mehr pois habe
        <div id="POIliste" class="container-fluid">
             <div class="row flex-row flex-nowrap">
-            <div id="poi-list" class="col-3">
+            <div id="poiList" class="col-3">
 
             </div>
             </div>
@@ -163,8 +164,9 @@
         <br>
         <br>
             <div id="poiDetails"></div>-->
-    <h1>Points of Interest</h1>
-    <div id="poiList" class="d-flex flex-row"></div>
+    <h1 id="überschriftPOI">Points of Interest</h1>
+    <div id="poiList" class="d-flex flex-row custom-width">
+    </div>
     <div id="poiDetails" class="collapse"></div>
 </div>
 
