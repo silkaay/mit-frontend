@@ -70,12 +70,10 @@
     }
     #radios {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       text-align: center;
     }
-    #radio-label {
-      left: 0px;
-    }
+    
     .input-container {
       display: flex;
       justify-content: space-between;
