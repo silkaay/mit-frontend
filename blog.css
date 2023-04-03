@@ -70,10 +70,12 @@
     }
     #radios {
       display: flex;
-      justify-content: center;
-      text-align: center;
+      justify-content: space-evenly;
     }
-    
+    #radiobtn {
+      display: flex;
+      justify-content: space-between;
+    }
     .input-container {
       display: flex;
       justify-content: space-between;
@@ -135,6 +137,9 @@
       color: grey;
       text-decoration: underline;
       margin-left: auto;
+    }
+    #Place,#Journey{
+      margin-left:20px;
     }
     
   
