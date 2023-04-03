@@ -1,4 +1,6 @@
-
+#überschriftPOI{
+  text-align: center;
+}
 button {
   padding: 10px 20px;
   background-color: #4CAF50;
