@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="journeys.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -38,11 +39,99 @@
         </nav>
     </div>
     <!--Hier endet Banner und Navbar-->
-
     <div class="content">
-      
-    </div>
 
+        <h1 id="überschriftJourneys">Journeys</h1>
+
+        <div id="button-container"> <!-- Create POI Button-->
+            <button id="blog-button" onclick="openForm()">+ Create Place</button>
+            <!-- Pop-up zum erstellen-->
+            <div id="form-overlay"></div>
+            <div id="myForm" class="form-popup">
+                <form action="/submit-form">
+                    <div class="input-container">
+                        <input id="TitleJourneys" type="text" placeholder="Title" name="Title" required>
+                    </div>
+
+                    <div  class="container mt-5">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select id="seasons">
+                                    <option value="">Choose a seasons</option>
+                                </select>
+                                <br>
+                                <select id="categories">
+                                    <option value="">Choose a category</option>
+                                </select>
+                                <br>
+                                <select id="tags">
+                                    <option value="">Choose tags</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 justify-content-center" id="Sternebewertung">
+                                <ul class="ratings">
+                                    <li>
+                                        <h6>Cleanliness: </h6>
+                                        <input type="checkbox" id="rating1" name="rating1" value="1">
+                                        <label for="rating1"></label>
+                                        <input type="checkbox" id="rating2" name="rating1" value="2">
+                                        <label for="rating2"></label>
+                                        <input type="checkbox" id="rating3" name="rating1" value="3">
+                                        <label for="rating3"></label>
+                                        <input type="checkbox" id="rating4" name="rating1" value="4">
+                                        <label for="rating4"></label>
+                                        <input type="checkbox" id="rating5" name="rating1" value="5">
+                                        <label for="rating5"></label>
+                                    </li>
+                                    <li>
+                                        <h6>Must See: </h6>
+                                        <input type="checkbox" id="rating6" name="rating2" value="1">
+                                        <label for="rating6"></label>
+                                        <input type="checkbox" id="rating7" name="rating2" value="2">
+                                        <label for="rating7"></label>
+                                        <input type="checkbox" id="rating8" name="rating2" value="3">
+                                        <label for="rating8"></label>
+                                        <input type="checkbox" id="rating9" name="rating2" value="4">
+                                        <label for="rating9"></label>
+                                        <input type="checkbox" id="rating10" name="rating2" value="5">
+                                        <label for="rating10"></label>
+                                    </li>
+                                    <li>
+                                        <h6>Location:</h6>
+                                        <input type="checkbox" id="rating11" name="rating3" value="1">
+                                        <label for="rating11"></label>
+                                        <input type="checkbox" id="rating12" name="rating3" value="2">
+                                        <label for="rating12"></label>
+                                        <input type="checkbox" id="rating13" name="rating3" value="3">
+                                        <label for="rating13"></label>
+                                        <input type="checkbox" id="rating14" name="rating3" value="4">
+                                        <label for="rating14"></label>
+                                        <input type="checkbox" id="rating15" name="rating3" value="5">
+                                        <label for="rating15"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <textarea id="blogtext" name="blogtext"></textarea>
+                    <div class="button-align">
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- ende pop-up-->
+
+            <div id="journeys-container"></div>
+        </div>
+
+    <!--Input bis hier-->
+    </div>
+    <script src="journeys.js"></script>
     <!--Hier Beginnt Footer -->
     <footer class="footer">
       <div class="footer-links">
