@@ -20,9 +20,9 @@
   
   .traveldrop {
     display: flex;
-      justify-content: space-between;
-      align-items: center;
-    
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   #travel {
     width: 75%;
@@ -71,6 +71,7 @@
     #radios {
       display: flex;
       justify-content: space-between;
+      text-align: center;
     }
     #radio-label {
       left: 0px;
@@ -106,12 +107,12 @@
     .form-popup .cancel {
       background-color: #f44336;
     }
-    #blogcontainer {
+
+    .blogcontainer {
       background-color: rgb(170, 217, 170);
       border-radius: 5px;
     }
-
-    #bloghead {
+    .blogcontainer div{
       display: flex;
       align-items: baseline;
     }
@@ -119,12 +120,7 @@
     #author {
       flex: 1;
     }
-
-    #blogfoot {
-      display: flex;
-      align-items: baseline;
-    }
-    #innerbtn {
+    .blogcontainer button {
       background-color: white;
       color: grey;
       border-color: rgb(80, 80, 80);
@@ -134,10 +130,10 @@
       cursor: pointer;
       border-radius: 5px;
     }
-    #innerbtn:hover {
+    .blogcontainer button:hover {
         opacity: 0.8;
     }
-    #place-link {
+    .blogcontainer a{
       color: grey;
       text-decoration: underline;
       margin-left: auto;

@@ -62,45 +62,38 @@
           <div id="radios">
             <label id = "radio_label" for="poi_journey">Place or Journey?: </label>
             <div> 
-              <input type="radio" id="place" name="poi_journey" value="Place">
-              <label for="place">Place</label>
-            </div>
-            <div>
-              <input type="radio" id="journey" name="poi_journey" value="Journey">
-              <label for="journey">Journey</label>
+              <input type="radio" name="poi_journey" id="Place" value="Place">
+              <label for="Place">Place</label>
+              <input type="radio" name="poi_journey" id="Journey" value="Journey">
+              <label for="Journey">Journey</label>
             </div>
           </div>
           <div class="traveldrop">
-            <label for="travel">Choose one:   </label>
             <select id="travel" name="travel">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
+              <option value="">Choose element from list</option>
             </select>
           </div>
           <textarea id="blogtext" name="blogtext"></textarea>
           <div class="button-align">
             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn" onclick="submitForm()">Submit</button>
           </div>
         </form>
     </div>
     <!--Pop-Up Form Ende-->
-
+    
     <!--Hier starten die Blogposts-->
-    <div class="container-sm" id="blogcontainer">
-      <div id="bloghead">
+    <div class="container-sm blogcontainer">
+      <div>
         <h6 id="author">Autor, Datum</h6>
         <h2>hello</h2>
         <div id="author"></div> 
       </div>
-
       <p>dfkjnmkjnv jkvö lkdsknkbssvnjsknv  skjbsa kv kskjfkjsfdslkjklds nsflkbs</p>
-      <div id="blogfoot">
-        <button type="submit" id="innerbtn">Edit</button>
-        <button type="submit" id="innerbtn">Delete</button>
-        <a id="place-link" href="google.com">&rarr; POI</a>
+      <div>
+        <button type="submit">Edit</button>
+        <button type="submit">Delete</button>
+        <a href="google.com">&rarr; POI</a>
       </div>
         
     </div>
