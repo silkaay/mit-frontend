@@ -78,42 +78,23 @@ addButton.addEventListener('click', () => {
 
 
 // Sternbewertung
-const form = document.querySelector('form');
-const ratings = document.querySelectorAll('input[type="checkbox"]');
+var sterne = document.querySelectorAll(".stern");
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  let ratingsData = {};
-
-  // iterate through all checkboxes and save their values in an object
-  ratings.forEach((rating) => {
-    const name = rating.getAttribute('name');
-    const value = rating.checked ? rating.value : null;
-    if (name && value) {
-      ratingsData[name] = value;
-    }
-  });
-
-  // send the ratings data to the server
-  fetch('/ratings', {
-    method: 'POST',
-    body: JSON.stringify(ratingsData),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-      .then((response) => {
-        if (response.ok) {
-          alert('Bewertung erfolgreich abgeschickt!');
-        } else {
-          alert('Es ist ein Fehler aufgetreten.');
+for (var i = 0; i < sterne.length; i++) {
+    sterne[i].addEventListener("click", function() {
+        for (var j = 0; j < this.parentNode.children.length; j++) {
+            if (j < this.dataset.stern) {
+                this.parentNode.children[j].classList.add("aktiv");
+            } else {
+                this.parentNode.children[j].classList.remove("aktiv");
+            }
         }
-      })
-      .catch((error) => {
-        alert('Es ist ein Fehler aufgetreten.');
-      });
-});
+        var bewertung = this.dataset.stern;
+        localStorage.setItem(this.parentNode.parentNode.querySelector("h2").textContent, bewertung);
+    });
+}
+
+
 
 
 //Categorien und tags und seasons sich holen
@@ -164,53 +145,42 @@ fetch("http://localhost:8080/getSeasons")
 
 const poiList = document.getElementById("poiList");
 const poiDetails = document.getElementById("poiDetails");
-
+let currentCollapse = null; // Variable, die den aktuellen geöffneten Collapse-Button speichert
 
 function displayPOIDetails(poiId) {
     fetch("http://localhost:8080/getPOIDetails/" + poiId)
         .then(response => response.json())
         .then(data => {
             poiDetails.innerHTML = `
-        <table>
-            <tr>
-                <th style="width:30%">${data.poiTitle}</th>
-            </tr>
-            <tr>
-                <td><img src="${data.poiFileAccessLinks[0]}" /></td>
-                <td rowspan="5">Description: ${data.poiDescription}</td>
-            </tr>
-            <tr>
-                <td>Location: ${data.poiLocation}</td>
-            </tr>
-            <tr>
-                <td>${data.poiLatitude},${data.poiLongitude}</td>
-            </tr>
-            <tr>
-                <td>${data.poiSeasons.join(", ")}</td>
-            </tr>
-            <tr>
-                <td>${data.poiTags.join(", ")}</td>
-            </tr>
-            <tr>
-                <td>${data.poiCategory}</td>
-            </tr>
-           
-</table>
-        <!--
-        <h2>${data.poiTitle}</h2>
-        <p>Location: ${data.poiLocation}</p>
-        <p>Latitude: ${data.poiLatitude}</p>
-        <p>Longitude: ${data.poiLongitude}</p>
-        <p>Description: ${data.poiDescription}</p>
-        <p>Review Count: ${data.poiReviewCount}</p>
-        <p>Review Clean Average: ${data.poiReviewCleanAvg}</p>
-        <p>Review Must-See Average: ${data.poiReviewMustSeeAvg}</p>
-        <p>Review Location Average: ${data.poiReviewLocationAvg}</p>
-        <p>Seasons: ${data.poiSeasons.join(", ")}</p>
-        <p>Tags: ${data.poiTags.join(", ")}</p>
-        <p>Category: ${data.poiCategory}</p>
-        <img src="${data.poiFileAccessLinks[0]}" />-->
-      `;
+                <table>
+                    <tr>
+                        <th style="width:30%">${data.poiTitle}</th>
+                    </tr>
+                    <tr>
+                        <td><img src="http://localhost:8080/files/1" /></td>
+                        <td rowspan="5">Description: ${data.poiDescription}</td>
+                    </tr>
+                    <tr>
+                        <td>${data.poiLocation}</td>
+                    </tr>
+                    <tr>
+                        <td>${data.poiReviewAvg}</td>
+                    </tr>
+                    <tr>
+                        <td>${data.poiLatitude},${data.poiLongitude}</td>
+                    </tr>
+                    <tr>
+                        <td>${data.poiSeasons.join(", ")}</td>
+                    </tr>
+                    <tr>
+                        <td>${data.poiTags.join(", ")}</td>
+                    </tr>
+                    <tr>
+                        <td>${data.poiCategory}</td>
+                        <td><button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnetO="poiDetails" onclick="displayPOIKommentare(${poiId})">Kommentare</button></td>
+                    </tr>
+                </table>
+            `;
         })
         .catch(error => console.error(error));
 }
@@ -219,13 +189,15 @@ function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileA
     const poi = document.createElement("div");
     poi.className = "poi";
     poi.innerHTML = `
-    <h2>${poiTitle}</h2>
-    <img src="${poiFileAccessLink}" />
-    <p>Location: ${poiLocation}</p>
-    <p>Rating: ${displayStars(poiReviewAvg)}</p>
-    <p>Tags: ${poiTags.join(", ")}</p>
-    <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
-  `;
+        <div id="Test">
+            <h2>${poiTitle}</h2>
+            <img src="${poiFileAccessLink}" />
+            <p>Location: ${poiLocation}</p>
+            <p>Rating: ${displayStars(poiReviewAvg)}</p>
+            <p>Tags: ${poiTags.join(", ")}</p>
+            <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
+        </div>
+`;
     poiList.appendChild(poi);
 }
 
@@ -239,20 +211,57 @@ fetch("http://localhost:8080/getAllPOIs")
     .catch(error => console.error(error));
 
 function displayStars(rating) {
-    const roundedRating = Math.round(rating * 2) / 2; // Rundet die Bewertung auf den nächsten halben Stern
+    let fullStars = Math.floor(rating);
+    let halfStars = Math.abs(rating - fullStars) >= 0.5 ? 1 : 0;
+    let emptyStars = 5 - fullStars - halfStars;
+
     const stars = [];
 
-    for (let i = 0; i < 5; i++) {
-        if (i < roundedRating) {
-            stars.push('<i class="bi bi-star-fill"></i>'); // Fügt volle Sterne hinzu
-        } else if (i < roundedRating + 0.5) {
-            stars.push('<i class="bi bi-star-half"></i>'); // Fügt halben Stern hinzu
-        } else {
-            stars.push('<i class="bi bi-star"></i>'); // Fügt leeren Stern hinzu
-        }
+    for (let i = 0; i < fullStars; i++) {
+        stars.push('<i class="bi bi-star-fill"></i>'); // Fügt volle Sterne hinzu
+    }
+
+    if (halfStars) {
+        stars.push('<i class="bi bi-star-half"></i>'); // Fügt halben Stern hinzu
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+        stars.push('<i class="bi bi-star"></i>'); // Fügt leeren Stern hinzu
     }
 
     return stars.join(''); // Gibt die Sterne als HTML-String zurück
+}
+
+
+
+function displayPOIKommentare(poiId) {
+    // Erstelle eine Funktion, um die Kommentare abzurufen
+    function getComments() {
+        // Rufe die Daten von der API ab
+        fetch(`http://localhost:8080/getComments/${poiId}`)
+            .then(response => response.json())
+            .then(comments => {
+                // Leere die Kommentar-Liste
+                const commentList = document.getElementById('commentList');
+                commentList.innerHTML = '';
+
+                // Durchlaufe die Kommentare und füge sie zur Liste hinzu
+                comments.forEach(comment => {
+                    const { commentAuthor, commentDate, commentText } = comment;
+
+                    // Erstelle ein neues Listenelement für den Kommentar
+                    const li = document.createElement('li');
+                    li.innerHTML = `Autor: ${commentAuthor}, Datum: ${commentDate}, Text: ${commentText}`;
+
+                    // Füge das Listenelement zur Liste hinzu
+                    commentList.appendChild(li);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Rufe die Funktion auf, um die Kommentare zu laden
+    getComments();
 }
 
 

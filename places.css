@@ -1,6 +1,4 @@
-#überschriftPOI{
-  text-align: center;
-}
+
 button {
   padding: 10px 20px;
   background-color: #4CAF50;
@@ -19,18 +17,11 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-#Bewertungsansicht{
-  text-decoration: none;
-}
-/*
-li {
-  margin-bottom: 20px;
+#überschriftPOI {
+  text-align: center;
+  color: rgb(0, 80, 0);
 }
 
-h2 {
-  margin-bottom: 10px;
-}
-*/
 img {
   max-width: 100%;
   height: auto;
@@ -139,6 +130,7 @@ margin: 6px 6px;
 border: none;
 cursor: pointer;
 border-radius: 5px;
+
 }
 
 
@@ -215,9 +207,6 @@ cursor: pointer;
 border-radius: 5px;
 }
 
-.hidden {
-display: none;
-}
 #clear-button{
 background-color: darkseagreen;
 color: white;
@@ -229,30 +218,19 @@ border-radius: 5px;
 }
 
 /*Sternebewertung*/
-.ratings {
-list-style: none;
-padding: 0;
-margin: 0;
+
+.stern {
+  font-size: 30px;
+  color: #ddd;
+  cursor: pointer;
 }
 
-.ratings li {
-float: left;
-margin-right: 10px;
+.stern.aktiv {
+  color: gold;
 }
 
-.ratings input[type="checkbox"] {
-display: none;
-}
 
-.ratings label:before {
-content: "\2605";
-font-size: 20px;
-color: #ccc;
-}
 
-.ratings input[type="checkbox"]:checked ~ label:before {
-color: #f90;
-}
 
 #input{
 margin-left: 20px;
@@ -281,12 +259,18 @@ margin-right: 20px;
 
 /* Test anzeige POI*/
 
+
 #poiList {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-x: scroll;
   cursor: pointer;
+  height: 500px;
+  width: 100%;
+}
+#Test{
+  width: 300px;
 }
 
 .poi {
@@ -294,10 +278,8 @@ margin-right: 20px;
   background-color: darkseagreen;
   padding: 10px;
   margin: 10px;
-  height: 250px;
-
+  height: 460px;
 }
-
 .poi h2 {
   margin: 0;
   font-size: 1.5em;
@@ -316,12 +298,20 @@ margin-right: 20px;
 
 #poiDetails {
   margin-top: 50px;
-  padding: 10px;
+  padding: 20px;
   background-color: darkseagreen;
   border-radius: 5px;
-}
 
+}
 .bi-star-fill,.bi-star-half,.bi-star{
   color: gold;
   padding: 5px;
 }
+
+#comments{
+  background-color: darkseagreen;
+  border-radius: 5px;
+  padding-top: 20px;
+  padding-bottom:10px;
+}
+

@@ -95,47 +95,43 @@
                     </div>
 
                     <div class="col-md-4 justify-content-center" id="Sternebewertung">
-                        <ul class="ratings">
-                            <li>
-                                <h6>Cleanliness: </h6>
-                                <input type="checkbox" id="rating1" name="rating1" value="1">
-                                <label for="rating1"></label>
-                                <input type="checkbox" id="rating2" name="rating1" value="2">
-                                <label for="rating2"></label>
-                                <input type="checkbox" id="rating3" name="rating1" value="3">
-                                <label for="rating3"></label>
-                                <input type="checkbox" id="rating4" name="rating1" value="4">
-                                <label for="rating4"></label>
-                                <input type="checkbox" id="rating5" name="rating1" value="5">
-                                <label for="rating5"></label>
-                            </li>
-                            <li>
-                                <h6>Must See: </h6>
-                                <input type="checkbox" id="rating6" name="rating2" value="1">
-                                <label for="rating6"></label>
-                                <input type="checkbox" id="rating7" name="rating2" value="2">
-                                <label for="rating7"></label>
-                                <input type="checkbox" id="rating8" name="rating2" value="3">
-                                <label for="rating8"></label>
-                                <input type="checkbox" id="rating9" name="rating2" value="4">
-                                <label for="rating9"></label>
-                                <input type="checkbox" id="rating10" name="rating2" value="5">
-                                <label for="rating10"></label>
-                            </li>
-                            <li>
-                                <h6>Location:</h6>
-                                <input type="checkbox" id="rating11" name="rating3" value="1">
-                                <label for="rating11"></label>
-                                <input type="checkbox" id="rating12" name="rating3" value="2">
-                                <label for="rating12"></label>
-                                <input type="checkbox" id="rating13" name="rating3" value="3">
-                                <label for="rating13"></label>
-                                <input type="checkbox" id="rating14" name="rating3" value="4">
-                                <label for="rating14"></label>
-                                <input type="checkbox" id="rating15" name="rating3" value="5">
-                                <label for="rating15"></label>
-                            </li>
-                        </ul>
+                        <div class="bewertung">
+                            <h6>Cleanliness:</h6>
+                            <div class="sterne-bewertung">
+                                <span class="stern" data-stern="1">&#9734;</span>
+                                <span class="stern" data-stern="2">&#9734;</span>
+                                <span class="stern" data-stern="3">&#9734;</span>
+                                <span class="stern" data-stern="4">&#9734;</span>
+                                <span class="stern" data-stern="5">&#9734;</span>
+                            </div>
+                        </div>
+
+                        <div class="bewertung">
+                            <h6>Must See: </h6>
+                            <div class="sterne-bewertung">
+                                <span class="stern" data-stern="1">&#9734;</span>
+                                <span class="stern" data-stern="2">&#9734;</span>
+                                <span class="stern" data-stern="3">&#9734;</span>
+                                <span class="stern" data-stern="4">&#9734;</span>
+                                <span class="stern" data-stern="5">&#9734;</span>
+                            </div>
+                        </div>
+
+                        <div class="bewertung">
+                            <h6>Location: </h6>
+                            <div class="sterne-bewertung">
+                                <span class="stern" data-stern="1">&#9734;</span>
+                                <span class="stern" data-stern="2">&#9734;</span>
+                                <span class="stern" data-stern="3">&#9734;</span>
+                                <span class="stern" data-stern="4">&#9734;</span>
+                                <span class="stern" data-stern="5">&#9734;</span>
+                            </div>
+                        </div>
+
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -165,15 +161,20 @@
         <br>
             <div id="poiDetails"></div>-->
     <h1 id="überschriftPOI">Points of Interest</h1>
-    <div id="poiList" class="d-flex flex-row custom-width">
+
+        <div id="poiList"></div>
+
+        <div id="poiDetails" class="collapse"></div>
+    <div class="collapse" id="poiKommentare">
+        <div id="comments">
+            <ul id="commentList"></ul>
+        </div>
     </div>
-    <div id="poiDetails" class="collapse"></div>
 </div>
 
         <!--Das hier ist das Content Div-->
     </div>
     <!--Das hier ist das Content Div-->
-    
     <script src="places.js"></script>
 
     <!--Hier Beginnt Footer -->
