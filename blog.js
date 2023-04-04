@@ -12,9 +12,27 @@ function openForm() {
     location.reload();
   }
 
-  /*
   //Display the Blogposts
-  const blogList = document.getElementById("blogcontainer");
+  const blogList = document.querySelector('#blogcontainer');
+
+  window.onload = function() {
+    fetch("http://localhost:8080/getAllBlogposts")
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(blog => {
+            createBlogpost( 
+              blog.blogpostId, 
+              blog.blogpostAuthor,
+              blog.blogpostTitle, 
+              blog.blogpostCreationDate,
+              blog.blogpostText, 
+              blog.blogpostJourneyID, 
+              blog.blogpostPOIID
+              );
+        });
+    })
+    .catch(error => console.error(error));
+  }
 
   function createBlogpost(blogpostID, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyID, blogpostPOIID) {
     const blog = document.createElement("div");
@@ -27,42 +45,15 @@ function openForm() {
       </div>
       <p>${blogpostText}
       </p>
+      <div>
+        <button type="submit">Edit</button>
+        <button type="submit">Delete</button>
+        <a href="google.com">&rarr; POI</a>
+      </div>
+    </div>
   `;
-    blogList.appendChild(poi);
-}
-
-fetch("http://localhost:8080/getAllBlogposts")
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(blog => {
-            createBlogpost(blog.blogpostId, blog.blogpostTitle, blog.blogpostCreationDate, blog.blogpostText, blog.blogpostJourneyID, blog.blogpostPOIID);
-        });
-    })
-    .catch(error => console.error(error));
-*/
-/*
-fetch("http://localhost:8080/getSelectionPOIs")
-  .then(response => response.json())
-  .then(places => {
-    // Get dropdown element
-    const dropdown = document.getElementById('travel');
-
-    // Clear loading message
-    dropdown.innerHTML = '';
-
-    places.forEach(poi => {
-      console.log(poi.poiName);
-      const option = document.createElement('option');
-      option.value = poi.value;
-      option.text = poi.poiName;
-      dropdown.appendChild(option);
-
-    });
-  })
-  .catch(error => { 
-    console.error(error);
-  });
-  */
+    blogList.appendChild(blog);
+} 
 
   function journeyDropdown () {
     fetch("http://localhost:8080/getSelectionJourneys")
@@ -123,7 +114,6 @@ window.onload = function() {
       }
     });
   });
-
 }
 
   
