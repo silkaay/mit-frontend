@@ -182,7 +182,12 @@ function openForm() {
                       </tr>
                       <tr>
                           <td>${data.poiCategory}</td>
-                          <td><button class="btn btn-success btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Kommentare</button></td>
+                          <td>
+                          <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Kommentare</button>
+                          <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
+                          <button id="editPoi"> Edit</button>
+                          <button id="deletePoi"> Delete</button>
+                              
                       </tr>
                   </table>
               `;
@@ -206,7 +211,7 @@ function openForm() {
               <p>Location: ${poiLocation}</p>
               <p>Rating: ${displayStars(poiReviewAvg)}</p>
               <p>Tags: ${poiTags.join(", ")}</p>
-              <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
+              <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
           </div>
   `;
       poiList.appendChild(poi);
@@ -276,7 +281,17 @@ function openForm() {
       // Rufe die Funktion auf, um die Kommentare zu laden
       getComments();
   }
-  
-  
   //ende Poi liste mit detail bewertung
+  
+  // Popup für Kommentar erstellen
+  function openPopupCreateCom() {
+      document.getElementById("myFormCom").style.display = "block";
+      document.getElementById("form-overlayCom").style.display = "block";
+  }
+  
+  function closePopupCreateCom(){
+      document.getElementById("myFormCom").style.display = "none";
+      document.getElementById("form-overlayCom").style.display = "none";
+  }
+  
   
