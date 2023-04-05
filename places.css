@@ -218,7 +218,6 @@ border-radius: 5px;
 }
 
 /*Sternebewertung*/
-
 .stern {
   font-size: 30px;
   color: #ddd;
@@ -266,7 +265,7 @@ margin-right: 20px;
   justify-content: flex-start;
   overflow-x: scroll;
   cursor: pointer;
-  height: 500px;
+  height: 400px;
   width: 100%;
 }
 #Test{
@@ -278,7 +277,7 @@ margin-right: 20px;
   background-color: darkseagreen;
   padding: 10px;
   margin: 10px;
-  height: 460px;
+  height: 360px;
 }
 .poi h2 {
   margin: 0;
@@ -314,4 +313,3 @@ margin-right: 20px;
   padding-top: 20px;
   padding-bottom:10px;
 }
-
