@@ -373,3 +373,23 @@ margin-right: 20px;
   padding: 6px 24px;
   background-color: darkgreen;
 }
+#BewertungenDetails{
+  background-color: rgb(194, 222, 194);
+}
+
+#BewertungenDetailsListe::-webkit-scrollbar {
+  width: 10px;
+
+  /* width of the entire scrollbar */
+}
+
+#BewertungenDetailsListe::-webkit-scrollbar-track {
+  background-color: rgb(170, 217, 170);  /* color of the tracking area */
+  border-radius: 20px;
+
+}
+
+#BewertungenDetailsListe::-webkit-scrollbar-thumb {
+  background-color: darkgreen;    /* color of the scroll thumb */
+  border-radius: 20px;
+}

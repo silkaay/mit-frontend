@@ -169,7 +169,7 @@ function openForm() {
                           <td>${data.poiLocation}</td>
                       </tr>
                       <tr>
-                          <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
+                          <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
                       </tr>
                       <tr>
                           <td>${data.poiLatitude},${data.poiLongitude}</td>
@@ -329,6 +329,7 @@ function openForm() {
               // Hier fügen wir die Daten in die HTML-Struktur ein
               const poiInfoDiv = document.getElementById("poiInfo");
               poiInfoDiv.innerHTML = `
+          <p>Durchschnitt:</p>
           <div>Review Count: ${data.poiReviewCount}</div>
           <div>Cleanliness Average: ${displayStars(data.poiReviewCleanAvg)}</div>
           <div>Must-See Average: ${displayStars(data.poiReviewMustSeeAvg)}</div>
