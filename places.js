@@ -169,7 +169,7 @@ function openForm() {
                           <td>${data.poiLocation}</td>
                       </tr>
                       <tr>
-                          <td>${data.poiReviewAvg}</td>
+                          <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
                       </tr>
                       <tr>
                           <td>${data.poiLatitude},${data.poiLongitude}</td>
@@ -183,10 +183,10 @@ function openForm() {
                       <tr>
                           <td>${data.poiCategory}</td>
                           <td>
-                          <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Kommentare</button>
+                          <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Comments</button>
                           <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
                           <button id="editPoi"> Edit</button>
-                          <button id="deletePoi"> Delete</button>
+                          <button id="deletePoi" onclick="deletePOI(${poiId})" > Delete</button>
                               
                       </tr>
                   </table>
@@ -269,7 +269,21 @@ function openForm() {
   
                       // Erstelle ein neues Listenelement für den Kommentar
                       const li = document.createElement('li');
-                      li.innerHTML = `Autor: ${commentAuthor}, Datum: ${commentDate}, Text: ${commentText}`;
+                      li.innerHTML = `
+                      <table>
+                          <tr>
+                              <td>${commentAuthor},${commentDate}</td>
+                          </tr>
+                          <tr>
+                              <td>Text: ${commentText}</td>
+                          </tr>
+                          <tr>
+                              <td><button id="deletecomments">Delete this Comment</button></td>
+                          </tr>
+                      </table>
+                      <br>
+                 
+                      `;
   
                       // Füge das Listenelement zur Liste hinzu
                       commentList.appendChild(li);
@@ -294,4 +308,47 @@ function openForm() {
       document.getElementById("form-overlayCom").style.display = "none";
   }
   
+  
+  // Create Pop up für Bewertungen Detail
+  function openPopupCreateBewAbgeben() {
+      document.getElementById("myFormBewAbgeben").style.display = "block";
+      document.getElementById("form-overlayBewAbgeben").style.display = "block";
+  }
+  
+  function closePopupCreateBewAbgeben() {
+      document.getElementById("myFormBewAbgeben").style.display = "none";
+      document.getElementById("form-overlayBewAbgeben").style.display = "none";
+  }
+  
+  // Hier definieren wir eine Funktion, um die Daten abzurufen und anzuzeigen
+  function getReviews(poiId) {
+      // Hier rufen wir die Daten über einen API-Endpoint ab
+      fetch(`http://localhost:8080/getReviews/${poiId}`)
+          .then(response => response.json())
+          .then(data => {
+              // Hier fügen wir die Daten in die HTML-Struktur ein
+              const poiInfoDiv = document.getElementById("poiInfo");
+              poiInfoDiv.innerHTML = `
+          <div>Review Count: ${data.poiReviewCount}</div>
+          <div>Cleanliness Average: ${displayStars(data.poiReviewCleanAvg)}</div>
+          <div>Must-See Average: ${displayStars(data.poiReviewMustSeeAvg)}</div>
+          <div>Location Average: ${displayStars(data.poiReviewLocationAvg)}</div>
+        `;
+  
+              const poiReviewsDiv = document.getElementById("poiReviews");
+              poiReviewsDiv.innerHTML = ""; // leeren den Inhalt des divs, bevor wir neue Bewertungen einfügen
+              data.poiReviewReturnListList.forEach(review => {
+                  poiReviewsDiv.innerHTML += `
+            <div>
+              <div>Review: ${review.poiReviewId}</div>
+              <div>Cleanliness: ${displayStars(review.poiReviewClean)}</div>
+              <div>Must-See: ${displayStars(review.poiReviewMustSee)}</div>
+              <div>Location: ${displayStars(review.poiReviewLocation)}</div>
+              <br>
+            </div>
+          `;
+              });
+          })
+          .catch(error => console.error(error));
+  }
   

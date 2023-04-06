@@ -127,11 +127,6 @@
                                 <span class="stern" data-stern="5">&#9734;</span>
                             </div>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -160,7 +155,7 @@
         <br>
         <br>
             <div id="poiDetails"></div>-->
-    <h1 id="überschriftPOI">Points of Interest</h1>
+    <h1 id="überschriftPOI">Places</h1>
 
         <div id="poiList"></div>
         <div id="poiDetails" class="collapse"></div>
@@ -178,10 +173,68 @@
                 </div>
             </form>
         </div>
+    <div class="offcanvas offcanvas-start" id="demo">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">Reviews</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="poiInfo"></div>
+           <button id="ratebutton" data-bs-dismiss="offcanvas" onclick="openPopupCreateBewAbgeben()">Rate</button>
+            <hr>
+            <div id="poiReviews"></div>
+        </div>
+    </div>
 
+
+    <div id="form-overlayBewAbgeben"></div>
+    <div id="myFormBewAbgeben" class="form-popup">
+        <form action="/submit-form">
+            <div id="Sternebewertung">
+                <div class="bewertung">
+                    <h6>Cleanliness:</h6>
+                    <div class="sterne-bewertung">
+                        <span class="stern" data-stern="1">&#9734;</span>
+                        <span class="stern" data-stern="2">&#9734;</span>
+                        <span class="stern" data-stern="3">&#9734;</span>
+                        <span class="stern" data-stern="4">&#9734;</span>
+                        <span class="stern" data-stern="5">&#9734;</span>
+                    </div>
+                </div>
+
+                <div class="bewertung">
+                    <h6>Must See: </h6>
+                    <div class="sterne-bewertung">
+                        <span class="stern" data-stern="1">&#9734;</span>
+                        <span class="stern" data-stern="2">&#9734;</span>
+                        <span class="stern" data-stern="3">&#9734;</span>
+                        <span class="stern" data-stern="4">&#9734;</span>
+                        <span class="stern" data-stern="5">&#9734;</span>
+                    </div>
+                </div>
+
+                <div class="bewertung">
+                    <h6>Location: </h6>
+                    <div class="sterne-bewertung">
+                        <span class="stern" data-stern="1">&#9734;</span>
+                        <span class="stern" data-stern="2">&#9734;</span>
+                        <span class="stern" data-stern="3">&#9734;</span>
+                        <span class="stern" data-stern="4">&#9734;</span>
+                        <span class="stern" data-stern="5">&#9734;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-align">
+                <button type="button" class="btn cancel" onclick="closePopupCreateBewAbgeben()">Close</button>
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </div>
 
     <div class="collapse" id="poiKommentare">
         <div id="comments">
+            <h2 id="commentsueber">Comments</h2>
             <ul id="commentList"></ul>
         </div>
     </div>

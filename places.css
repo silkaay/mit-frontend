@@ -1,3 +1,4 @@
+
 button {
   padding: 10px 20px;
   background-color: #4CAF50;
@@ -48,6 +49,15 @@ background-color: darkseagreen;
   padding: 6px 24px;
   background-color: darkgreen;
 }
+#deletecomments{
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-right: 60px;
+  padding: 2px 20px;
+  background-color: darkgreen;
+  font-size: 15px;
+}
 
 #blog-button:hover {
 opacity: 0.8;
@@ -80,6 +90,16 @@ display: none; /* hide the overlay by default */
   background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
   display: none; /* hide the overlay by default */
 }
+#form-overlayBewAbgeben {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+  display: none; /* hide the overlay by default */
+}
 .form-popup {
 display: none;
 transform: translate(-50%, -50%);
@@ -100,6 +120,7 @@ border-radius: 5px;
 width: 700px;
 overflow-y: auto;
 }
+
 
 .form-popup input[type=text], .form-popup input[type=date] {
 width: 32%;
@@ -123,7 +144,7 @@ border: 1px solid #ccc;
 text-align: right;
 bottom: 2%;
 }
-.form-popup button[type=submit], .form-popup button[type=button] {
+.form-popup button[type=submit], .form-popup button[type=button]{
 background-color: darkseagreen;
 color: white;
 padding: 3px 24px;
@@ -131,6 +152,15 @@ margin: 6px 6px;
 border: none;
 cursor: pointer;
 
+}
+#ratebutton,#bewschließen{
+  background-color: darkseagreen;
+  color: white;
+  padding: 3px 24px;
+  margin: 6px 6px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .form-popup button[type=submit]:hover, .form-popup button[type=button]:hover {
@@ -261,7 +291,7 @@ margin-right: 20px;
 }
 
 #poiList::-webkit-scrollbar-track {
-  background: darkseagreen;  /* color of the tracking area */
+  background-color: rgb(170, 217, 170);  /* color of the tracking area */
   border-radius: 20px;
 
 }
@@ -292,7 +322,7 @@ margin-right: 20px;
 
 .poi {
   border-radius: 5px;
-  background-color: darkseagreen;
+  background-color: rgb(170, 217, 170);
   padding: 10px;
   margin: 10px;
   height: 360px;
@@ -316,7 +346,7 @@ margin-right: 20px;
 #poiDetails {
   margin-top: 50px;
   padding: 20px;
-  background-color: darkseagreen;
+  background-color: rgb(170, 217, 170);
   border-radius: 5px;
 
 }
@@ -326,8 +356,20 @@ margin-right: 20px;
 }
 
 #comments{
-  background-color: darkseagreen;
+  background-color: rgb(170, 217, 170);
   border-radius: 5px;
   padding-top: 20px;
   padding-bottom:10px;
+}
+#commentsueber{
+  text-align: center;
+  color: darkgreen;
+}
+#bewertungenansehen{
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-right: 60px;
+  padding: 6px 24px;
+  background-color: darkgreen;
 }
