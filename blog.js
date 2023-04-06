@@ -11,49 +11,33 @@ function openForm() {
   function submitForm() {
     location.reload();
   }
+  
 
   //Display the Blogposts
-  const blogList = document.querySelector('#blogcontainer');
-
-  window.onload = function() {
-    fetch("http://localhost:8080/getAllBlogposts")
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(blog => {
-            createBlogpost( 
-              blog.blogpostId, 
-              blog.blogpostAuthor,
-              blog.blogpostTitle, 
-              blog.blogpostCreationDate,
-              blog.blogpostText, 
-              blog.blogpostJourneyID, 
-              blog.blogpostPOIID
-              );
-        });
-    })
-    .catch(error => console.error(error));
-  }
-
-  function createBlogpost(blogpostID, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyID, blogpostPOIID) {
-    const blog = document.createElement("div");
-    blog.className = "blogcontainer";
-    blog.innerHTML = `
-    <div>
-        <h6 id="author">${blogpostAuthor}, ${blogpostCreationDate}</h6>
-        <h2>${blogpostTitle}</h2>
-        <div id="author"></div> 
-      </div>
-      <p>${blogpostText}
-      </p>
-      <div>
-        <button type="submit">Edit</button>
-        <button type="submit">Delete</button>
-        <a href="google.com">&rarr; POI</a>
-      </div>
-    </div>
+  const blogcontainer = document.getElementById("blogcontainer");
+    
+    function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
+      const blog = document.createElement("div");
+      blog.className = "blogpost";
+      blog.innerHTML = `
+              <h2>${blogpostAuthor}, ${blogpostTitle}</h2>
+              <p>${blogpostCreationDate}</p>
+              <p>${blogpostText}</p>
+              <p>${blogpostJourneyId}, ${blogpostPOIId}</p>
   `;
-    blogList.appendChild(blog);
-} 
+      blogcontainer.appendChild(blog);
+  }
+  
+  fetch("http://localhost:8080/getAllBlogposts")
+      .then(response => response.json())
+      .then(data => {
+          data.forEach(blogpost => {
+              createBlogpost(blogpost.blogpostId, blogpost.blogpostAuthor, blogpost.blogpostTitle, blogpost.blogpostCreationDate, blogpost.blogpostText, blogpost.blogpostJourneyId, blogpost.blogpostPOIId);
+          });
+      })
+      .catch(error => console.error(error));
+
+
 
   function journeyDropdown () {
     fetch("http://localhost:8080/getSelectionJourneys")
