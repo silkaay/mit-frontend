@@ -111,13 +111,19 @@
     #blogcontainer {
       background-color: rgb(170, 217, 170);
       border-radius: 5px;
+      margin: 20px;
+      padding: 10px;
+      margin-left: auto;
+      margin-right: auto;
     }
     #blogcontainer div{
       display: flex;
       align-items: baseline;
+      justify-content: center;
+      
     }
-
-    #author {
+    #blogcontainer h6 {
+      margin-left: auto;
       flex: 1;
     }
     #blogcontainer button {

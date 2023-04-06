@@ -20,11 +20,17 @@ function openForm() {
       const blog = document.createElement("div");
       blog.className = "blogpost";
       blog.innerHTML = `
-            <div id="blogcontainer">
-              <h2>${blogpostAuthor}, ${blogpostTitle}</h2>
-              <p>${blogpostCreationDate}</p>
+            <div class="container-sm" id="blogcontainer">
+              <div>
+                <h6>${blogpostAuthor}, ${blogpostCreationDate}</h6>
+                <h3>${blogpostTitle}</h3>
+                <h6></h6>
+              </div>
               <p>${blogpostText}</p>
               <p>${blogpostJourneyId}, ${blogpostPOIId}</p>
+                <button type="submit">Edit</button>
+                <button type="submit">Delete</button>
+            
             </div>
   `;
       bloglist.appendChild(blog);
