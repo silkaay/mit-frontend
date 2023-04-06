@@ -108,11 +108,11 @@
       background-color: #f44336;
     }
 
-    .blogcontainer {
+    #blogcontainer {
       background-color: rgb(170, 217, 170);
       border-radius: 5px;
     }
-    .blogcontainer div{
+    #blogcontainer div{
       display: flex;
       align-items: baseline;
     }
@@ -120,7 +120,7 @@
     #author {
       flex: 1;
     }
-    .blogcontainer button {
+    #blogcontainer button {
       background-color: white;
       color: grey;
       border-color: rgb(80, 80, 80);
@@ -130,10 +130,10 @@
       cursor: pointer;
       border-radius: 5px;
     }
-    .blogcontainer button:hover {
+    #blogcontainer button:hover {
         opacity: 0.8;
     }
-    .blogcontainer a{
+    #blogcontainer a{
       color: grey;
       text-decoration: underline;
       margin-left: auto;
@@ -141,6 +141,7 @@
     #Place,#Journey{
       margin-left:30px;
     }
+    
     
   
    

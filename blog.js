@@ -14,18 +14,20 @@ function openForm() {
   
 
   //Display the Blogposts
-  const blogcontainer = document.getElementById("blogcontainer");
+  const bloglist = document.getElementById("bloglist");
     
     function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
       const blog = document.createElement("div");
       blog.className = "blogpost";
       blog.innerHTML = `
+            <div id="blogcontainer">
               <h2>${blogpostAuthor}, ${blogpostTitle}</h2>
               <p>${blogpostCreationDate}</p>
               <p>${blogpostText}</p>
               <p>${blogpostJourneyId}, ${blogpostPOIId}</p>
+            </div>
   `;
-      blogcontainer.appendChild(blog);
+      bloglist.appendChild(blog);
   }
   
   fetch("http://localhost:8080/getAllBlogposts")
