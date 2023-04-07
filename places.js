@@ -98,47 +98,58 @@ function openForm() {
   
   
   //Categorien und tags und seasons sich holen
-  const categorySelect = document.getElementById("categories");
-  const tagSelect = document.getElementById("tags");
-  
-  fetch("http://localhost:8080/getCategories")
-      .then(response => response.json())
-      .then(categories => {
-        Object.entries(categories).forEach(([id, name]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          categorySelect.appendChild(option);
-        });
-      })
-      .catch(error => console.error(error));
-  
-  fetch("http://localhost:8080/getTags")
-      .then(response => response.json())
-      .then(tags => {
+const categorySelect = document.getElementById("categories");
+const tagSelect = document.getElementById("tags");
+
+fetch("http://localhost:8080/getCategories")
+    .then(response => response.json())
+    .then(categories => {
+      Object.entries(categories).forEach(([id, name]) => {
+        const option = document.createElement("option");
+        option.value = id;
+        option.textContent = name;
+        categorySelect.appendChild(option);
+      });
+    })
+    .catch(error => console.error(error));
+
+const categoryDiv = document.getElementById("categories");
+const tagDiv = document.getElementById("tags");
+const seasonDiv = document.getElementById("seasons");
+
+fetch("http://localhost:8080/getTags")
+    .then(response => response.json())
+    .then(tags => {
         Object.entries(tags).forEach(([id, name]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          tagSelect.appendChild(option);
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "tag";
+            checkbox.value = id;
+            const label = document.createElement("label");
+            label.textContent = name;
+            tagDiv.appendChild(checkbox);
+            tagDiv.appendChild(label);
+
         });
-      })
-      .catch(error => console.error(error));
-  
-   const seasonSelect = document.getElementById("seasons");
-  
-  fetch("http://localhost:8080/getSeasons")
-      .then(response => response.json())
-      .then(seasons => {
-          Object.entries(seasons).forEach(([id, season]) => {
-              const option = document.createElement("option");
-              option.value = id;
-              option.innerHTML = season.displayName;
-              seasonSelect.appendChild(option);
-          });
-      })
-      .catch(error => console.error(error))
-  // Ende Categorien und tags seasons sich holen
+    })
+    .catch(error => console.error(error));
+
+fetch("http://localhost:8080/getSeasons")
+    .then(response => response.json())
+    .then(seasons => {
+        Object.entries(seasons).forEach(([id, season]) => {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "season";
+            checkbox.value = id;
+            const label = document.createElement("label");
+            label.innerHTML = season.displayName;
+            seasonDiv.appendChild(checkbox);
+            seasonDiv.appendChild(label);
+        });
+    })
+    .catch(error => console.error(error));
+// Ende Categorien und tags seasons sich holen
   
   
   //Poi Liste mit detail bewertung

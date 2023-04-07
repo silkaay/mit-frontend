@@ -56,6 +56,7 @@
         <div id="form-overlay"></div>
         <div id="myForm" class="form-popup">
             <form action="/submit-form">
+                <h2 id="POIertsellenueber">Create Place</h2>
                 <div class="input-container">
                     <input id="NamePOI" type="text" placeholder="Name" name="Name" required>
                     <input id="Place" type="text" placeholder="Place" name="Place" required>
@@ -64,20 +65,21 @@
                 <div class="input-container ">
                     <input id="LatitudePOI" type="text" placeholder="Latitude" name="Latitude" required>
                     <input id="Longitude" type="text" placeholder="Longitude" name="Longitude" required>
-
-                </div>
-                <div class="input-container">
-
-                    <select id="seasons">
-                        <option value="">Choose a seasons</option>
-                    </select>
                     <select id="categories">
                         <option value="">Choose a category</option>
                     </select>
 
-                    <select id="tags">
-                        <option value="">Choose tags</option>
-                    </select>
+                </div>
+                <div class="input-container">
+                    <div id="seasons">
+                        <label>Seasons:</label><br>
+                    </div>
+                </div>
+                <div class="input-container">
+
+                    <div id="tags">
+                        <label>Tags:</label><br>
+                    </div>
 
 
                 </div>
@@ -160,7 +162,7 @@
         <div id="poiList"></div>
         <div id="poiDetails" class="collapse"></div>
     <div id="form-overlayCom"></div>
-        <div id="myFormCom" class="form-popup">
+        <div id="myFormCom" class="form-popup2">
             <form action="/submit-form">
 
                 <input id="Author" type="text" placeholder="Name" name="Name" required>
@@ -188,7 +190,7 @@
 
 
     <div id="form-overlayBewAbgeben"></div>
-    <div id="myFormBewAbgeben" class="form-popup">
+    <div id="myFormBewAbgeben" class="form-popup2">
         <form action="/submit-form">
             <div id="Sternebewertung">
                 <div class="bewertung">
