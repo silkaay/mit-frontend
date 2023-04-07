@@ -157,7 +157,7 @@ fetch("http://localhost:8080/getSeasons")
   const poiList = document.getElementById("poiList");
   const poiDetails = document.getElementById("poiDetails");
   let currentCollapse = null; // Variable, die den aktuellen geöffneten Collapse-Button speichert
-  
+  let currentPOIId = null;
   function displayPOIDetails(poiId) {
       fetch("http://localhost:8080/getPOIDetails/" + poiId)
           .then(response => response.json())
@@ -214,6 +214,7 @@ fetch("http://localhost:8080/getSeasons")
   
   function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileAccessLink) {
       const poi = document.createElement("div");
+      currentPOIId = poiId;
       poi.className = "poi";
       poi.innerHTML = `
           <div id="Test">
@@ -380,4 +381,34 @@ function deleteComment(commentId, button) {
           })
           .catch(error => console.error(error));
   }
+
+  function createComment(poiId, commentAuthor, commentText) {
+
+    const data = { poiId, commentAuthor, commentText };
+
+let url = "http://localhost:8080/createComment";
+let request = new Request(url, {
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+    method: "POST",
+})
+fetch(request)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Antwort vom Server:", data);
+
+    })
+
+
+}
+
+function submitComment(event) {
+event.preventDefault();
+const poiId = currentPOIId;
+const commentAuthor = document.getElementById("Author").value;
+const commentText = document.getElementById("commenttext").value;
+createComment(poiId, commentAuthor, commentText);
+
+}
+
   
