@@ -1,7 +1,6 @@
-
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: darkgreen;
   color: white;
   border: none;
   border-radius: 4px;
@@ -17,6 +16,7 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
 #überschriftPOI {
   text-align: center;
   color: rgb(0, 80, 0);
@@ -39,7 +39,7 @@ border: none;
 border-radius: 5px;
 color: white;
 padding: 4px 24px;
-background-color: darkseagreen;
+background-color: darkgreen;
 }
 #createcomment,#commentsliste,#poidetailsbutton,#editPoi,#deletePoi{
   border: none;
@@ -145,7 +145,7 @@ text-align: right;
 bottom: 2%;
 }
 .form-popup button[type=submit], .form-popup button[type=button]{
-background-color: darkseagreen;
+background-color: darkgreen;
 color: white;
 padding: 3px 24px;
 margin: 6px 6px;
@@ -153,8 +153,17 @@ border: none;
 cursor: pointer;
 
 }
-#ratebutton,#bewschließen{
-  background-color: darkseagreen;
+#bewschließen{
+  background-color: darkgreen;
+  color: white;
+  padding: 3px 24px;
+  margin: 6px 6px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#ratebutton{
+  background-color: darkgreen;
   color: white;
   padding: 3px 24px;
   margin: 6px 6px;
@@ -246,7 +255,7 @@ background: #555;
 #add-button {
 margin-top: 20px;
 margin-right: 10px;
-background-color: darkseagreen;
+background-color: darkgreen;
 color: white;
 padding: 3px 24px;
 margin: 6px 6px;
@@ -256,7 +265,7 @@ border-radius: 5px;
 }
 
 #clear-button{
-background-color: darkseagreen;
+background-color: darkgreen;
 color: white;
 padding: 3px 24px;
 margin: 6px 6px;
@@ -370,8 +379,9 @@ margin-right: 20px;
   border-radius: 5px;
   color: white;
   margin-right: 60px;
-  padding: 6px 24px;
+  padding: 4px 24px;
   background-color: darkgreen;
+  margin-left: 20px;
 }
 #BewertungenDetails{
   background-color: rgb(194, 222, 194);
@@ -392,4 +402,6 @@ margin-right: 20px;
 #BewertungenDetailsListe::-webkit-scrollbar-thumb {
   background-color: darkgreen;    /* color of the scroll thumb */
   border-radius: 20px;
+  /* roundness of the scroll thumb */
+  /* creates padding around scroll thumb */
 }
