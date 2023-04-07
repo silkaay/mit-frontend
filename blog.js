@@ -38,7 +38,7 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
         <h6></h6>
       </div>
       <p>${blogpostText}</p>
-      <button type="submit" onclick="editBlogpost(${blogpostId}, this)">Edit</button>
+      <button type="submit" onclick="openEditBlogpost(${blogpostId}, this)">Edit</button>
       <button type="submit" onclick="deleteBlogpost(${blogpostId}, this)">Delete</button>
     </div>
   `;
@@ -53,13 +53,31 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
 */
 
 //Bearbeite einzelne Blogposts
-function editBlogpost (blogpostId, button) {
+function openEditBlogpost (blogpostId, button) {
   //öffnet die Form
   document.getElementById("form-overlay").style.display = "block";
   document.getElementById("editForm").style.display = "block";
 
+  console.log(blogpostId);
 
-  console.log("test");
+  var form = document.forms["editForm"];
+
+  // get the values of the input elements
+  var title = form.editTitle.value;
+
+  const editTitle = document.getElementById('editTitle');
+  const editBlogtext = document.getElementById('editBlogtext');
+
+  fetch(`http://localhost:8080/getBlogpostById/${blogpostId}`) 
+    .then(response => response.json())
+    .then(blogpost => {
+      console.log(blogpost.blogpostTitle);
+      title.value = blogpost.blogpostTitle;
+      //editTitle.value = blogpost.blogpostTitle;
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
 }
 
 function openBlog() {
@@ -88,6 +106,9 @@ function deleteBlogpost(blogpostId, button) {
   })
   .catch(error => console.error(`Error deleting blogpost with id ${blogpostId}: ${error}`));
 }
+
+
+
 
 //Ab hier sind die Dropdown-Felder für die erstellen Ansicht
 function journeyDropdown() {
