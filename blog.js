@@ -46,21 +46,7 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
 }
 
 
-function postBlogpost() {
-  var form = document.forms["myForm"];
 
-  // get the values of the input elements
-  var title = form.title.value;
-  var entrydate = form.entrydate.value;
-  var author = form.author.value;
-  var blogtext = form.blogtext.value;
-  /*
-  var entrydate = form.elements["entrydate"].value;
-  var author = form.elements["author"].value;
-  var blogtext = form.elements["blogtext"].value;*/
-
-  console.log(title, entrydate, author, blogtext);
-}
 
 /* Diese Line wurde aus dem inner html entfern, hier nur zum Sichern
 <p>${blogpostJourneyId}, ${blogpostPOIId}</p>
@@ -117,7 +103,7 @@ function journeyDropdown() {
       journeys.forEach(journey => {
         console.log(journey.journeyName);
         const option = document.createElement('option');
-        option.value = journey.value;
+        option.value = journey.journeyId;
         option.text = journey.journeyName;
         dropdown.appendChild(option);
 
@@ -141,7 +127,7 @@ function poiDropdown() {
       places.forEach(poi => {
         console.log(poi.poiName);
         const option = document.createElement('option');
-        option.value = poi.value;
+        option.value = poi.poiId;
         option.text = poi.poiName;
         dropdown.appendChild(option);
 
@@ -152,7 +138,8 @@ function poiDropdown() {
     });
 }
 
-window.onload = function () {
+//window.onload = 
+function populateDropdown () {
   const radioButtons = document.querySelectorAll('input[type=radio][name=poi_journey][id=Place], input[type=radio][name=poi_journey][id=Journey]');
   radioButtons.forEach(button => {
     button.addEventListener('change', function () {
@@ -165,3 +152,56 @@ window.onload = function () {
     });
   });
 }
+
+function postBlogpost() {
+  const dropdown = document.getElementById('travel');
+
+  var form = document.forms["myForm"];
+
+  // get the values of the input elements
+  var title = form.title.value;
+  var entrydate = form.entrydate.value;
+  var author = form.author.value;
+  var blogtext = form.blogtext.value;
+  var travel = form.travel.value;
+  const selectedOption = document.querySelector('input[name="poi_journey"]:checked').value;
+
+  console.log(selectedOption); // Will output either "Place" or "Journey"
+  
+  var journey;
+  var place;
+  if (selectedOption === "Place") {
+    place = travel;
+    journey = "";
+  } else {
+    place = "";
+    journey = travel;
+  }
+  
+
+  var data = {
+    blogpostAuthor: author,
+    blogpostTitle: title,
+    blogpostCreationDate: entrydate,
+    blogpostText: blogtext,
+    blogpostJourneyId: journey,
+    blogpostPOIId: place
+  };
+  
+  fetch("http://localhost:8080/createBlogpost", {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+ location.reload(); 
+}
+
