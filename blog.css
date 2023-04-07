@@ -12,7 +12,7 @@
     border-radius: 5px;
     color: white;
     padding: 4px 24px;
-    background-color: darkseagreen;
+    background-color: darkgreen;
   }
   #blog-button:hover {
     opacity: 0.8;
@@ -109,7 +109,7 @@
     }
 
     #blogcontainer {
-      background-color: rgb(170, 217, 170);
+      background-color: rgb(191, 225, 194);
       border-radius: 5px;
       margin: 20px;
       padding: 10px;
@@ -123,12 +123,19 @@
       
     }
     #blogcontainer h6 {
-      margin-left: auto;
+      margin-left: 15px;
       flex: 1;
     }
+    #blogcontainer h3 {
+      color: darkgreen; 
+    }
+    #blogcontainer p {
+      margin: 15px 30px 30px;
+    }
+
     #blogcontainer button {
-      background-color: white;
-      color: grey;
+      background-color: darkgreen;
+      color: white;
       border-color: rgb(80, 80, 80);
       padding: 3px 24px;
       margin: 6px 6px;

@@ -16,6 +16,7 @@ function submitForm() {
 //Display the Blogposts
 const bloglist = document.getElementById("bloglist");
 
+
 function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
   const blog = document.createElement("div");
   blog.className = "blogpost";
@@ -27,7 +28,6 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
         <h6></h6>
       </div>
       <p>${blogpostText}</p>
-      <p>${blogpostJourneyId}, ${blogpostPOIId}</p>
       <button type="submit">Edit</button>
       <button type="submit" onclick="deleteBlogpost(${blogpostId}, this)">Delete</button>
     </div>
@@ -35,6 +35,9 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
   bloglist.appendChild(blog);
 }
 
+/* Diese Line wurde aus dem inner html entfern, hier nur zum Sichern
+<p>${blogpostJourneyId}, ${blogpostPOIId}</p>
+*/
 function deleteBlogpost(blogpostId, button) {
   // Sende DELETE-Request an den Server
   fetch(`http://localhost:8080/deleteBlogpost/${blogpostId}`, {
