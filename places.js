@@ -253,48 +253,65 @@ function openForm() {
   
   
   function displayPOIKommentare(poiId) {
-      // Erstelle eine Funktion, um die Kommentare abzurufen
-      function getComments() {
-          // Rufe die Daten von der API ab
-          fetch(`http://localhost:8080/getComments/${poiId}`)
-              .then(response => response.json())
-              .then(comments => {
-                  // Leere die Kommentar-Liste
-                  const commentList = document.getElementById('commentList');
-                  commentList.innerHTML = '';
-  
-                  // Durchlaufe die Kommentare und füge sie zur Liste hinzu
-                  comments.forEach(comment => {
-                      const { commentAuthor, commentDate, commentText } = comment;
-  
-                      // Erstelle ein neues Listenelement für den Kommentar
-                      const li = document.createElement('li');
-                      li.innerHTML = `
-                      <table>
-                          <tr>
-                              <td>${commentAuthor},${commentDate}</td>
-                          </tr>
-                          <tr>
-                              <td>Text: ${commentText}</td>
-                          </tr>
-                          <tr>
-                              <td><button id="deletecomments">Delete this Comment</button></td>
-                          </tr>
-                      </table>
-                      <br>
-                 
-                      `;
-  
-                      // Füge das Listenelement zur Liste hinzu
-                      commentList.appendChild(li);
-                  });
-              })
-              .catch(error => console.error(error));
-      }
-  
-      // Rufe die Funktion auf, um die Kommentare zu laden
-      getComments();
-  }
+    // Erstelle eine Funktion, um die Kommentare abzurufen
+    function getComments() {
+        // Rufe die Daten von der API ab
+        fetch(`http://localhost:8080/getComments/${poiId}`)
+            .then(response => response.json())
+            .then(comments => {
+                // Leere die Kommentar-Liste
+                const commentList = document.getElementById('commentList');
+                commentList.innerHTML = '';
+
+                // Durchlaufe die Kommentare und füge sie zur Liste hinzu
+                comments.forEach(comment => {
+                    const { commentAuthor, commentDate, commentText, commentId } = comment;
+
+                    // Erstelle ein neues Listenelement für den Kommentar
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                    <table>
+                        <tr>
+                            <td>${commentAuthor},${commentDate}</td>
+                        </tr>
+                        <tr>
+                            <td>Text: ${commentText}</td>
+                        </tr>
+                        <tr>
+                            <td><button type="submit" id="deletecomments" onclick="deleteComment(${commentId}, this)">Delete this Comment</button></td>
+                        </tr>
+                    </table>
+                    <br>
+
+                    `;
+
+                    // Füge das Listenelement zur Liste hinzu
+                    commentList.appendChild(li);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Rufe die Funktion auf, um die Kommentare zu laden
+    getComments();
+}
+
+function deleteComment(commentId, button) {
+    // Sende DELETE-Request an den Server
+    fetch(`http://localhost:8080/deleteComment/${commentId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (response.ok) {
+            // Entferne den gelöschten Kommentar aus der Anzeige
+            button.parentNode.parentNode.parentNode.remove();
+        } else {
+            console.error(`Error deleting comment with id ${commentId}: ${response.status}`);
+        }
+    })
+    .catch(error => console.error(`Error deleting comment with id ${commentId}: ${error}`));
+}
+
   //ende Poi liste mit detail bewertung
   
   // Popup für Kommentar erstellen
