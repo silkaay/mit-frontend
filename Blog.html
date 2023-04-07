@@ -51,9 +51,11 @@
       <button id="blog-button" onclick="openForm()">+ Create Blogpost</button>
 
       <!--Pop-Up Form Anfang-->
+      <!--action="/submit-form"-->>
+      
       <div id="form-overlay"></div>
       <div id="myForm" class="form-popup">
-        <form action="/submit-form">
+        <form name="myForm">
           <div class="input-container"> 
             <input type="text" placeholder="Title" name="title" required>
             <input type="date" id="blog-date" name="entrydate">
@@ -76,7 +78,7 @@
           <textarea id="blogtext" name="blogtext"></textarea>
           <div class="button-align">
             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            <button type="submit" class="btn" onclick="submitForm()">Submit</button>
+            <button type="button" class="btn" onclick="postBlogpost()">Submit</button>
           </div>
         </form>
     </div>
@@ -85,6 +87,42 @@
     <!--Hier starten die Blogposts-->
     <div id="bloglist">
     </div>
+
+
+
+
+
+
+
+    <div id="editForm" class="form-popup">
+      <form action="/submit-form">
+        <div class="input-container"> 
+          <input type="text" placeholder="Title" name="title" required>
+          <input type="date" id="blog-date" name="entrydate">
+          <input type="text" id="author" placeholder="Author" name="author" required>
+        </div>
+        <div id="radios">
+          <label id = "radio_label" for="poi_journey">Choose a Place or Journey: </label>
+          <div id="radiobtn"> 
+            <input type="radio" name="poi_journey" id="Place" value="Place">
+            <label for="Place">Place  </label>
+            <input type="radio" name="poi_journey" id="Journey" value="Journey">
+            <label for="Journey">Journey</label>
+          </div>
+        </div>
+        <div class="traveldrop">
+          <select id="travel" name="travel">
+            <option value="">Choose element from list</option>
+          </select>
+        </div>
+        <textarea id="blogtext" name="blogtext"></textarea>
+        <div class="button-align">
+          <button type="button" class="btn cancel" onclick="closeBlog()">Close</button>
+          <button type="button" class="btn" onclick="postBlogpost()">Submit</button>
+        </div>
+      </form>
+  </div>
+
     
 
     <!--Hier enden Blogposts-->

@@ -91,23 +91,18 @@
       bottom: 2%;
     }
     .form-popup button[type=submit], .form-popup button[type=button] {
-      background-color: darkseagreen;
+      background-color: darkgreen;
       color: white;
       padding: 3px 24px;
       margin: 6px 6px;
       border: none;
       cursor: pointer;
-     
     }
     
     .form-popup button[type=submit]:hover, .form-popup button[type=button]:hover {
       opacity: 0.8;
     }
     
-    .form-popup .cancel {
-      background-color: #f44336;
-    }
-
     #blogcontainer {
       background-color: rgb(191, 225, 194);
       border-radius: 5px;
