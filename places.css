@@ -336,6 +336,7 @@ border-radius: 5px;
 .stern.aktiv {
   color: gold;
 }
+
 /* POI Liste */
 #input{
 margin-left: 20px;
@@ -371,7 +372,7 @@ margin-right: 20px;
   justify-content: flex-start;
   overflow-x: scroll;
   cursor: pointer;
-  height: 400px;
+  height: 500px;
   width: 100%;
 }
 #Test{
@@ -383,7 +384,7 @@ margin-right: 20px;
   background-color: rgb(170, 217, 170);
   padding: 10px;
   margin: 10px;
-  height: 360px;
+  height: 460px;
 }
 .poi h2 {
   margin: 0;

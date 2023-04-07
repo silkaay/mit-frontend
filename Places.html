@@ -161,20 +161,19 @@
 
         <div id="poiList"></div>
         <div id="poiDetails" class="collapse"></div>
-    <div id="form-overlayCom"></div>
+        <div id="form-overlayCom"></div>
         <div id="myFormCom" class="form-popup2">
-            <form action="/submit-form">
-
+            <form onsubmit="submitComment(event)">
+    
                 <input id="Author" type="text" placeholder="Name" name="Name" required>
-                <input id="DatumCom" type="date" placeholder="Date" name="Date" required>
-
-                <textarea id="blogtext" name="blogtext"></textarea>
+                <textarea id="commenttext" name="blogtext"></textarea>
                 <div class="button-align">
                     <button type="button" class="btn cancel" onclick="closePopupCreateCom()">Close</button>
                     <button type="submit" class="btn">Submit</button>
                 </div>
             </form>
         </div>
+        
     <div class="offcanvas offcanvas-start" id="BewertungenDetails">
         <div class="offcanvas-header">
             <h1 class="offcanvas-title">Reviews</h1>
