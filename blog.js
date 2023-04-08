@@ -58,31 +58,55 @@ function openEditBlogpost (blogpostId, button) {
   document.getElementById("form-overlay").style.display = "block";
   document.getElementById("editForm").style.display = "block";
 
-  console.log(blogpostId);
-
   var form = document.forms["editForm"];
 
   // get the values of the input elements
-  var title = form.editTitle.value;
+  //var title = form.editTitle.value;
 
-  const editTitle = document.getElementById('editTitle');
-  const editBlogtext = document.getElementById('editBlogtext');
+  const editTitle = form.editTitle;
+  const editBlogtext = form.editBlogtext;
 
   fetch(`http://localhost:8080/getBlogpostById/${blogpostId}`) 
     .then(response => response.json())
     .then(blogpost => {
       console.log(blogpost.blogpostTitle);
-      title.value = blogpost.blogpostTitle;
-      //editTitle.value = blogpost.blogpostTitle;
+      editTitle.value = blogpost.blogpostTitle;
+      editBlogtext.value = blogpost.blogpostText;
+      var id = blogpostId;
+      submitEdit(blogpostId);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
     });
 }
 
-function openBlog() {
-  document.getElementById("form-overlay").style.display = "block";
-  document.getElementById("editForm").style.display = "block";
+function submitEdit (id) {
+  var form = document.forms["editForm"];
+  var newTitle = form.editTitle.value;
+  var newText = form.editBlogtext.value;
+
+  console.log(id);
+
+  var data = {
+    blogpostTitle: newTitle,
+    blogpostText: newText
+  }
+
+  
+  fetch("http://localhost:8080/updateBlogpost", {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  })
 }
 
 function closeBlog() {
@@ -187,8 +211,6 @@ function postBlogpost() {
   var travel = form.travel.value;
   const selectedOption = document.querySelector('input[name="poi_journey"]:checked').value;
 
-  console.log(selectedOption); // Will output either "Place" or "Journey"
-  
   var journey;
   var place;
   if (selectedOption === "Place") {
