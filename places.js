@@ -211,6 +211,21 @@ fetch("http://localhost:8080/getSeasons")
           })
           .catch(error => console.error(error));
   }
+
+  function deletePOI(poiId, button) {
+    fetch(`http://localhost:8080/deletePOI/${poiId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log(`POI with id ${poiId} successfully deleted`);
+        location.reload(); //Seite neu laden
+      } else {
+        throw new Error('Error deleting POI');
+      }
+    })
+    .catch(error => console.error(error));
+  }
   
   //POI mit Bild 
   function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, fileAccessLink) {
