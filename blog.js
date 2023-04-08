@@ -38,7 +38,7 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
         <h6></h6>
       </div>
       <p>${blogpostText}</p>
-      <button type="submit" onclick="openEditBlogpost(${blogpostId}, this)">Edit</button>
+      <button type="submit" onclick="openEditBlogpost(${blogpostId}, this)" data-blogpost-id="${blogpostId}">Edit</button>
       <button type="submit" onclick="deleteBlogpost(${blogpostId}, this)">Delete</button>
     </div>
   `;
@@ -55,6 +55,7 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
 //Bearbeite einzelne Blogposts
 function openEditBlogpost (blogpostId, button) {
   //öffnet die Form
+  const blogId = button.dataset.blogpostId;
   document.getElementById("form-overlay").style.display = "block";
   document.getElementById("editForm").style.display = "block";
 
@@ -73,40 +74,79 @@ function openEditBlogpost (blogpostId, button) {
       editTitle.value = blogpost.blogpostTitle;
       editBlogtext.value = blogpost.blogpostText;
       var id = blogpostId;
-      submitEdit(blogpostId);
+    
+      //keepId(blogId);
+      waitForSubmitUpdateClick(blogId);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
     });
 }
+function waitForSubmitUpdateClick(blogId) {
+  var button = document.getElementById("submitUpdate");
+  const keepingId = blogId;
+  button.addEventListener("click", function() {
+    // This code will execute when the submitUpdate button is clicked
+    console.log("submitUpdate button clicked!");
+    console.log("ID: ", keepingId);
+    submitEdit(keepingId);
+    // Execute the rest of the code here
+  });
+}
 
-function submitEdit (id) {
+function submitEdit (blogId) {
+  //var anotherId = 
   var form = document.forms["editForm"];
   var newTitle = form.editTitle.value;
   var newText = form.editBlogtext.value;
 
-  console.log(id);
-
-  var data = {
-    blogpostTitle: newTitle,
-    blogpostText: newText
-  }
-
   
-  fetch("http://localhost:8080/updateBlogpost", {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  })
+  fetch(`http://localhost:8080/getBlogpostById/${blogId}`) 
+    .then(response => response.json())
+    .then(blogpost => {
+      var author = blogpost.blogpostAuthor;
+      var date = blogpost.blogpostCreationDate;
+      var journey =  blogpost.blogpostJourneyId;
+      var place = blogpost.blogpostPOIId;
+
+      if (journey === -1) {
+        journey = "";
+      } else {
+        place = "";
+      }
+      var data = {
+        blogpostId: blogId,
+        blogpostAuthor: author,
+        blogpostTitle: newTitle,
+        blogpostCreationDate: date,
+        blogpostText: newText,
+        blogpostJourneyId: journey,
+        blogpostPOIId: place
+      };
+
+      console.log(data);
+      
+      
+      fetch("http://localhost:8080/updateBlogpost", {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+        })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      }) 
+
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+    location.reload();
 }
 
 function closeBlog() {
