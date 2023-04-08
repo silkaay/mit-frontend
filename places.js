@@ -259,18 +259,24 @@ fetch("http://localhost:8080/getSeasons")
   }
   
   //POI mit Bild 
-  function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, fileAccessLink) {
+  function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileInfo) {
     const poi = document.createElement("div");
     poi.className = "poi";
     poi.innerHTML = `
-        <div id="Test">
-            <h2>${poiTitle}</h2>
-            <img src="${fileAccessLink}"/>
-            <p>Location: ${poiLocation}</p>
-            <p>Rating: ${displayStars(poiReviewAvg)}</p>
-            <p>Tags: ${poiTags.join(", ")}</p>
-            <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
-        </div>
+      <div id="Test">
+        <h2>${poiTitle}</h2>
+        ${
+          poiFileInfo && poiFileInfo.fileFormat.startsWith("image")
+            ? `<img src="${poiFileInfo.fileAccessLink}"/>`
+            : poiFileInfo && poiFileInfo.fileFormat.startsWith("video")
+            ? `<video src="${poiFileInfo.fileAccessLink}" controls></video>`
+            : ""
+        }
+        <p>Location: ${poiLocation}</p>
+        <p>Rating: ${displayStars(poiReviewAvg)}</p>
+        <p>Tags: ${poiTags.join(", ")}</p>
+        <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
+      </div>
     `;
     poiList.appendChild(poi);
   }
@@ -279,11 +285,7 @@ fetch("http://localhost:8080/getSeasons")
     .then(response => response.json())
     .then(data => {
       data.forEach(poi => {
-        let fileAccessLink = "";
-        if (poi.poiFileInfo) {
-          fileAccessLink = poi.poiFileInfo.fileAccessLink;
-        }
-        createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, fileAccessLink);
+        createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, poi.poiFileInfo);
       });
     })
     .catch(error => console.error(error));

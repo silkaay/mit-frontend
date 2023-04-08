@@ -29,6 +29,11 @@ img {
   height: auto;
   margin-top: 10px;
 }
+video{
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
 
 /* create Button
  */
