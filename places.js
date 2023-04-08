@@ -212,31 +212,35 @@ fetch("http://localhost:8080/getSeasons")
           .catch(error => console.error(error));
   }
   
-  function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileAccessLink) {
-      const poi = document.createElement("div");
-      currentPOIId = poiId;
-      poi.className = "poi";
-      poi.innerHTML = `
-          <div id="Test">
-              <h2>${poiTitle}</h2>
-              <img src="${poiFileAccessLink}" />
-              <p>Location: ${poiLocation}</p>
-              <p>Rating: ${displayStars(poiReviewAvg)}</p>
-              <p>Tags: ${poiTags.join(", ")}</p>
-              <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
-          </div>
-  `;
-      poiList.appendChild(poi);
+  //POI mit Bild 
+  function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, fileAccessLink) {
+    const poi = document.createElement("div");
+    poi.className = "poi";
+    poi.innerHTML = `
+        <div id="Test">
+            <h2>${poiTitle}</h2>
+            <img src="${fileAccessLink}"/>
+            <p>Location: ${poiLocation}</p>
+            <p>Rating: ${displayStars(poiReviewAvg)}</p>
+            <p>Tags: ${poiTags.join(", ")}</p>
+            <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
+        </div>
+    `;
+    poiList.appendChild(poi);
   }
   
   fetch("http://localhost:8080/getAllPOIs")
-      .then(response => response.json())
-      .then(data => {
-          data.forEach(poi => {
-              createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, poi.poiFileAccessLink);
-          });
-      })
-      .catch(error => console.error(error));
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(poi => {
+        let fileAccessLink = "";
+        if (poi.poiFileInfo) {
+          fileAccessLink = poi.poiFileInfo.fileAccessLink;
+        }
+        createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, fileAccessLink);
+      });
+    })
+    .catch(error => console.error(error));
   
   function displayStars(rating) {
       let fullStars = Math.floor(rating);
