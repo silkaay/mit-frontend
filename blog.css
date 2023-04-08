@@ -32,7 +32,7 @@
   }
   
   #form-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -68,6 +68,13 @@
       border: 1px solid #ccc;
       /*box-sizing: border-box;*/
     }
+    #editFormTitle {
+      width: 66%;
+      padding: 6px 6px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+    }
+
     #radios {
       display: flex;
       justify-content: space-evenly;
