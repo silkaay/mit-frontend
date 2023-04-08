@@ -459,3 +459,22 @@ margin-right: 20px;
   /* roundness of the scroll thumb */
   /* creates padding around scroll thumb */
 }
+
+/*für das Karusell*/
+
+.carousel-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel {
+  width: 90%; /* % Breite für das Karussell */
+}
+
+.carousel img,
+.carousel video {
+  width: 100%; /* Bilder und Videos haben die gleiche Größe */
+  height: auto;
+}

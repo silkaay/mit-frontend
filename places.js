@@ -173,7 +173,7 @@ fetch("http://localhost:8080/getSeasons")
                           <th style="width:30%">${data.poiTitle}</th>
                       </tr>
                       <tr>
-                          <td><img src="http://localhost:8080/files/1" /></td>
+                          <td>${displayMedia(data.poiFileInfo)}</td>
                           <td rowspan="5">Description: ${data.poiDescription}</td>
                       </tr>
                       <tr>
@@ -197,7 +197,7 @@ fetch("http://localhost:8080/getSeasons")
                           <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Comments</button>
                           <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
                           <button id="editPoi"> Edit</button>
-                          <button id="deletePoi" onclick="deletePOI(${poiId})" > Delete</button>
+                          <button id="deletePoi" onclick="deletePOI(${poiId}, this)" > Delete</button>
                               
                       </tr>
                   </table>
@@ -211,6 +211,37 @@ fetch("http://localhost:8080/getSeasons")
           })
           .catch(error => console.error(error));
   }
+  function displayMedia(fileInfoArray) {
+    let mediaHTML = "";
+    for (let i = 0; i < fileInfoArray.length; i++) {
+      const fileInfo = fileInfoArray[i];
+      if (fileInfo.fileFormat.startsWith("image")) {
+        mediaHTML += `<div class="carousel-item ${i == 0 ? 'active' : ''}"><img src="${fileInfo.fileAccessLink}" class="d-block w-100"></div>`;
+      } else if (fileInfo.fileFormat.startsWith("video")) {
+        mediaHTML += `<div class="carousel-item ${i == 0 ? 'active' : ''}"><video controls><source src="${fileInfo.fileAccessLink}" type="${fileInfo.fileFormat}"></video></div>`;
+      }
+    }
+    return `
+      
+        <div id="carousel-${Date.now()}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            ${mediaHTML}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${Date.now()}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-${Date.now()}" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      
+    `;
+  }
+
+
+
 
   function deletePOI(poiId, button) {
     fetch(`http://localhost:8080/deletePOI/${poiId}`, {
