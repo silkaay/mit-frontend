@@ -213,16 +213,20 @@ fetch("http://localhost:8080/getSeasons")
   }
   function displayMedia(fileInfoArray) {
     let mediaHTML = "";
+    let hasMedia = false;
     for (let i = 0; i < fileInfoArray.length; i++) {
       const fileInfo = fileInfoArray[i];
       if (fileInfo.fileFormat.startsWith("image")) {
         mediaHTML += `<div class="carousel-item ${i == 0 ? 'active' : ''}"><img src="${fileInfo.fileAccessLink}" class="d-block w-100"></div>`;
+        hasMedia = true;
       } else if (fileInfo.fileFormat.startsWith("video")) {
         mediaHTML += `<div class="carousel-item ${i == 0 ? 'active' : ''}"><video controls><source src="${fileInfo.fileAccessLink}" type="${fileInfo.fileFormat}"></video></div>`;
+        hasMedia = true;
       }
     }
-    return `
-      
+    if (hasMedia) {
+      return `
+        
         <div id="carousel-${Date.now()}" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             ${mediaHTML}
@@ -236,8 +240,11 @@ fetch("http://localhost:8080/getSeasons")
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-      
-    `;
+        
+      `;
+    } else {
+      return "Kein Mediainhalt";
+    }
   }
 
 
