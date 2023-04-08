@@ -270,7 +270,7 @@ fetch("http://localhost:8080/getSeasons")
             ? `<img src="${poiFileInfo.fileAccessLink}"/>`
             : poiFileInfo && poiFileInfo.fileFormat.startsWith("video")
             ? `<video src="${poiFileInfo.fileAccessLink}" controls></video>`
-            : ""
+            : "Kein Mediainhalt"
         }
         <p>Location: ${poiLocation}</p>
         <p>Rating: ${displayStars(poiReviewAvg)}</p>
