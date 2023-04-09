@@ -159,6 +159,7 @@ fetch("http://localhost:8080/getSeasons")
   let currentCollapse = null; // Variable, die den aktuellen geöffneten Collapse-Button speichert
   let currentPOIId = null;
   function displayPOIDetails(poiId) {
+    currentPOIId= poiID;
       fetch("http://localhost:8080/getPOIDetails/" + poiId)
           .then(response => response.json())
           .then(data => {
@@ -467,6 +468,41 @@ const poiId = currentPOIId;
 const commentAuthor = document.getElementById("Author").value;
 const commentText = document.getElementById("commenttext").value;
 createComment(poiId, commentAuthor, commentText);
+
+}
+
+function createReview(poiId, cleanStars, mustSeeStars, locationStars) {
+
+  const data = { poiId, cleanStars, mustSeeStars, locationStars};
+  console.log(data);
+
+  let url = "http://localhost:8080/createReview";
+  let request = new Request(url, {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      method: "POST",
+  })
+  fetch(request)
+      .then((response) => response.json())
+      .then((data) => {
+          console.log("Antwort vom Server:", data);
+
+      })
+
+
+}
+
+function submitReview() {
+  event.preventDefault();
+      const poiId = currentPOIId; // Hier sollte die tatsächliche poiId verwendet werden
+      const cleanStars = document.querySelectorAll('#Sternebewertung .star-rating-clean input:checked').length;
+      const mustSeeStars = document.querySelectorAll('#Sternebewertung .star-rating-must input:checked').length;
+      const locationStars = document.querySelectorAll('#Sternebewertung .star-rating-loc input:checked').length;
+
+
+
+  console.log(poiId);
+  createReview(poiId, cleanStars, mustSeeStars, locationStars);
 
 }
 

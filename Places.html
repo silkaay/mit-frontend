@@ -195,40 +195,51 @@
 
     <div id="form-overlayBewAbgeben"></div>
     <div id="myFormBewAbgeben" class="form-popup2">
-        <form action="/submit-form">
+        <form onsubmit="submitReview(event)">
             <div id="Sternebewertung">
-                <div class="bewertung">
-                    <h6>Cleanliness:</h6>
-                    <div class="sterne-bewertung">
-                        <span class="stern" data-stern="1">&#9734;</span>
-                        <span class="stern" data-stern="2">&#9734;</span>
-                        <span class="stern" data-stern="3">&#9734;</span>
-                        <span class="stern" data-stern="4">&#9734;</span>
-                        <span class="stern" data-stern="5">&#9734;</span>
+                    <div class="star-rating-clean">
+                        <h5>Cleanliness: </h5>
+                        <input type="checkbox" id="star-5-clean" name="rating" value="5">
+                        <label for="star-5-clean">★</label>
+                        <input type="checkbox" id="star-4-clean" name="rating" value="4">
+                        <label for="star-4-clean">★</label>
+                        <input type="checkbox" id="star-3-clean" name="rating" value="3">
+                        <label for="star-3-clean">★</label>
+                        <input type="checkbox" id="star-2-clean" name="rating" value="2">
+                        <label for="star-2-clean">★</label>
+                        <input type="checkbox" id="star-1-clean" name="rating" value="1">
+                        <label for="star-1-clean">★</label>
                     </div>
+                <br>
+                <div class="star-rating-must">
+                    <h5>Must See:</h5>
+                    <input type="checkbox" id="star-5-must" name="rating" value="5">
+                    <label for="star-5-must">★</label>
+                    <input type="checkbox" id="star-4-must" name="rating" value="4">
+                    <label for="star-4-must">★</label>
+                    <input type="checkbox" id="star-3-must" name="rating" value="3">
+                    <label for="star-3-must">★</label>
+                    <input type="checkbox" id="star-2-must" name="rating" value="2">
+                    <label for="star-2-must">★</label>
+                    <input type="checkbox" id="star-1-must" name="rating" value="1">
+                    <label for="star-1-must">★</label>
+                </div>
+                <br>
+                <div class="star-rating-loc">
+                    <h5>Location:</h5>
+                    <input type="checkbox" id="star-5-loc" name="rating" value="5">
+                    <label for="star-5-loc">★</label>
+                    <input type="checkbox" id="star-4-loc" name="rating" value="4">
+                    <label for="star-4-loc">★</label>
+                    <input type="checkbox" id="star-3-loc" name="rating" value="3">
+                    <label for="star-3-loc">★</label>
+                    <input type="checkbox" id="star-2-loc" name="rating" value="2">
+                    <label for="star-2-loc">★</label>
+                    <input type="checkbox" id="star-1-loc" name="rating" value="1">
+                    <label for="star-1-loc">★</label>
                 </div>
 
-                <div class="bewertung">
-                    <h6>Must See: </h6>
-                    <div class="sterne-bewertung">
-                        <span class="stern" data-stern="1">&#9734;</span>
-                        <span class="stern" data-stern="2">&#9734;</span>
-                        <span class="stern" data-stern="3">&#9734;</span>
-                        <span class="stern" data-stern="4">&#9734;</span>
-                        <span class="stern" data-stern="5">&#9734;</span>
-                    </div>
-                </div>
 
-                <div class="bewertung">
-                    <h6>Location: </h6>
-                    <div class="sterne-bewertung">
-                        <span class="stern" data-stern="1">&#9734;</span>
-                        <span class="stern" data-stern="2">&#9734;</span>
-                        <span class="stern" data-stern="3">&#9734;</span>
-                        <span class="stern" data-stern="4">&#9734;</span>
-                        <span class="stern" data-stern="5">&#9734;</span>
-                    </div>
-                </div>
             </div>
 
             <div class="button-align">
@@ -237,7 +248,6 @@
             </div>
         </form>
     </div>
-
     <div class="collapse" id="poiKommentare">
         <div id="comments">
             <h2 id="commentsueber">Comments</h2>

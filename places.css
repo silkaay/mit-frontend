@@ -332,13 +332,49 @@ border-radius: 5px;
 }
 
 /*Sternebewertung*/
-.stern {
-  font-size: 30px;
-  color: #ddd;
-  cursor: pointer;
+/*Sternebewertung*/
+.star-rating-clean input[type="checkbox"] {
+  display: none;
 }
 
-.stern.aktiv {
+.star-rating-clean label {
+  font-size: 34px;
+  cursor: pointer;
+  color: #ccc;
+  float: right;
+}
+
+.star-rating-clean input[type="checkbox"]:checked + label {
+  color: gold;
+}
+
+.star-rating-must input[type="checkbox"] {
+  display: none;
+}
+
+.star-rating-must label {
+  font-size: 34px;
+  cursor: pointer;
+  color: #ccc;
+  float: right;
+}
+
+.star-rating-must input[type="checkbox"]:checked + label {
+  color: gold;
+}
+
+.star-rating-loc input[type="checkbox"] {
+  display: none;
+}
+
+.star-rating-loc label {
+  font-size: 34px;
+  cursor: pointer;
+  color: #ccc;
+  float: right;
+}
+
+.star-rating-loc input[type="checkbox"]:checked + label {
   color: gold;
 }
 
