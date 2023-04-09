@@ -77,29 +77,9 @@ function openForm() {
   
   
   
-  // Sternbewertung
-  var sterne = document.querySelectorAll(".stern");
-  
-  for (var i = 0; i < sterne.length; i++) {
-      sterne[i].addEventListener("click", function() {
-          for (var j = 0; j < this.parentNode.children.length; j++) {
-              if (j < this.dataset.stern) {
-                  this.parentNode.children[j].classList.add("aktiv");
-              } else {
-                  this.parentNode.children[j].classList.remove("aktiv");
-              }
-          }
-          var bewertung = this.dataset.stern;
-          localStorage.setItem(this.parentNode.parentNode.querySelector("h2").textContent, bewertung);
-      });
-  }
-  
-  
-  
-  
   //Categorien und tags und seasons sich holen
 const categorySelect = document.getElementById("categories");
-const tagSelect = document.getElementById("tags");
+
 
 fetch("http://localhost:8080/getCategories")
     .then(response => response.json())
@@ -113,7 +93,6 @@ fetch("http://localhost:8080/getCategories")
     })
     .catch(error => console.error(error));
 
-const categoryDiv = document.getElementById("categories");
 const tagDiv = document.getElementById("tags");
 const seasonDiv = document.getElementById("seasons");
 
@@ -468,27 +447,6 @@ const poiId = currentPOIId;
 const commentAuthor = document.getElementById("Author").value;
 const commentText = document.getElementById("commenttext").value;
 createComment(poiId, commentAuthor, commentText);
-
-}
-
-function createReview(poiId, cleanStars, mustSeeStars, locationStars) {
-
-  const data = { poiId, cleanStars, mustSeeStars, locationStars};
-  console.log(data);
-
-  let url = "http://localhost:8080/createReview";
-  let request = new Request(url, {
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-      method: "POST",
-  })
-  fetch(request)
-      .then((response) => response.json())
-      .then((data) => {
-          console.log("Antwort vom Server:", data);
-
-      })
-
 
 }
 
