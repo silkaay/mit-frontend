@@ -138,7 +138,7 @@ fetch("http://localhost:8080/getSeasons")
   let currentCollapse = null; // Variable, die den aktuellen geöffneten Collapse-Button speichert
   let currentPOIId = null;
   function displayPOIDetails(poiId) {
-    currentPOIId= poiID;
+    currentPOIId= poiId;
       fetch("http://localhost:8080/getPOIDetails/" + poiId)
           .then(response => response.json())
           .then(data => {
