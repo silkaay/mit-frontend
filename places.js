@@ -492,18 +492,41 @@ function createReview(poiId, cleanStars, mustSeeStars, locationStars) {
 
 }
 
+
+function createReview(poiId, reviewCleanRating, reviewMustSeeRating, reviewLocationRating) {
+
+  const data = { poiId, reviewCleanRating, reviewMustSeeRating, reviewLocationRating};
+  console.log(data);
+
+  let url = "http://localhost:8080/createReview";
+  let request = new Request(url, {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      method: "POST",
+  })
+  fetch(request)
+      .then((response) => response.json())
+      .then((data) => {
+          console.log("Antwort vom Server:", data);
+
+      })
+
+
+}
+
 function submitReview() {
   event.preventDefault();
       const poiId = currentPOIId; // Hier sollte die tatsächliche poiId verwendet werden
-      const cleanStars = document.querySelectorAll('#Sternebewertung .star-rating-clean input:checked').length;
-      const mustSeeStars = document.querySelectorAll('#Sternebewertung .star-rating-must input:checked').length;
-      const locationStars = document.querySelectorAll('#Sternebewertung .star-rating-loc input:checked').length;
+      const reviewCleanRating = document.querySelectorAll('#Sternebewertung .star-rating-clean input:checked').length;
+      const reviewMustSeeRating = document.querySelectorAll('#Sternebewertung .star-rating-must input:checked').length;
+      const reviewLocationRating = document.querySelectorAll('#Sternebewertung .star-rating-loc input:checked').length;
 
 
 
   console.log(poiId);
-  createReview(poiId, cleanStars, mustSeeStars, locationStars);
+  createReview(poiId, reviewCleanRating, reviewMustSeeRating, reviewLocationRating);
 
 }
+
 
   
