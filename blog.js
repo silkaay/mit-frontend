@@ -73,15 +73,16 @@ function openEditBlogpost (blogpostId, button) {
       console.log(blogpost.blogpostTitle);
       editTitle.value = blogpost.blogpostTitle;
       editBlogtext.value = blogpost.blogpostText;
-      var id = blogpostId;
     
-      //keepId(blogId);
       waitForSubmitUpdateClick(blogId);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
     });
 }
+
+
+//hilfsfunktion, ansonsten funktioniert der submit button nicht
 function waitForSubmitUpdateClick(blogId) {
   var button = document.getElementById("submitUpdate");
   const keepingId = blogId;
@@ -94,6 +95,7 @@ function waitForSubmitUpdateClick(blogId) {
   });
 }
 
+//Um eigentliches update übergeben zu können
 function submitEdit (blogId) {
   //var anotherId = 
   var form = document.forms["editForm"];
@@ -223,7 +225,7 @@ function poiDropdown() {
     });
 }
 
-//window.onload = 
+//Sorgt dafuer, dass im dropdown POIs/Journeys geladen werden koennen
 function populateDropdown () {
   const radioButtons = document.querySelectorAll('input[type=radio][name=poi_journey][id=Place], input[type=radio][name=poi_journey][id=Journey]');
   radioButtons.forEach(button => {
