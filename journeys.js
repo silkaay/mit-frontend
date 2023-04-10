@@ -8,41 +8,50 @@ function closeForm() {
     document.getElementById("form-overlay").style.display = "none";
 }
 
+
 // Journeys Liste
 const journeysContainer = document.querySelector("#journeys-container");
 
 fetch("http://localhost:8080/getAllJourneys")
-    .then(response => response.json())
-    .then(journeys => {
-        const journeyElements = journeys.map(journey => createJourneyElement(journey));
-        journeysContainer.innerHTML = journeyElements.join("");
-    });
+  .then(response => response.json())
+  .then(journeys => {
+    const journeyElements = journeys.map(journey => createJourneyElement(journey));
+    journeysContainer.innerHTML = journeyElements.join("");
+  });
 
-    function createJourneyElement(journey) {
-        const journeyElement = `
-        <div class="journey">
-           
-                  <h2>${journey.journeyTitle}</h2>
-                
-                <table>
-                <tr>
-                  
-                  
-                </tr>
-                <tr>
-                  <td>Rating: ${displayStars(journey.poiReviewAvg)}</td>
-                  <td rowspan="5">${journey.journeyDescription}</td>
-                </tr>
-                <tr>
-                  <td>RTags: ${journey.journeyTags.join(", ")}</td>
-                </tr>
-            </table>
-        </div>
-      `;
-        return journeyElement;
+function createJourneyElement(journey) {
+  const images = journey.poiFileInfo.filter(file => file.fileFormat.startsWith("image"));
+  const videos = journey.poiFileInfo.filter(file => file.fileFormat.startsWith("video"));
+
+  const mediaElements = [...images, ...videos].slice(0, 4).map(media => {
+    if (media.fileFormat.startsWith("image")) {
+      return `<img src="${media.fileAccessLink}" class="media" style="width: 15%;">`;
+    } else {
+      return `<video src="${media.fileAccessLink}" controls class="media" style="width: 15%;"></video>`;
     }
-    
-    // Journey Liste ende
+  }).join("");
+
+  const journeyElement = `
+    <div class="journey">
+      <h2 id="überschriftJourneys">${journey.journeyTitle}</h2>
+      <div class="media-container" style="display: flex;">
+        ${mediaElements}
+      </div>
+      <br>
+      <table>
+        <tr>
+        <td style="width: 60%">Rating: ${displayStars(journey.poiReviewAvg)}</td>
+        <td rowspan="3">${journey.journeyDescription}</td>
+        </tr>
+        <tr>
+        <td style="width: 60%">Tags: ${journey.journeyTags.join(", ")}</td>
+        </tr>
+      </table>
+    </div>
+  `;
+  return journeyElement;
+}
+//journey liste ende
     
     function displayStars(rating) {
         let fullStars = Math.floor(rating);
