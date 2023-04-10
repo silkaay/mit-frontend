@@ -133,64 +133,93 @@ fetch("http://localhost:8080/getSeasons")
   
   //Poi Liste mit detail bewertung
   
-  const poiList = document.getElementById("poiList");
-  const poiDetails = document.getElementById("poiDetails");
-  let currentCollapse = null; // Variable, die den aktuellen geöffneten Collapse-Button speichert
-  let currentPOIId = null;
   function displayPOIDetails(poiId) {
-    currentPOIId= poiId;
-      fetch("http://localhost:8080/getPOIDetails/" + poiId)
-          .then(response => response.json())
-          .then(data => {
-              //Die Klasse collapse muss, wenn sie angezeigt werden soll die Klasse show haben.
-              //Wenn es nicht mehr angezeigt werden soll, die Klasse show wieder entfernen
-              poiDetails.classList.add('show')
+    currentPOIId = poiId;
+    fetch("http://localhost:8080/getPOIDetails/" + poiId)
+      .then(response => response.json())
+      .then(data => {
+        // Add or remove the 'show' class to display or hide the POI details section
+        poiDetails.classList.add('show');
   
+        // Determine whether to show the release button based on the POI status
+        const showReleaseButton = !data.poiStatus;
+        const releaseButton = showReleaseButton ? `<button id="releasePoi" onclick="releasePOI(${poiId}, this)">Release</button>` : '';
   
-              poiDetails.innerHTML = `
-                  <table>
-                      <tr>
-                          <th style="width:30%">${data.poiTitle}</th>
-                      </tr>
-                      <tr>
-                          <td>${displayMedia(data.poiFileInfo)}</td>
-                          <td rowspan="5">Description: ${data.poiDescription}</td>
-                      </tr>
-                      <tr>
-                          <td>${data.poiLocation}</td>
-                      </tr>
-                      <tr>
-                          <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
-                      </tr>
-                      <tr>
-                          <td>${data.poiLatitude},${data.poiLongitude}</td>
-                      </tr>
-                      <tr>
-                          <td>${data.poiSeasons.join(", ")}</td>
-                      </tr>
-                      <tr>
-                          <td>${data.poiTags.join(", ")}</td>
-                      </tr>
-                      <tr>
-                          <td>${data.poiCategory}</td>
-                          <td>
-                          <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Comments</button>
-                          <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
-                          <button id="editPoi"> Edit</button>
-                          <button id="deletePoi" onclick="deletePOI(${poiId}, this)" > Delete</button>
-                              
-                      </tr>
-                  </table>
-              `;
-              commentBtn = poiDetails.querySelector('.btn-kommentare')
-              //Abfragen, ob die Kommentarsektion momentan angezeigt wird
-              if (document.querySelector('#poiKommentare').classList.contains('show')) {
-                  //Klickevent des dazugehörigen Buttons triggern
-                  commentBtn.click()
-              }
-          })
-          .catch(error => console.error(error));
+        poiDetails.innerHTML = `
+          <table>
+            <tr>
+              <th style="width:30%">${data.poiTitle}</th>
+            </tr>
+            <tr>
+              <td>${displayMedia(data.poiFileInfo)}</td>
+              <td rowspan="5">Description: ${data.poiDescription}</td>
+            </tr>
+            <tr>
+              <td>${data.poiLocation}</td>
+            </tr>
+            <tr>
+              <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
+            </tr>
+            <tr>
+              <td>${data.poiLatitude},${data.poiLongitude}</td>
+            </tr>
+            <tr>
+              <td>${data.poiSeasons.join(", ")}</td>
+            </tr>
+            <tr>
+              <td>${data.poiTags.join(", ")}</td>
+            </tr>
+            <tr>
+              <td>${data.poiCategory}</td>
+              <td>
+                <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Comments</button>
+                <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
+                <button id="editPoi"> Edit</button>
+                <button id="deletePoi" onclick="deletePOI(${poiId}, this)" > Delete</button>
+                ${releaseButton}
+              </td>
+            </tr>
+          </table>
+        `;
+  
+        // If the comments section is currently displayed, trigger the corresponding button's click event
+        const commentBtn = poiDetails.querySelector('.btn-kommentare');
+        if (document.querySelector('#poiKommentare').classList.contains('show')) {
+          commentBtn.click();
+        }
+      })
+      .catch(error => console.error(error));
   }
+
+
+  function releasePOI(poiId) {
+    fetch(`http://localhost:8080/releasePOI/${poiId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        poiId: poiId
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log(`POI with ID ${poiId} has been released.`);
+        // remove the "Release" button
+        const releaseButton = document.getElementById('releasePoi');
+        releaseButton.parentNode.removeChild(releaseButton);
+        window.location.reload();
+      } else {
+        throw new Error('Failed to release POI.');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+
+
   function displayMedia(fileInfoArray) {
     let mediaHTML = "";
     let hasMedia = false;

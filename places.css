@@ -48,7 +48,7 @@ color: white;
 padding: 4px 24px;
 background-color: darkgreen;
 }
-#createcomment,#commentsliste,#poidetailsbutton,#editPoi,#deletePoi{
+#createcomment,#commentsliste,#poidetailsbutton,#editPoi,#deletePoi,#releasePoi{
   border: none;
   border-radius: 5px;
   color: white;
