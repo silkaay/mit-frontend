@@ -27,47 +27,50 @@ fetch("http://localhost:8080/getAllBlogposts")
 const bloglist = document.getElementById("bloglist");
 
 function getJourneyorPoi(name, id) {
-if (name==="place") {
-  fetch("http://localhost:8080/getSelectionPOIs")
-    .then(response => response.json())
-    .then(places => {
-      places.forEach(poi => {
-        if (poi.poiId===id) {
-          console.log(poi.poiName);
-          return poi.poiName;
-        }
-      });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-} else {
-  fetch("http://localhost:8080/getSelectionJourneys")
-    .then(response => response.json())
-    .then(journeys => {
-      // Get dropdown element
-      journeys.forEach(journey => {
-        if (journey.journeyId===id) {
-          console.log(journey.journeyName);
-          return journey.journeyName;
-        }
-      });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  }
+  return new Promise((resolve, reject) => {
+    if (name === "place") {
+      fetch("http://localhost:8080/getSelectionPOIs")
+        .then(response => response.json())
+        .then(places => {
+          const poi = places.find(poi => poi.poiId === id);
+          if (poi) {
+            resolve(poi.poiName);
+          } else {
+            reject(`No POI found with ID ${id}`);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    } else {
+      fetch("http://localhost:8080/getSelectionJourneys")
+        .then(response => response.json())
+        .then(journeys => {
+          const journey = journeys.find(journey => journey.journeyId === id);
+          if (journey) {
+            resolve(journey.journeyName);
+          } else {
+            reject(`No journey found with ID ${id}`);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    }
+  });
 }
 
 //obvious, aber hier werden die Posts generiert
-function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
-  var bloglink;
-
-  if (blogpostPOIId===-1) {
-    bloglink = getJourneyorPoi("journey", blogpostJourneyId);
-    console.log("Hi: ",bloglink);
-  } else {
-    bloglink = getJourneyorPoi("place", blogpostPOIId);
+async function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
+  let bloglink;
+  try {
+    if (blogpostPOIId === -1) {
+      bloglink = await getJourneyorPoi("journey", blogpostJourneyId);
+    } else {
+      bloglink = await getJourneyorPoi("place", blogpostPOIId);
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   const blog = document.createElement("div");
