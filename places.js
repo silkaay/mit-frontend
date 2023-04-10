@@ -141,7 +141,7 @@ fetch("http://localhost:8080/getSeasons")
         // Add or remove the 'show' class to display or hide the POI details section
         poiDetails.classList.add('show');
   
-        // Determine whether to show the release button based on the POI status
+        // Schaut sich den Status an 
         const showReleaseButton = !data.poiStatus;
         const releaseButton = showReleaseButton ? `<button id="releasePoi" onclick="releasePOI(${poiId}, this)">Release</button>` : '';
   
@@ -182,7 +182,6 @@ fetch("http://localhost:8080/getSeasons")
           </table>
         `;
   
-        // If the comments section is currently displayed, trigger the corresponding button's click event
         const commentBtn = poiDetails.querySelector('.btn-kommentare');
         if (document.querySelector('#poiKommentare').classList.contains('show')) {
           commentBtn.click();
@@ -205,7 +204,7 @@ fetch("http://localhost:8080/getSeasons")
     .then(response => {
       if (response.ok) {
         console.log(`POI with ID ${poiId} has been released.`);
-        // remove the "Release" button
+        // entfernt release Button
         const releaseButton = document.getElementById('releasePoi');
         releaseButton.parentNode.removeChild(releaseButton);
         window.location.reload();
