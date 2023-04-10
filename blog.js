@@ -148,7 +148,7 @@ function submitEdit (blogId) {
     .catch(error => {
       console.error('Error fetching data:', error);
     });
-    location.reload();
+    //location.reload();
 }
 
 function closeBlog() {
