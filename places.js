@@ -461,29 +461,37 @@ function createReview(poiId, reviewCleanRating, reviewMustSeeRating, reviewLocat
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
       method: "POST",
-  })
-  fetch(request)
+  });
+  return fetch(request) // Rückgabe des fetch-Versprechens
       .then((response) => response.json())
       .then((data) => {
           console.log("Antwort vom Server:", data);
 
-      })
-
+      });
 
 }
 
 function submitReview() {
   event.preventDefault();
-      const poiId = currentPOIId; // Hier sollte die tatsächliche poiId verwendet werden
-      const reviewCleanRating = document.querySelectorAll('#Sternebewertung .star-rating-clean input:checked').length;
-      const reviewMustSeeRating = document.querySelectorAll('#Sternebewertung .star-rating-must input:checked').length;
-      const reviewLocationRating = document.querySelectorAll('#Sternebewertung .star-rating-loc input:checked').length;
+  const poiId = currentPOIId;
+  const reviewCleanRating = document.querySelectorAll('#Sternebewertung .star-rating-clean input:checked').length;
+  const reviewMustSeeRating = document.querySelectorAll('#Sternebewertung .star-rating-must input:checked').length;
+  const reviewLocationRating = document.querySelectorAll('#Sternebewertung .star-rating-loc input:checked').length;
 
+  createReview(poiId, reviewCleanRating, reviewMustSeeRating, reviewLocationRating)
+    .then(() => {
+      console.log("Review erfolgreich erstellt");
+      closePopupCreateBewAbgeben();
 
-
-  console.log(poiId);
-  createReview(poiId, reviewCleanRating, reviewMustSeeRating, reviewLocationRating);
-
+      // Formular zurücksetzen
+      const stars = document.querySelectorAll('#Sternebewertung input[type="checkbox"]');
+      stars.forEach((star) => {
+        star.checked = false;
+      });
+    })
+    .catch((error) => {
+      console.error("Fehler beim Erstellen der Review:", error);
+    });
 }
 
 
