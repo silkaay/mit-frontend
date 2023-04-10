@@ -422,33 +422,33 @@ function deleteComment(commentId, button) {
   }
 
   function createComment(poiId, commentAuthor, commentText) {
-
     const data = { poiId, commentAuthor, commentText };
-
-let url = "http://localhost:8080/createComment";
-let request = new Request(url, {
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-    method: "POST",
-})
-fetch(request)
-    .then((response) => response.json())
-    .then((data) => {
+    let url = "http://localhost:8080/createComment";
+    let request = new Request(url, {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      method: "POST",
+    });
+    fetch(request)
+      .then((response) => response.json())
+      .then((data) => {
         console.log("Antwort vom Server:", data);
-
-    })
-
-
-}
-
-function submitComment(event) {
-event.preventDefault();
-const poiId = currentPOIId;
-const commentAuthor = document.getElementById("Author").value;
-const commentText = document.getElementById("commenttext").value;
-createComment(poiId, commentAuthor, commentText);
-
-}
+        closePopupCreateCom();
+        location.reload();
+      });
+  }
+  
+  function submitComment(event) {
+    event.preventDefault();
+    const poiId = currentPOIId;
+    const commentAuthor = document.getElementById("Author").value;
+    const commentText = document.getElementById("commenttext").value;
+    createComment(poiId, commentAuthor, commentText);
+  
+    // Reset form after submitting comment
+    const form = event.target.closest('form');
+    form.reset();
+  }
 
 
 function createReview(poiId, reviewCleanRating, reviewMustSeeRating, reviewLocationRating) {
