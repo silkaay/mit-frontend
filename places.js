@@ -388,38 +388,38 @@ function deleteComment(commentId, button) {
       document.getElementById("form-overlayBewAbgeben").style.display = "none";
   }
   
-  // Hier definieren wir eine Funktion, um die Daten abzurufen und anzuzeigen
-  function getReviews(poiId) {
-      // Hier rufen wir die Daten über einen API-Endpoint ab
-      fetch(`http://localhost:8080/getReviews/${poiId}`)
-          .then(response => response.json())
-          .then(data => {
-              // Hier fügen wir die Daten in die HTML-Struktur ein
-              const poiInfoDiv = document.getElementById("poiInfo");
-              poiInfoDiv.innerHTML = `
-          <p>Durchschnitt:</p>
-          <div>Review Count: ${data.poiReviewCount}</div>
-          <div>Cleanliness Average: ${displayStars(data.poiReviewCleanAvg)}</div>
-          <div>Must-See Average: ${displayStars(data.poiReviewMustSeeAvg)}</div>
-          <div>Location Average: ${displayStars(data.poiReviewLocationAvg)}</div>
-        `;
-  
-              const poiReviewsDiv = document.getElementById("poiReviews");
-              poiReviewsDiv.innerHTML = ""; // leeren den Inhalt des divs, bevor wir neue Bewertungen einfügen
-              data.poiReviewReturnListList.forEach(review => {
-                  poiReviewsDiv.innerHTML += `
-            <div>
-              <div>Review: ${review.poiReviewId}</div>
-              <div>Cleanliness: ${displayStars(review.poiReviewClean)}</div>
-              <div>Must-See: ${displayStars(review.poiReviewMustSee)}</div>
-              <div>Location: ${displayStars(review.poiReviewLocation)}</div>
-              <br>
-            </div>
-          `;
-              });
-          })
-          .catch(error => console.error(error));
-  }
+// Hier definieren wir eine Funktion, um die Daten abzurufen und anzuzeigen
+function getReviews(poiId) {
+  // Hier rufen wir die Daten über einen API-Endpoint ab
+  fetch(`http://localhost:8080/getReviews/${poiId}`)
+      .then(response => response.json())
+      .then(data => {
+          // Hier fügen wir die Daten in die HTML-Struktur ein
+          const poiInfoDiv = document.getElementById("poiInfo");
+          poiInfoDiv.innerHTML = `
+      <p>Average detailed rating:</p>
+      <!-- <div>Review Count: ${data.poiReviewCount}</div> -->
+      <div>Cleanliness Average: ${displayStars(data.poiReviewCleanAvg)}</div>
+      <div>Must-See Average: ${displayStars(data.poiReviewMustSeeAvg)}</div>
+      <div>Location Average: ${displayStars(data.poiReviewLocationAvg)}</div>
+    `;
+
+          const poiReviewsDiv = document.getElementById("poiReviews");
+          poiReviewsDiv.innerHTML = ""; // leeren den Inhalt des divs, bevor wir neue Bewertungen einfügen
+          data.poiReviewReturnListList.forEach(review => {
+              poiReviewsDiv.innerHTML += `
+        <div>
+          <!-- <div>Review: ${review.poiReviewId}</div> --> <!-- Auskommentiert, da wir die Nummer nicht anzeigen wollen-->
+          <div>Cleanliness: ${displayStars(review.poiReviewClean)}</div>
+          <div>Must-See: ${displayStars(review.poiReviewMustSee)}</div>
+          <div>Location: ${displayStars(review.poiReviewLocation)}</div>
+          <br>
+        </div>
+      `;
+          });
+      })
+      .catch(error => console.error(error));
+}
 
   function createComment(poiId, commentAuthor, commentText) {
     const data = { poiId, commentAuthor, commentText };
