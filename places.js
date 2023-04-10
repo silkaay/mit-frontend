@@ -275,36 +275,40 @@ fetch("http://localhost:8080/getSeasons")
   }
   
   //POI mit Bild 
-  function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileInfo) {
-    const poi = document.createElement("div");
-    poi.className = "poi";
-    poi.innerHTML = `
-      <div id="Test">
-        <h2>${poiTitle}</h2>
-        ${
-          poiFileInfo && poiFileInfo.fileFormat.startsWith("image")
-            ? `<img src="${poiFileInfo.fileAccessLink}"/>`
-            : poiFileInfo && poiFileInfo.fileFormat.startsWith("video")
-            ? `<video src="${poiFileInfo.fileAccessLink}" controls></video>`
-            : "Kein Mediainhalt"
-        }
-        <p>Location: ${poiLocation}</p>
-        <p>Rating: ${displayStars(poiReviewAvg)}</p>
-        <p>Tags: ${poiTags.join(", ")}</p>
-        <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
-      </div>
-    `;
-    poiList.appendChild(poi);
-  }
-  
-  fetch("http://localhost:8080/getAllPOIs")
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(poi => {
-        createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, poi.poiFileInfo);
-      });
-    })
-    .catch(error => console.error(error));
+function createPOI(poiId, poiTitle, poiLocation, poiReviewAvg, poiTags, poiFileInfo, poiStatus) {
+  const poi = document.createElement("div");
+  poi.className = "poi";
+  poi.innerHTML = `
+    <div id="Test">
+    <h2>${poiTitle}${!poiStatus ? ' <span style="font-size: 18px">&#x1F512;</span>' : ''}</h2>
+      ${
+        poiFileInfo && poiFileInfo.fileFormat.startsWith("image")
+          ? `<img src="${poiFileInfo.fileAccessLink}"/>`
+          : poiFileInfo && poiFileInfo.fileFormat.startsWith("video")
+          ? `<video src="${poiFileInfo.fileAccessLink}" controls></video>`
+          : "Kein Mediainhalt"
+      }
+      <p>Location: ${poiLocation}</p>
+      <p>Rating: ${displayStars(poiReviewAvg)}</p>
+      <p>Tags: ${poiTags.join(", ")}</p>
+      <button id="poidetailsbutton" class="btn" data-bs-toggle="collapse" data-bs-target="#poiDetails" onclick="displayPOIDetails(${poiId})">View Details</button>
+    </div>
+  `;
+  poiList.appendChild(poi);
+  console.log(`POI-Status für ${poiTitle}: ${poiStatus}`); //zum testen was das backend übergeben hat als status
+}
+
+
+
+
+fetch("http://localhost:8080/getAllPOIs")
+.then(response => response.json())
+.then(data => {
+  data.forEach(poi => {
+    createPOI(poi.poiId, poi.poiTitle, poi.poiLocation, poi.poiReviewAvg, poi.poiTags, poi.poiFileInfo, poi.poiStatus);
+  });
+})
+.catch(error => console.error(error));
   
   function displayStars(rating) {
       let fullStars = Math.floor(rating);
