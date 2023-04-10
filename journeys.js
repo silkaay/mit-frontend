@@ -18,29 +18,54 @@ fetch("http://localhost:8080/getAllJourneys")
         journeysContainer.innerHTML = journeyElements.join("");
     });
 
-function createJourneyElement(journey) {
-    const journeyElement = `
-    <div class="journey">
-      <h2>${journey.journeyTitle}</h2>
-      <p>${journey.journeyDescription}</p>
-      <p>Review count: ${journey.poiReviewCount}</p>
-      <p>Review average: ${journey.poiReviewAvg}</p>
-      <p>Tags: ${journey.journeyTags.join(", ")}</p>
-      <br>
-      <h4>POIs</h4>
-      <div class="journey-pois">
-        ${journey.journeyPois.map(poi => `
-          <div class="journey-poi">
-            <p>${poi.poisJourneysPoiName}</p>
-            <p>${poi.poisJourneysPoiLocation}</p>
-          </div>
-        `).join("")}
-      </div>
-    </div>
-  `;
-    return journeyElement;
-}
-
+    function createJourneyElement(journey) {
+        const journeyElement = `
+        <div class="journey">
+           
+                  <h2>${journey.journeyTitle}</h2>
+                
+                <table>
+                <tr>
+                  
+                  
+                </tr>
+                <tr>
+                  <td>Rating: ${displayStars(journey.poiReviewAvg)}</td>
+                  <td rowspan="5">${journey.journeyDescription}</td>
+                </tr>
+                <tr>
+                  <td>RTags: ${journey.journeyTags.join(", ")}</td>
+                </tr>
+            </table>
+        </div>
+      `;
+        return journeyElement;
+    }
+    
+    // Journey Liste ende
+    
+    function displayStars(rating) {
+        let fullStars = Math.floor(rating);
+        let halfStars = Math.abs(rating - fullStars) >= 0.5 ? 1 : 0;
+        let emptyStars = 5 - fullStars - halfStars;
+    
+        const stars = [];
+    
+        for (let i = 0; i < fullStars; i++) {
+            stars.push('<i class="bi bi-star-fill"></i>'); // Fügt volle Sterne hinzu
+        }
+    
+        if (halfStars) {
+            stars.push('<i class="bi bi-star-half"></i>'); // Fügt halben Stern hinzu
+        }
+    
+        for (let i = 0; i < emptyStars; i++) {
+            stars.push('<i class="bi bi-star"></i>'); // Fügt leeren Stern hinzu
+        }
+    
+        return stars.join(''); // Gibt die Sterne als HTML-String zurück
+    }
+    
 // Journey Liste ende
 
 //Categorien und tags und seasons sich holen
