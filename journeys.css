@@ -1,6 +1,6 @@
 button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: darkgreen;
     color: white;
     border: none;
     border-radius: 4px;
@@ -9,7 +9,7 @@ button {
 }
 
 button:hover {
-    background-color: #3e8e41;
+    background-color: darkgreen;
 }
 
 ul {
@@ -19,6 +19,15 @@ ul {
 #überschriftJourneys {
     text-align: center;
     color: rgb(0, 80, 0);
+}
+#ueberjourney{
+    text-align: center;
+
+}
+
+.bi-star-fill,.bi-star-half,.bi-star{
+    color: gold;
+    padding: 5px;
 }
 
 img {
@@ -38,7 +47,7 @@ img {
     border-radius: 5px;
     color: white;
     padding: 4px 24px;
-    background-color: darkseagreen;
+    background-color: darkgreen;
 }
 #blog-button:hover {
     opacity: 0.8;
@@ -52,7 +61,7 @@ img {
 }
 
 #form-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -105,7 +114,7 @@ img {
     bottom: 2%;
 }
 .form-popup button[type=submit], .form-popup button[type=button] {
-    background-color: darkseagreen;
+    background-color: darkgreen;
     color: white;
     padding: 3px 24px;
     margin: 6px 6px;
@@ -171,7 +180,7 @@ img {
     width: 100%;
     margin: 20px;
     padding: 10px;
-    background-color: darkseagreen;
+    background-color:  rgb(170, 217, 170);
     border-radius: 5px;
 }
 
@@ -195,4 +204,26 @@ img {
 
 .journey-poi {
     margin-top: 5px;
+}
+
+/*für die bilder und videos bei getall*/
+.media-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .media {
+    margin-right: 10px;
+    width: 100%;
+    height: 200px;
+  }
+
+
+  #journeysDetail-container{
+    background-color: rgb(170, 217, 170);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.journey-detail{
+    margin: 20px;
 }
