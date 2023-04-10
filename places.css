@@ -78,7 +78,7 @@ border: 1px solid #ccc;
 }
 
 #form-overlay {
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
 width: 100%;
@@ -88,7 +88,7 @@ background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
 display: none; /* hide the overlay by default */
 }
 #form-overlayCom {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -98,7 +98,7 @@ display: none; /* hide the overlay by default */
   display: none; /* hide the overlay by default */
 }
 #form-overlayBewAbgeben {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
