@@ -147,19 +147,17 @@ function waitForSubmitUpdateClick(blogId) {
 }
 
 //Um eigentliches update übergeben zu können
-function submitEdit (blogId) {
-  //var anotherId = 
+function submitEdit(blogId) {
   var form = document.forms["editForm"];
   var newTitle = form.editTitle.value;
   var newText = form.editBlogtext.value;
 
-  
-  fetch(`http://localhost:8080/getBlogpostById/${blogId}`) 
-    .then(response => response.json())
-    .then(blogpost => {
+  fetch(`http://localhost:8080/getBlogpostById/${blogId}`)
+    .then((response) => response.json())
+    .then((blogpost) => {
       var author = blogpost.blogpostAuthor;
       var date = blogpost.blogpostCreationDate;
-      var journey =  blogpost.blogpostJourneyId;
+      var journey = blogpost.blogpostJourneyId;
       var place = blogpost.blogpostPOIId;
 
       if (journey === -1) {
@@ -167,6 +165,7 @@ function submitEdit (blogId) {
       } else {
         place = "";
       }
+
       var data = {
         blogpostId: blogId,
         blogpostAuthor: author,
@@ -174,32 +173,29 @@ function submitEdit (blogId) {
         blogpostCreationDate: date,
         blogpostText: newText,
         blogpostJourneyId: journey,
-        blogpostPOIId: place
+        blogpostPOIId: place,
       };
 
-      console.log(data);
-      
-      
       fetch("http://localhost:8080/updateBlogpost", {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
-          'Content-Type': 'application/json'
-        }
-        })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        console.error('Error:', error);
-      }) 
-
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          closeBlog();
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     })
-    .catch(error => {
-      console.error('Error fetching data:', error);
+    .catch((error) => {
+      console.error("Error fetching data:", error);
     });
-    //location.reload();
 }
 
 function closeBlog() {
