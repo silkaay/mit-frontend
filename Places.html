@@ -52,68 +52,85 @@
 
 
 
-    <div id="button-container"> <!-- Create POI Button-->
-        <button id="blog-button" onclick="openForm()">+ Create Place</button>
-        <!-- Pop-up zum erstellen-->
-        <div id="form-overlay"></div>
-        <div id="myForm" class="form-popup">
-            <form action="/submit-form">
-                <h2 id="POIertsellenueber">Create Place</h2>
-                <div class="input-container">
-                    <input id="NamePOI" type="text" placeholder="Name" name="Name" required>
-                    <input id="Place" type="text" placeholder="Place" name="Place" required>
-                    <input id="NameOfPlace" type="text" placeholder="Name of Place" name="Name of Place">
-                </div>
-                <div class="input-container ">
-                    <input id="LatitudePOI" type="text" placeholder="Latitude" name="Latitude" required>
-                    <input id="Longitude" type="text" placeholder="Longitude" name="Longitude" required>
-                    <select id="categories">
-                        <option value="">Choose a category</option>
-                    </select>
-
-                </div>
-                <div class="input-container">
-                    <div id="seasons">
-                        <label>Seasons:</label><br>
+        <div id="button-container"> <!-- Create POI Button-->
+            <button id="blog-button" onclick="openForm()">+ Create Place</button>
+            <!-- Pop-up zum erstellen-->
+            <div id="form-overlay"></div>
+            
+            <div id="myForm" class="form-popup">
+                <form name="myForm">
+                    <h2 id="POIertsellenueber">Create Place</h2>
+                    <div class="input-container">
+                        <input id="NamePOI" type="text" placeholder="Name" name="Name" required>
+                        <input id="Place" type="text" placeholder="Place" name="Place" required>
+                        <input id="NameOfPlace" type="text" placeholder="Name of Place" name="NameofPlace">
                     </div>
-                </div>
-                <div class="input-container">
+                    <div class="input-container ">
+                        <input id="LatitudePOI" type="text" placeholder="Latitude" name="Latitude" required>
+                        <input id="Longitude" type="text" placeholder="Longitude" name="Longitude" required>
+                        <select id="categories">
+                            <option value="">Choose a category</option>
+                        </select>
 
-                    <div id="tags">
-                        <label>Tags:</label><br>
                     </div>
-
-
-                </div>
-
-                <div  class="container mt-5">
-                <div class="row">
-                    <div class="col-md-8" id="DragAndDrop">
-                        <div class="drop-container">
-                            <div class="drop-message">
-                                <p id="drop_here">Drop files here</p>
-                            </div>
+                    <div class="input-container">
+                        <div id="seasons">
+                            <label>Seasons:</label><br>
                         </div>
-                        <button id="add-button">Add Images</button>
-                        <button id="clear-button">Clear Images</button>
+                    </div>
+                    <div class="input-container">
+
+                        <div id="tags">
+                            <label>Tags:</label><br>
+                        </div>
+
+
                     </div>
 
-                </div>
+                    <!--
+                        <div  class="container mt-5">
+                        <div class="row">
+                            <div class="col-md-8" id="DragAndDrop">
+                                <div class="drop-container">
+                                    <div class="drop-message">
+                                        <p id="drop_here">Drop files here</p>
+                                    </div>
+                                </div>
+                                <button id="add-button">Add Images</button>
+                                <button id="clear-button">Clear Images</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    -->
+                
+                    <textarea id="blogtext" name="blogtext"></textarea>
+                    <div class="button-align">
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        <button type="button" class="btn" onclick="postPlace()">Submit</button>
+                    </div>
+                </form>
             </div>
-
-
-
-                <textarea id="blogtext" name="blogtext"></textarea>
-                <div class="button-align">
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                    <button type="submit" class="btn">Submit</button>
-                </div>
-            </form>
+            <!-- ende pop-up-->
         </div>
-        <!-- ende pop-up-->
+
+    <!--Edit Funktion Anfang-->
+        <div id="editForm" class="form-popup">
+        <form name="editForm">
+            <div class="input-container"> 
+            <input type="text" id="editFormTitle" placeholder="Title" name="editTitle" required>
+            </div>
+            <textarea id="blogtext" name="editBlogtext">hhhh</textarea>
+            <div class="button-align">
+            <button type="button" class="btn cancel" onclick="closeBlog()">Close</button>
+            <button type="button" class="btn" id="submitUpdate">Submit</button>
+            </div>
+        </form>
     </div>
 
-<div id="input">
+    <!--Edit Funktion Ende-->
+
+    <div id="input">
        <!-- Der Teil könnte noch relevant sein wenn ich später mehr pois habe
        <div id="POIliste" class="container-fluid">
             <div class="row flex-row flex-nowrap">
@@ -125,22 +142,22 @@
         <br>
         <br>
             <div id="poiDetails"></div>-->
-    <h1 id="überschriftPOI">Places</h1>
+        <h1 id="überschriftPOI">Places</h1>
 
-        <div id="poiList"></div>
-        <div id="poiDetails" class="collapse"></div>
-    
-        <div id="form-overlayCom"></div>
-        <div id="myFormCom" class="form-popup2">
-        <form id="comment-form" onsubmit="submitComment(event)">
-            <input id="Author" type="text" placeholder="Name" name="Name" required>
-            <textarea id="commenttext" name="blogtext"></textarea>
-            <div class="button-align">
-            <button type="button" class="btn cancel" onclick="closePopupCreateCom()">Close</button>
-            <button type="submit" class="btn">Submit</button>
+            <div id="poiList"></div>
+            <div id="poiDetails" class="collapse"></div>
+        
+            <div id="form-overlayCom"></div>
+            <div id="myFormCom" class="form-popup2">
+            <form id="comment-form" onsubmit="submitComment(event)">
+                <input id="Author" type="text" placeholder="Name" name="Name" required>
+                <textarea id="commenttext" name="blogtext"></textarea>
+                <div class="button-align">
+                <button type="button" class="btn cancel" onclick="closePopupCreateCom()">Close</button>
+                <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
             </div>
-        </form>
-        </div>
 
 
 
@@ -217,19 +234,20 @@
                 <button type="submit" class="btn">Submit</button>
             </div>
         </form>
-    </div>
-    <div class="collapse" id="poiKommentare">
-        <div id="comments">
-            <h2 id="commentsueber">Comments</h2>
-            <ul id="commentList"></ul>
+        </div>
+
+        <div class="collapse" id="poiKommentare">
+            <div id="comments">
+                <h2 id="commentsueber">Comments</h2>
+                <ul id="commentList"></ul>
+            </div>
         </div>
     </div>
-</div>
 
         <!--Das hier ist das Content Div-->
-    </div>
+</div>
     <!--Das hier ist das Content Div-->
-    <script src="places.js"></script>
+    
 
     <!--Hier Beginnt Footer -->
     <footer class="footer">
@@ -245,4 +263,5 @@
 
 
 </body>
+<script src="places.js"></script>
 </html>

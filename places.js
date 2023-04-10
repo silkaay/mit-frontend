@@ -11,7 +11,7 @@ function openForm() {
   
   
   
-  
+  /*
   //Drag and drop
   const dropContainer = document.querySelector('.drop-container');
   const clearButton = document.querySelector('#clear-button');
@@ -74,7 +74,7 @@ function openForm() {
     });
     input.click();
   });
-  
+  */
   
   
   //Categorien und tags und seasons sich holen
@@ -129,6 +129,70 @@ fetch("http://localhost:8080/getSeasons")
     })
     .catch(error => console.error(error));
 // Ende Categorien und tags seasons sich holen
+
+//Start Create Place
+
+function postPlace() {
+  var form = document.forms["myForm"];
+  // get the values of the input elements
+  var title = form.Name.value;
+  var place = form.Place.value;
+  var placename = form.NameofPlace.value;
+  var latitude = form.Latitude.value;
+  var longitude = form.Longitude.value;
+  var text = form.blogtext.value;
+
+  const dropdown = document.getElementById('categories');
+ 
+  var category = dropdown.value;
+   // get all the season checkboxes
+  const seasonCheckboxes = document.querySelectorAll('input[name="season"]');
+
+  // loop through the checkboxes to check if any are checked
+  let seasonsSelected = [];
+  seasonCheckboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      seasonsSelected.push(checkbox.value);
+    }
+  });
+
+  const tagCheckboxes = document.querySelectorAll('input[name="tag"]');
+
+  // loop through the checkboxes to check if any are checked
+  let tagsSelected = [];
+  tagCheckboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      tagsSelected.push(checkbox.value);
+    }
+  });
+  
+  var data = {
+    poiTitle: title,
+    poiLocation: place,
+    poiLatitude: latitude,
+    poiLongitude: longitude,
+    poiDescription: text,
+    poiSeasons: seasonsSelected,
+    poiTags: tagsSelected,
+    poiCategory: category
+  };
+
+  fetch("http://localhost:8080/createPOI", {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+//Ende Create Place
   
   
   //Poi Liste mit detail bewertung
@@ -208,7 +272,7 @@ fetch("http://localhost:8080/getSeasons")
         const releaseButton = document.getElementById('releasePoi');
         releaseButton.parentNode.removeChild(releaseButton);
         //läd seite neu um schloss zu entfernen bei getAll
-        window.location.reload();
+        //window.location.reload();
       } else {
         throw new Error('Failed to release POI.');
       }
