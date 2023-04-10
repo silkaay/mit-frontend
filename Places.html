@@ -107,12 +107,35 @@
                     <textarea id="blogtext" name="blogtext"></textarea>
                     <div class="button-align">
                         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                        <button type="button" class="btn" onclick="postPlace()">Submit</button>
+                        <button type="button" class="btn" onclick="postPlace()">Next Step</button>
                     </div>
                 </form>
             </div>
             <!-- ende pop-up-->
         </div>
+
+        <div class="form-popup" id="image-form">
+            <form name="image-form">
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-8" id="DragAndDrop">
+                            <div class="drop-container">
+                                <div class="drop-message">
+                                    <p id="drop_here">Drop files here</p>
+                                </div>
+                            </div>
+                            <button id="add-button">Add Images</button>
+                            <button id="clear-button">Clear Images</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn cancel" onclick="closeImageForm()">Close</button>
+                <button type="button" class="btn" onclick="reloadIt()">Submit</button>
+
+            </form>
+        </div>
+        
+
 
     <!--Edit Funktion Anfang-->
         <div id="editForm" class="form-popup">

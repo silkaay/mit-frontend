@@ -73,9 +73,7 @@ function openForm() {
       addButton.classList.remove('hidden');
     });
     input.click();
-  });
-  */
-  
+  });*/
   
   //Categorien und tags und seasons sich holen
 const categorySelect = document.getElementById("categories");
@@ -187,14 +185,110 @@ function postPlace() {
   .then(response => response.json())
   .then(data => {
     console.log('Success:', data);
+    closeForm();
+    addImages(data);
+
   })
   .catch((error) => {
     console.error('Error:', error);
-  });
+  });  
 }
+
+
 //Ende Create Place
+function closeImageForm () {
   
+  document.getElementById("image-form").style.display = "none";
+  document.getElementById("form-overlay").style.display = "none";
+}
+
+
+function addImages (id) {
+  console.log("Id: ", id);
+  document.getElementById("image-form").style.display = "block";
+  document.getElementById("form-overlay").style.display = "block";
+
+  //Drag and drop
+  const dropContainer = document.querySelector('.drop-container');
+  const clearButton = document.querySelector('#clear-button');
+  const addButton = document.querySelector('#add-button');
   
+  // Set up drop event on container
+  dropContainer.addEventListener('drop', event => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    handleFiles(files);
+    addButton.classList.remove('hidden');
+  });
+  
+  // Set up dragover event on container
+  dropContainer.addEventListener('dragover', event => {
+    event.preventDefault();
+  });
+  
+  // Handle dropped files
+  function handleFiles(files) {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      formData.append('file', file);
+      const fileType = file.type;
+      const fileUrl = URL.createObjectURL(file);
+      if (fileType.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = fileUrl;
+        img.classList.add('drop-image');
+        dropContainer.appendChild(img);
+      } else if (fileType.startsWith('video/')) {
+        const video = document.createElement('video');
+        video.src = fileUrl;
+        video.controls = true;
+        dropContainer.appendChild(video);
+      }
+    }
+    fetch(`http://localhost:8080/upload/${id}`, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+  
+ 
+  // Clear images when clear button is clicked
+  clearButton.addEventListener('click', () => {
+    const images = document.querySelectorAll('.drop-image');
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+      dropContainer.removeChild(image);
+    }
+    addButton.classList.add('hidden');
+  });
+  
+  // Add images when add button is clicked
+  addButton.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*,video/*';
+    input.multiple = true;
+    input.addEventListener('change', event => {
+      const files = event.target.files;
+      handleFiles(files);
+      addButton.classList.remove('hidden');
+    });
+    input.click();
+  });
+
+}
+  
+function reloadIt() {
+  window.location.reload();
+}
   //Poi Liste mit detail bewertung
   
   function displayPOIDetails(poiId) {
