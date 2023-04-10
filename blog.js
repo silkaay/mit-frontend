@@ -63,10 +63,13 @@ function getJourneyorPoi(name, id) {
 //obvious, aber hier werden die Posts generiert
 async function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
   let bloglink;
+  var blogadd;
   try {
     if (blogpostPOIId === -1) {
+      blogadd = "&#8594; Journey: ";
       bloglink = await getJourneyorPoi("journey", blogpostJourneyId);
     } else {
+      blogadd = "&#8594; Place: ";
       bloglink = await getJourneyorPoi("place", blogpostPOIId);
     }
   } catch (error) {
@@ -86,7 +89,7 @@ async function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpos
       <div>
         <button type="submit" onclick="openEditBlogpost(${blogpostId}, this)" data-blogpost-id="${blogpostId}">Edit</button>
         <button type="submit" onclick="deleteBlogpost(${blogpostId}, this)">Delete</button>
-        <a id="link">${bloglink}</a>
+        <a id="link">${blogadd}${bloglink}</a>
       </div>
     </div>
   `;
