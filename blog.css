@@ -122,8 +122,6 @@
     #blogcontainer div{
       display: flex;
       align-items: baseline;
-      justify-content: center;
-      
     }
     #blogcontainer h6 {
       margin-left: 15px;
@@ -131,11 +129,11 @@
     }
     #blogcontainer h3 {
       color: darkgreen; 
+      justify-content: center;
     }
     #blogcontainer p {
       margin: 15px 30px 30px;
     }
-
     #blogcontainer button {
       background-color: darkgreen;
       color: white;
@@ -153,6 +151,7 @@
       color: grey;
       text-decoration: underline;
       margin-left: auto;
+      margin-right: 24px;
     }
     #Place,#Journey{
       margin-left:30px;

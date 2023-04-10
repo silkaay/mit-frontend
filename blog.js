@@ -26,8 +26,50 @@ fetch("http://localhost:8080/getAllBlogposts")
 //Liste aus der HTML, dass sie in die DOM geadded werden können
 const bloglist = document.getElementById("bloglist");
 
+function getJourneyorPoi(name, id) {
+if (name==="place") {
+  fetch("http://localhost:8080/getSelectionPOIs")
+    .then(response => response.json())
+    .then(places => {
+      places.forEach(poi => {
+        if (poi.poiId===id) {
+          console.log(poi.poiName);
+          return poi.poiName;
+        }
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+} else {
+  fetch("http://localhost:8080/getSelectionJourneys")
+    .then(response => response.json())
+    .then(journeys => {
+      // Get dropdown element
+      journeys.forEach(journey => {
+        if (journey.journeyId===id) {
+          console.log(journey.journeyName);
+          return journey.journeyName;
+        }
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+}
+
 //obvious, aber hier werden die Posts generiert
 function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreationDate, blogpostText, blogpostJourneyId, blogpostPOIId) {
+  var bloglink;
+
+  if (blogpostPOIId===-1) {
+    bloglink = getJourneyorPoi("journey", blogpostJourneyId);
+    console.log("Hi: ",bloglink);
+  } else {
+    bloglink = getJourneyorPoi("place", blogpostPOIId);
+  }
+
   const blog = document.createElement("div");
   blog.className = "blogpost";
   blog.innerHTML = `
@@ -38,14 +80,17 @@ function createBlogpost(blogpostId, blogpostAuthor, blogpostTitle, blogpostCreat
         <h6></h6>
       </div>
       <p>${blogpostText}</p>
-      <button type="submit" onclick="openEditBlogpost(${blogpostId}, this)" data-blogpost-id="${blogpostId}">Edit</button>
-      <button type="submit" onclick="deleteBlogpost(${blogpostId}, this)">Delete</button>
+      <div>
+        <button type="submit" onclick="openEditBlogpost(${blogpostId}, this)" data-blogpost-id="${blogpostId}">Edit</button>
+        <button type="submit" onclick="deleteBlogpost(${blogpostId}, this)">Delete</button>
+        <a id="link">${bloglink}</a>
+      </div>
     </div>
   `;
   bloglist.appendChild(blog);
 }
 
-
+//<a id="link">poi</p>
 
 
 /* Diese Line wurde aus dem inner html entfern, hier nur zum Sichern
@@ -263,7 +308,6 @@ function postBlogpost() {
     journey = travel;
   }
   
-
   var data = {
     blogpostAuthor: author,
     blogpostTitle: title,
