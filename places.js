@@ -161,16 +161,16 @@ fetch("http://localhost:8080/getSeasons")
               <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
             </tr>
             <tr>
-              <td>${data.poiLatitude},${data.poiLongitude}</td>
+              <td>Location: ${data.poiLatitude},${data.poiLongitude}</td>
             </tr>
             <tr>
-              <td>${data.poiSeasons.join(", ")}</td>
+              <td>Seasons: ${data.poiSeasons.join(", ")}</td>
             </tr>
             <tr>
-              <td>${data.poiTags.join(", ")}</td>
+              <td>Tags: ${data.poiTags.join(", ")}</td>
             </tr>
             <tr>
-              <td>${data.poiCategory}</td>
+              <td>Seasons: ${data.poiCategory}</td>
               <td>
                 <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Comments</button>
                 <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
