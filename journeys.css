@@ -205,3 +205,16 @@ img {
 .journey-poi {
     margin-top: 5px;
 }
+
+/*für die bilder und videos bei getall*/
+.media-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .media {
+    margin-right: 10px;
+    width: 100%;
+    height: 200px;
+  }
+
