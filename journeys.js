@@ -121,25 +121,30 @@ function displayJourneyDetail(journeyId) {
             </tr>
             <tr>
               <td>Category: ${journey.journeyCategory}</td>
-            </tr>
-            <tr>
-              <td><button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button></td>
-              <td> <div class="journey-detail"> <button onclick="goBack()">Back</button></div></td>
+              <td>
+                <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${journeyId})">Show Comments</button>
+                <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
+                <button id="editJourney"> Edit</button>
+                <button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button>
+                <button id= "goBack" onclick="goBack()">Go Back</button>
+              </td>
             </tr>
           </table>
         </div>
       `;
       const journeyDetailContainer = document.getElementById("journeyDetailContainer");
       if (journeyDetailContainer) {
-        journeyDetailContainer.innerHTML = journeyDetailElement;
-      } else {
-        console.error(`Journey detail container not found`);
+      journeyDetailContainer.innerHTML = journeyDetailElement;
+      const commentBtn = journeyDetailContainer.querySelector('.btn-kommentare');
+      if (document.querySelector('#poiKommentare').classList.contains('show')) {
+      commentBtn.click();
       }
-    })
-    .catch(error => {
-      console.error(`Error fetching journey details for journey ID ${journeyId}: ${error}`);
-    });
-}
+      } else {
+      console.error();
+      }
+      })
+    }
+
 
 
 function hideAllJourneys() {
@@ -278,4 +283,95 @@ function getReviews(journeyId) {
           });
       })
       .catch(error => console.error(error));
+}
+
+
+
+function displayPOIKommentare(journeyId) {
+  // Erstelle eine Funktion, um die Kommentare abzurufen
+  function getComments() {
+      // Rufe die Daten von der API ab
+      fetch(`http://localhost:8080/getJourneyComments/${journeyId}`)
+          .then(response => response.json())
+          .then(comments => {
+              // Leere die Kommentar-Liste
+              const commentList = document.getElementById('commentList');
+              commentList.innerHTML = '';
+
+              // Durchlaufe die Kommentare und füge sie zur Liste hinzu
+              comments.forEach(comment => {
+                  const { commentAuthor, commentDate, commentText, commentId } = comment;
+
+                  // Erstelle ein neues Listenelement für den Kommentar
+                  const li = document.createElement('li');
+                  li.innerHTML = `
+                  <table>
+                      <tr>
+                          <td>${commentAuthor},${commentDate}</td>
+                      </tr>
+                      <tr>
+                          <td>Text: ${commentText}</td>
+                      </tr>
+                      <tr>
+                          <td><button type="submit" id="deletecomments" onclick="deleteComment(${commentId}, this)">Delete this Comment</button></td>
+                      </tr>
+                  </table>
+                  <br>
+
+                  `;
+
+                  // Füge das Listenelement zur Liste hinzu
+                  commentList.appendChild(li);
+              });
+          })
+          .catch(error => console.error(error));
+  }
+
+  // Rufe die Funktion auf, um die Kommentare zu laden
+  getComments();
+}
+
+function deleteComment(commentId, button) {
+  // Sende DELETE-Request an den Server
+  fetch(`http://localhost:8080/deleteJourneyComment/${commentId}`, {
+      method: 'DELETE',
+  })
+  .then(response => {
+      if (response.ok) {
+          // Entferne den gelöschten Kommentar aus der Anzeige
+          button.parentNode.parentNode.parentNode.remove();
+      } else {
+          console.error(`Error deleting comment with id ${commentId}: ${response.status}`);
+      }
+  })
+  .catch(error => console.error(`Error deleting comment with id ${commentId}: ${error}`));
+}
+
+function createComment(journeyId, commentAuthor, commentText) {
+  const data = { journeyId, commentAuthor, commentText };
+  let url = "http://localhost:8080/createJourneyComment";
+  let request = new Request(url, {
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+    method: "POST",
+  });
+  fetch(request)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Antwort vom Server:", data);
+      closePopupCreateCom();
+      location.reload();
+    });
+}
+
+function submitComment(event) {
+  event.preventDefault();
+  const journeyId = currentJOURNEYId;
+  const commentAuthor = document.getElementById("Author").value;
+  const commentText = document.getElementById("commenttext").value;
+  createComment(journeyId, commentAuthor, commentText);
+
+  // Reset form after submitting comment
+  const form = event.target.closest('form');
+  form.reset();
 }
