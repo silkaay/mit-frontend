@@ -96,8 +96,8 @@ function displayJourneyDetail(journeyId) {
                 <td> 
                     <li>
                           <h4>${poi.poiTitle} (${poi.poiLocation})</h4>
-                          <li>Date: ${poi.poisJourneysDate}</li>
-                           <li>Time: ${poi.poisJourneysTime}</li>
+                          <li>Time: ${poi.poisJourneysDate}</li>
+                           <li>Date: ${poi.poisJourneysTime}</li>
                           <!-- <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li> -->
                       
                     </li>
