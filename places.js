@@ -154,6 +154,11 @@ function postPlace() {
     }
   });
 
+  seasonsSelected = seasonsSelected.map((season) => {
+    return parseInt(season) + 1;
+  });
+  
+
   const tagCheckboxes = document.querySelectorAll('input[name="tag"]');
 
   // loop through the checkboxes to check if any are checked
@@ -163,6 +168,12 @@ function postPlace() {
       tagsSelected.push(checkbox.value);
     }
   });
+
+  tagsSelected = tagsSelected.map((tag) => {
+    return parseInt(tag) + 1;
+  });
+
+
   
   var data = {
     poiTitle: title,
@@ -174,6 +185,7 @@ function postPlace() {
     poiTags: tagsSelected,
     poiCategory: category
   };
+  console.log(data);
 
   fetch("http://localhost:8080/createPOI", {
     method: 'POST',
