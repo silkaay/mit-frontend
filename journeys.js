@@ -75,32 +75,42 @@ function displayJourneyDetail(journeyId) {
           <h3>Points of Interest:</h3>
           <ul>
             ${journey.journeyPois.map(poi => `
-              <li>
-                <h4>${poi.poiTitle}</h4>
-                <p>${poi.poiLocation}</p>
-                <ul>
-                  <li>Date: ${poi.poisJourneysDate}</li>
-                  <li>Time: ${poi.poisJourneysTime}</li>
-                  <!-- <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li> -->
-                  <li>
-                    <ul>
-                      ${poi.poiFiles.map(file => `
-                        <li>
-                          ${file.fileFormat.startsWith("image") ?
-                            `<img style="width: 25%;" src="${file.fileAccessLink}" alt="${file.fileID}">` :
-                            `<video style="width: 25%;" src="${file.fileAccessLink}" alt="${file.fileID}" controls></video>`
-                          }
-                        </li>
-                      `).join("")}
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+            <div id="poiinJourneys">
+            <table>
+                <tr>
+                 <td style="width: 25%;">
+                    <li>
+                         <ul>
+                            ${poi.poiFiles.map(file => `
+                                <li >
+                                  ${file.fileFormat.startsWith("image") ?
+                                    `<img  src="${file.fileAccessLink}" alt="${file.fileID}">` :
+                                    `<video  src="${file.fileAccessLink}" alt="${file.fileID}" controls></video>`
+                                    }
+                                </li>
+                              `).join("")}
+                         </ul>
+                    </li>
+                  </td>
+                  <td> 
+                      <li>
+                            <h4>${poi.poiTitle}</h4>
+                            <p>${poi.poiLocation}</p>
+                        <ul>
+                            <li>Date: ${poi.poisJourneysDate}</li>
+                             <li>Time: ${poi.poisJourneysTime}</li>
+                            <!-- <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li> -->
+                        </ul>
+                      </li>
+                  </td>
+                </tr>
+            </table>
+          </div>
             `).join("")}
           </ul>
           <table>
             <tr>
-              <td>${displayStars(journey.journeyReviewAvg)} <button id="bewertungenansehen" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${journeyId})">${journey.journeyReviewCount} Reviews</button></td>
+              <td>${displayStars(journey.journeyReviewAvg)} <button id="bewertungenansehen" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${journeyId})">${journey.journeyReviewCount} Reviews / Rate</button></td>
             </tr>
             <tr>
               <td>Seasons: ${journey.journeySeasons.join(", ")}</td>
