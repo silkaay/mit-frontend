@@ -135,7 +135,6 @@ function postPlace() {
   // get the values of the input elements
   var title = form.Name.value;
   var place = form.Place.value;
-  var placename = form.NameofPlace.value;
   var latitude = form.Latitude.value;
   var longitude = form.Longitude.value;
   var text = form.blogtext.value;
@@ -295,11 +294,196 @@ function addImages (id) {
     });
     input.click();
   });
-
 }
   
 function reloadIt() {
   window.location.reload();
+}
+
+
+function openEdit(poiId) {
+  document.getElementById("editForm").style.display = "block";
+  document.getElementById("form-overlay").style.display = "block";
+
+  console.log(poiId);
+
+  var form = document.forms["editForm"];
+
+  const editTitle = form.editName;
+  const editPlace = form.editPlace;
+  const editLatitude = form.editLatitude;
+  const editLongitude = form.editLongitude;
+  const editText = form.editText;
+  const categoryDropdown = document.getElementById("editCategories");
+
+  
+  fetch("http://localhost:8080/getPOIDetails/" + poiId)
+      .then(response => response.json())
+      .then(place => {
+        console.log(place.poiTitle);
+        editTitle.value = place.poiTitle;
+        editPlace.value = place.poiLocation;
+        editLatitude.value = place.poiLatitude;
+        editLongitude.value = place.poiLongitude;
+        editText.value = place.poiDescription;
+        //categoryDropdown.value = place.poiCategory;
+        var selected = place.poiCategory;
+
+        // Set the value of the category dropdown to place.poiCategory
+        const selectedValue = place.poiCategory;
+        let seasonsSelected = [];
+        seasonsSelected = place.poiSeasons;
+        console.log(seasonsSelected);
+
+        let tagsSelected = [];
+        tagsSelected = place.poiTags;
+
+        
+        fetch("http://localhost:8080/getCategories")
+            .then(response => response.json())
+            .then(categories => {
+                Object.entries(categories).forEach(([id, name]) => {
+                    const option = document.createElement("option");
+                    option.value = id;
+                    option.textContent = name;
+                    categoryDropdown.appendChild(option);
+
+                    // Check if the option value matches the value you want to set as selected
+                    if (name === selectedValue) {
+                        option.selected = true;
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+
+            const seasonDiv = document.getElementById("editSeasons");    
+            
+            fetch("http://localhost:8080/getSeasons")
+            .then(response => response.json())
+            .then(seasons => {
+              seasonDiv.innerHTML = "Seasons: ";
+            Object.entries(seasons).forEach(([id, season]) => {
+              
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "season";
+            checkbox.value = id;
+            const label = document.createElement("label");
+            label.innerHTML = season.displayName;
+            seasonDiv.appendChild(checkbox);
+            seasonDiv.appendChild(label);
+
+            if (seasonsSelected.includes(season.seasonName)) {
+              checkbox.checked = true;
+            }
+
+          });
+      })
+      .catch(error => console.error(error));
+
+      const tagDiv = document.getElementById("editTags");
+
+      fetch("http://localhost:8080/getTags")
+    .then(response => response.json())
+    .then(tags => {
+      tagDiv.innerHTML = "Tags: ";
+        Object.entries(tags).forEach(([id, name]) => {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "tag";
+            checkbox.value = id;
+            const label = document.createElement("label");
+            label.textContent = name;
+            tagDiv.appendChild(checkbox);
+            tagDiv.appendChild(label);
+
+            if (tagsSelected.includes(name)) { // Check if the tag is in the tagsSelected array
+              checkbox.checked = true; // Set the checkbox's checked property to true if it is
+            }
+            
+        });
+    })
+    .catch(error => console.error(error));
+    waitForSubmitUpdateClick(poiId);
+
+  })
+  .catch(error => console.error(error));
+}
+
+function waitForSubmitUpdateClick(poiId) {
+  var button = document.getElementById("submitUpdate");
+  const keepingId = poiId;
+  button.addEventListener("click", function() {
+    // This code will execute when the submitUpdate button is clicked
+    console.log("submitUpdate button clicked!");
+    submitEdit(keepingId);
+    // Execute the rest of the code here
+  });
+}
+
+function submitEdit(poiId) {
+  console.log("Id: "+ poiId);
+  var form = document.forms["editForm"];
+
+  const editTitle = form.editName.value;
+  const editPlace = form.editPlace.value;
+  const editLatitude = form.editLatitude.value;
+  const editLongitude = form.editLongitude.value;
+  const editText = form.editText.value;
+  
+  const dropdown = document.getElementById('editCategories');
+ 
+  var category = dropdown.value;
+
+  const seasonCheckboxes = document.querySelectorAll('input[name="season"]');
+  const checkedSeasons = Array.from(seasonCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => parseInt(checkbox.value) + 1);
+
+  const tagCheckboxes = document.querySelectorAll('input[name="tag"]');
+  const checkedTags = Array.from(tagCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => parseInt(checkbox.value));
+
+    var placeId = poiId;
+  var data = {
+    poiId: placeId,
+    poiTitle: editTitle,
+    poiLocation: editPlace,
+    poiLatitude: editLatitude,
+    poiLongitude: editLongitude,
+    poiDescription: editText,
+    poiSeasons: checkedSeasons,
+    poiTags: checkedTags,
+    poiCategory: category
+  };
+  console.log(data);
+  
+  fetch("http://localhost:8080/updatePOI", {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });  
+  
+  closeEdit();
+
+
+
+}
+
+function closeEdit() {
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("form-overlay").style.display = "none";
 }
   //Poi Liste mit detail bewertung
   
@@ -340,11 +524,11 @@ function reloadIt() {
               <td>Tags: ${data.poiTags.join(", ")}</td>
             </tr>
             <tr>
-              <td>Seasons: ${data.poiCategory}</td>
+              <td>Category: ${data.poiCategory}</td>
               <td>
                 <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Show Comments</button>
                 <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
-                <button id="editPoi"> Edit</button>
+                <button id="editPoi" onclick="openEdit(${poiId}, this)"> Edit</button>
                 <button id="deletePoi" onclick="deletePOI(${poiId}, this)" > Delete</button>
                 ${releaseButton}
               </td>

@@ -66,8 +66,8 @@
                         <input id="NameOfPlace" type="text" placeholder="Name of Place" name="NameofPlace">
                     </div>
                     <div class="input-container ">
-                        <input id="LatitudePOI" type="text" placeholder="Latitude" name="Latitude" required>
-                        <input id="Longitude" type="text" placeholder="Longitude" name="Longitude" required>
+                        <input id="LatitudePOI" type="text" placeholder="Latitude" name="editLatitude" required>
+                        <input id="Longitude" type="text" placeholder="Longitude" name="editLongitude" required>
                         <select id="categories">
                             <option value="">Choose a category</option>
                         </select>
@@ -144,12 +144,36 @@
     <!--Edit Funktion Anfang-->
         <div id="editForm" class="form-popup">
         <form name="editForm">
-            <div class="input-container"> 
-            <input type="text" id="editFormTitle" placeholder="Title" name="editTitle" required>
-            </div>
-            <textarea id="blogtext" name="editBlogtext">hhhh</textarea>
+            <h2 id="POIertsellenueber">Edit Place</h2>
+                    <div class="input-container">
+                        <input id="NamePOI" type="text" placeholder="Name" name="editName" required>
+                        <input id="Place" type="text" placeholder="Place" name="editPlace" required>
+                        <input id="NameOfPlace" type="text" placeholder="Name of Place" name="editNameofPlace">
+                    </div>
+                    <div class="input-container ">
+                        <input id="LatitudePOI" type="text" placeholder="Latitude" name="editLatitude" required>
+                        <input id="Longitude" type="text" placeholder="Longitude" name="editLongitude" required>
+                        <select id="editCategories">
+                            <option value="">Choose a category</option>
+                        </select>
+
+                    </div>
+                    <div class="input-container">
+                        <div id="editSeasons">
+                            <label>Seasons:</label><br>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <div id="editTags">
+                            <label>Tags:</label><br>
+                        </div>
+                    </div>
+            
+            <textarea id="blogtext2" name="editText"></textarea>
+
+
             <div class="button-align">
-            <button type="button" class="btn cancel" onclick="closeBlog()">Close</button>
+            <button type="button" class="btn cancel" onclick="closeEdit()">Close</button>
             <button type="button" class="btn" id="submitUpdate">Submit</button>
             </div>
         </form>
