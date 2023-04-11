@@ -98,7 +98,7 @@ function displayJourneyDetail(journeyId) {
           </ul>
           <table>
             <tr>
-              <td>${displayStars(journey.journeyReviewAvg)}</td>
+              <td>${displayStars(journey.journeyReviewAvg)} <button id="bewertungenansehen" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${journeyId})">${journey.journeyReviewCount} Reviews</button></td>
             </tr>
             <tr>
               <td>Seasons: ${journey.journeySeasons.join(", ")}</td>
@@ -213,3 +213,35 @@ fetch("http://localhost:8080/getSeasons")
     })
     .catch(error => console.error(error))
 // Ende Categorien und tags seasons sich holen
+
+function getReviews(journeyId) {
+  // Hier rufen wir die Daten über einen API-Endpoint ab
+  fetch(`http://localhost:8080/getJourneyReviews/`+journeyId)
+      .then(response => response.json())
+      .then(data => {
+          // Hier fügen wir die Daten in die HTML-Struktur ein
+          const poiInfoDiv = document.getElementById("poiInfo");
+          poiInfoDiv.innerHTML = `
+    <p>Average detailed rating:</p>
+   
+    <div>Price-Preformance Average: ${displayStars(data.journeyReviewPricePerformanceAvg)}</div>
+    <div>Must-Do Average: ${displayStars(data.journeyReviewMustDoAvg)}</div>
+    <div>Variety Average: ${displayStars(data.journeyReviewVarietyAvg)}</div>
+  `;
+
+          const poiReviewsDiv = document.getElementById("poiReviews");
+          poiReviewsDiv.innerHTML = ""; // leeren den Inhalt des divs, bevor wir neue Bewertungen einfügen
+          data.journeyReviewReturnListList.forEach(review => {
+              poiReviewsDiv.innerHTML += `
+      <div>
+        
+        <div>Price-Preformance: ${displayStars(review.journeyReviewPricePerformance)}</div>
+        <div>Must-Do: ${displayStars(review.journeyReviewMustDo)}</div>
+        <div>Variety: ${displayStars(review.journeyReviewVariety)}</div>
+        <br>
+      </div>
+    `;
+          });
+      })
+      .catch(error => console.error(error));
+}
