@@ -224,7 +224,7 @@ function getReviews(journeyId) {
           poiInfoDiv.innerHTML = `
     <p>Average detailed rating:</p>
    
-    <div>Price-Preformance Average: ${displayStars(data.journeyReviewPricePerformanceAvg)}</div>
+    <div>Price-PerformanceAverage: ${displayStars(data.journeyReviewPricePerformanceAvg)}</div>
     <div>Must-Do Average: ${displayStars(data.journeyReviewMustDoAvg)}</div>
     <div>Variety Average: ${displayStars(data.journeyReviewVarietyAvg)}</div>
   `;
@@ -235,7 +235,7 @@ function getReviews(journeyId) {
               poiReviewsDiv.innerHTML += `
       <div>
         
-        <div>Price-Preformance: ${displayStars(review.journeyReviewPricePerformance)}</div>
+        <div>Price-Performance: ${displayStars(review.journeyReviewPricePerformance)}</div>
         <div>Must-Do: ${displayStars(review.journeyReviewMustDo)}</div>
         <div>Variety: ${displayStars(review.journeyReviewVariety)}</div>
         <br>
