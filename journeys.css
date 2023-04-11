@@ -232,6 +232,7 @@ img {
     background-color: rgb(170, 217, 170);
     margin-left: 20px;
     margin-right: 20px;
+    border-radius: 5px;
 }
 .journey-detail{
     margin: 20px;
