@@ -328,7 +328,7 @@ function reloadIt() {
               <td>${data.poiLocation}</td>
             </tr>
             <tr>
-              <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews</button></td>
+              <td>${displayStars(data.poiReviewAvg)}<button id="bewertungenansehen" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${poiId})">${data.poiReviewCount} Reviews/ Rate</button></td>
             </tr>
             <tr>
               <td>GPS: ${data.poiLatitude},${data.poiLongitude}</td>
@@ -342,7 +342,7 @@ function reloadIt() {
             <tr>
               <td>Seasons: ${data.poiCategory}</td>
               <td>
-                <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Comments</button>
+                <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Show Comments</button>
                 <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
                 <button id="editPoi"> Edit</button>
                 <button id="deletePoi" onclick="deletePOI(${poiId}, this)" > Delete</button>

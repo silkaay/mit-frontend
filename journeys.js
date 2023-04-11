@@ -40,15 +40,17 @@ function createJourneyElement(journey) {
       <br>
       <table>
         <tr>
-        <td style="width: 60%">Rating: ${displayStars(journey.poiReviewAvg)}</td>
-        <td rowspan="3">${journey.journeyDescription}</td>
+        <td style="width: 20%;">Rating: ${displayStars(journey.poiReviewAvg)}</td>
+        <td style="max-width: 1250px; word-wrap: break-word; text-align: center; vertical-align: middle;">
+          Description:   ${journey.journeyDescription}
+        </td>
         </tr>
         <tr>
-        <td style="width: 60%">Tags: ${journey.journeyTags.join(", ")}</td>
+        <td>Tags: ${journey.journeyTags.join(", ")}</td>
         </tr>
         <tr>
-                <td><button onclick="displayJourneyDetail(${journey.journeyId})" >View Details</button></td>
-            </tr>
+            <td><button id="view-detailbtn"onclick="displayJourneyDetail(${journey.journeyId})">View Details</button></td>
+        </tr>
       </table>
     </div>
   `;
@@ -83,8 +85,8 @@ function displayJourneyDetail(journeyId) {
                       ${poi.poiFiles.map(file => `
                         <li>
                           ${file.fileFormat.startsWith("image") ?
-                            `<img src="${file.fileAccessLink}" alt="${file.fileID}">` :
-                            `<video src="${file.fileAccessLink}" alt="${file.fileID}" controls></video>`
+                            `<img style="width: 25%;" src="${file.fileAccessLink}" alt="${file.fileID}">` :
+                            `<video style="width: 25%;" src="${file.fileAccessLink}" alt="${file.fileID}" controls></video>`
                           }
                         </li>
                       `).join("")}
