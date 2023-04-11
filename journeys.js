@@ -73,6 +73,7 @@ function displayJourneyDetail(journeyId) {
           const journeyDetailElement = `
       <div class="journey-detail">
         <h2>${journey.journeyTitle}</h2>
+        
         <ul>
           ${journey.journeyPois.map(poi => `
           <div id="poiinJourneys">
@@ -108,10 +109,10 @@ function displayJourneyDetail(journeyId) {
         </ul>
         <table>
           <tr>
-            <td>${displayStars(journey.journeyReviewAvg)} <button id="bewertungenansehen" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${journeyId})">${journey.journeyReviewCount} Reviews / Rate</button></td>
+            <td colspan="3">${displayStars(journey.journeyReviewAvg)} <button id="bewertungenansehen" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${journeyId})">${journey.journeyReviewCount} Reviews / Rate</button></td>
           </tr>
           <tr>
-            <td>Seasons: ${journey.journeySeasons.join(", ")}</td>
+            <td style="width: 25%">Seasons: ${journey.journeySeasons.join(", ")}</td>
             <td colspan="3">Description: ${journey.journeyDescription}</td>
           </tr>
           <tr>
