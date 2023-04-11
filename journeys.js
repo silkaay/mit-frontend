@@ -73,7 +73,6 @@ function displayJourneyDetail(journeyId) {
           const journeyDetailElement = `
       <div class="journey-detail">
         <h2>${journey.journeyTitle}</h2>
-        <h3>Points of Interest:</h3>
         <ul>
           ${journey.journeyPois.map(poi => `
           <div id="poiinJourneys">
@@ -115,7 +114,7 @@ function displayJourneyDetail(journeyId) {
           </tr>
           <tr>
             <td>Seasons: ${journey.journeySeasons.join(", ")}</td>
-            <td colspan="3">${journey.journeyDescription}</td>
+            <td colspan="3">Description: ${journey.journeyDescription}</td>
           </tr>
           <tr>
             <td>Tags: ${journey.journeyTags.join(", ")}</td>
