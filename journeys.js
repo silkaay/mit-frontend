@@ -60,6 +60,8 @@ function createJourneyElement(journey) {
 //Detail ansicht
 
 function displayJourneyDetail(journeyId) {
+  // Hide all journeys before displaying the detail of a specific journey
+  hideAllJourneys();
   fetch(`http://localhost:8080/getJourneyDetails/${journeyId}`)
     .then(response => {
       console.log(`Response status: ${response.status}`);
@@ -112,11 +114,12 @@ function displayJourneyDetail(journeyId) {
             </tr>
             <tr>
               <td><button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button></td>
+              <td> <div class="journey-detail"> <button onclick="goBack()">Back</button></div></td>
             </tr>
           </table>
         </div>
       `;
-      const journeyDetailContainer = document.getElementById("journeysDetail-container");
+      const journeyDetailContainer = document.getElementById("journeyDetailContainer");
       if (journeyDetailContainer) {
         journeyDetailContainer.innerHTML = journeyDetailElement;
       } else {
@@ -128,6 +131,27 @@ function displayJourneyDetail(journeyId) {
     });
 }
 
+
+function hideAllJourneys() {
+  const journeyElements = document.querySelectorAll(".journey");
+  journeyElements.forEach(element => {
+    element.style.display = "none";
+  });
+}
+
+function showAllJourneys() {
+  const journeyElements = document.querySelectorAll(".journey");
+  journeyElements.forEach(element => {
+    element.style.display = "";
+  });
+}
+function goBack() {
+  showAllJourneys();
+  const journeyDetailContainer = document.getElementById("journeyDetailContainer");
+  if (journeyDetailContainer) {
+    journeyDetailContainer.innerHTML = "";
+  }
+}
 //detail ende
 
 //delete localhost:8080/deleteJourney/{JourneyID}
