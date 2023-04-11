@@ -162,11 +162,7 @@ function showAllJourneys() {
   });
 }
 function goBack() {
-  showAllJourneys();
-  const journeyDetailContainer = document.getElementById("journeyDetailContainer");
-  if (journeyDetailContainer) {
-      journeyDetailContainer.innerHTML = "";
-  }
+  window.location.href = "Journeys.html";
 }
 //detail ende
 
