@@ -111,7 +111,7 @@ function displayJourneyDetail(journeyId) {
               <td>Category: ${journey.journeyCategory}</td>
             </tr>
             <tr>
-            <button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button>
+              <td><button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button></td>
             </tr>
           </table>
         </div>
