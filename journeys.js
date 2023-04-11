@@ -58,10 +58,14 @@ function createJourneyElement(journey) {
 //Detail ansicht
 
 function displayJourneyDetail(journeyId) {
-    fetch(`http://localhost:8080/getJourneyDetails/${journeyId}`)
-        .then(response => response.json())
-        .then(journey => {
-            const journeyDetailElement = `
+  fetch(`http://localhost:8080/getJourneyDetails/${journeyId}`)
+    .then(response => {
+      console.log(`Response status: ${response.status}`);
+      return response.json();
+    })
+    .then(journey => {
+      console.log(`Received journey: ${JSON.stringify(journey)}`);
+      const journeyDetailElement = `
         <div class="journey-detail">
           <h2>${journey.journeyTitle}</h2>
           <h3>Points of Interest:</h3>
@@ -73,41 +77,71 @@ function displayJourneyDetail(journeyId) {
                 <ul>
                   <li>Date: ${poi.poisJourneysDate}</li>
                   <li>Time: ${poi.poisJourneysTime}</li>
-                  <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li>
-                  
+                  <!-- <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li> -->
+                  <li>
+                    <ul>
+                      ${poi.poiFiles.map(file => `
+                        <li>
+                          ${file.fileFormat.startsWith("image") ?
+                            `<img src="${file.fileAccessLink}" alt="${file.fileID}">` :
+                            `<video src="${file.fileAccessLink}" alt="${file.fileID}" controls></video>`
+                          }
+                        </li>
+                      `).join("")}
+                    </ul>
+                  </li>
                 </ul>
               </li>
             `).join("")}
           </ul>
           <table>
             <tr>
-                 <td>${displayStars(journey.journeyReviewAvg)} </td>
+              <td>${displayStars(journey.journeyReviewAvg)}</td>
             </tr>
             <tr>
-                <td>Seasons: ${journey.journeySeasons.join(", ")}</td>
-                <td colspan="3">${journey.journeyDescription}</td>
+              <td>Seasons: ${journey.journeySeasons.join(", ")}</td>
+              <td colspan="3">${journey.journeyDescription}</td>
             </tr>
             <tr>
-                <td>Tags: ${journey.journeyTags.join(", ")}</td>
+              <td>Tags: ${journey.journeyTags.join(", ")}</td>
             </tr>
             <tr>
-                <td>Category: ${journey.journeyCategory}</td>
+              <td>Category: ${journey.journeyCategory}</td>
             </tr>
-           
-          
-          </table> 
+            <tr>
+            <button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button>
+            </tr>
+          </table>
         </div>
       `;
-            const journeyDetailContainer = document.getElementById("journeysDetail-container");
-            if (journeyDetailContainer) {
-                journeyDetailContainer.innerHTML = journeyDetailElement;
-            } else {
-                console.error(`Journey detail container not found`);
-            }
-        })
-        .catch(error => {
-            console.error(`Error fetching journey details for journey ID ${journeyId}: ${error}`);
-        });
+      const journeyDetailContainer = document.getElementById("journeysDetail-container");
+      if (journeyDetailContainer) {
+        journeyDetailContainer.innerHTML = journeyDetailElement;
+      } else {
+        console.error(`Journey detail container not found`);
+      }
+    })
+    .catch(error => {
+      console.error(`Error fetching journey details for journey ID ${journeyId}: ${error}`);
+    });
+}
+
+//detail ende
+
+//delete localhost:8080/deleteJourney/{JourneyID}
+function deleteJourney(JourneyId, button) {
+  fetch(`http://localhost:8080/deleteJourney/${JourneyId}`, {
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log(`Journey with id ${JourneyId} successfully deleted`);
+      location.reload(); //Seite neu laden
+    } else {
+      throw new Error('Error deleting Journey');
+    }
+  })
+  .catch(error => console.error(error));
 }
 //detail ende
     
