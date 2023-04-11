@@ -126,7 +126,15 @@ overflow: auto;
   top: 50%;
   overflow: auto;
 }
-
+.image-form {
+  display: none;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  overflow: auto;
+  }
 .form-popup form {
 background-color: #e6f7e7;
 margin: 5% auto;
@@ -145,6 +153,16 @@ overflow-y: scroll;
   border-radius: 5px;
 
 }
+.image-form form {
+  background-color: #e6f7e7;
+  margin: 5% auto;
+  padding: 15px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 500px;
+  height: 420px;
+
+  }
 
 .form-popup form::-webkit-scrollbar {
   width: 10px;
@@ -180,6 +198,14 @@ overflow-y: scroll
   border: 1px solid #ccc;
   /*box-sizing: border-box;*/
 }
+.image-form input[type=text], .image-form input[type=date] {
+  width: 32%;
+  padding: 6px 6px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+
+  /*box-sizing: border-box;*/
+  }
 
 .input-container {
 display: flex;
@@ -203,6 +229,14 @@ margin: 6px 6px;
 border: none;
 cursor: pointer;
 }
+.image-form button[type=submit], .image-form button[type=button]{
+  background-color: darkgreen;
+  color: white;
+  padding: 3px 24px;
+  margin: 6px 6px;
+  border: none;
+  cursor: pointer;
+  }
 .form-popup2 button[type=submit], .form-popup2 button[type=button]{
   background-color: darkgreen;
   color: white;
@@ -229,7 +263,9 @@ cursor: pointer;
   cursor: pointer;
   border-radius: 5px;
 }
-
+.image-form button[type=submit]:hover, .image-form button[type=button]:hover {
+  opacity: 0.8;
+  }
 .form-popup button[type=submit]:hover, .form-popup button[type=button]:hover {
 opacity: 0.8;
 }
