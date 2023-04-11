@@ -25,7 +25,7 @@ ul {
 
 }
 
-#view-detailbtn{
+#view-detailbtn,#deleteJourney{
     border: none;
     border-radius: 5px;
     color: white;
