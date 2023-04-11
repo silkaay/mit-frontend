@@ -69,49 +69,6 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-4 justify-content-center" id="Sternebewertung">
-                                <ul class="ratings">
-                                    <li>
-                                        <h6>Cleanliness: </h6>
-                                        <input type="checkbox" id="rating1" name="rating1" value="1">
-                                        <label for="rating1"></label>
-                                        <input type="checkbox" id="rating2" name="rating1" value="2">
-                                        <label for="rating2"></label>
-                                        <input type="checkbox" id="rating3" name="rating1" value="3">
-                                        <label for="rating3"></label>
-                                        <input type="checkbox" id="rating4" name="rating1" value="4">
-                                        <label for="rating4"></label>
-                                        <input type="checkbox" id="rating5" name="rating1" value="5">
-                                        <label for="rating5"></label>
-                                    </li>
-                                    <li>
-                                        <h6>Must See: </h6>
-                                        <input type="checkbox" id="rating6" name="rating2" value="1">
-                                        <label for="rating6"></label>
-                                        <input type="checkbox" id="rating7" name="rating2" value="2">
-                                        <label for="rating7"></label>
-                                        <input type="checkbox" id="rating8" name="rating2" value="3">
-                                        <label for="rating8"></label>
-                                        <input type="checkbox" id="rating9" name="rating2" value="4">
-                                        <label for="rating9"></label>
-                                        <input type="checkbox" id="rating10" name="rating2" value="5">
-                                        <label for="rating10"></label>
-                                    </li>
-                                    <li>
-                                        <h6>Location:</h6>
-                                        <input type="checkbox" id="rating11" name="rating3" value="1">
-                                        <label for="rating11"></label>
-                                        <input type="checkbox" id="rating12" name="rating3" value="2">
-                                        <label for="rating12"></label>
-                                        <input type="checkbox" id="rating13" name="rating3" value="3">
-                                        <label for="rating13"></label>
-                                        <input type="checkbox" id="rating14" name="rating3" value="4">
-                                        <label for="rating14"></label>
-                                        <input type="checkbox" id="rating15" name="rating3" value="5">
-                                        <label for="rating15"></label>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
 
@@ -137,11 +94,88 @@
           </div>
           <div class="offcanvas-body" id="BewertungenDetailsListe">
               <div id="poiInfo"></div>
-              <button id="ratebutton" data-bs-dismiss="offcanvas" <!--onclick="openPopupCreateBewAbgeben()"-->>Rate</button>-->
+              <button id="ratebutton" data-bs-dismiss="offcanvas" onclick="openPopupCreateBewAbgeben()">Rate</button>-->
               <hr>
               <div id="poiReviews"></div>
           </div>
       </div>
+
+        <div id="form-overlayBewAbgeben"></div>
+        <div id="myFormBewAbgeben" class="form-popup2">
+            <form onsubmit="submitReview(event)">
+                <div id="Sternebewertung">
+                    <div>
+                        <p>Bitte achten Sie darauf, immer die exakte Anzahl </p>
+                        <p>an Sternen anzuklicken, die Sie vergeben möchten.</p>
+                    </div>
+                    <div class="star-rating-clean">
+                        <h5>Cleanliness: </h5>
+                        <input type="checkbox" id="star-5-clean" name="rating" value="5">
+                        <label for="star-5-clean">★</label>
+                        <input type="checkbox" id="star-4-clean" name="rating" value="4">
+                        <label for="star-4-clean">★</label>
+                        <input type="checkbox" id="star-3-clean" name="rating" value="3">
+                        <label for="star-3-clean">★</label>
+                        <input type="checkbox" id="star-2-clean" name="rating" value="2">
+                        <label for="star-2-clean">★</label>
+                        <input type="checkbox" id="star-1-clean" name="rating" value="1">
+                        <label for="star-1-clean">★</label>
+                    </div>
+                    <br>
+                    <div class="star-rating-must">
+                        <h5>Must See:</h5>
+                        <input type="checkbox" id="star-5-must" name="rating" value="5">
+                        <label for="star-5-must">★</label>
+                        <input type="checkbox" id="star-4-must" name="rating" value="4">
+                        <label for="star-4-must">★</label>
+                        <input type="checkbox" id="star-3-must" name="rating" value="3">
+                        <label for="star-3-must">★</label>
+                        <input type="checkbox" id="star-2-must" name="rating" value="2">
+                        <label for="star-2-must">★</label>
+                        <input type="checkbox" id="star-1-must" name="rating" value="1">
+                        <label for="star-1-must">★</label>
+                    </div>
+                    <br>
+                    <div class="star-rating-loc">
+                        <h5>Location:</h5>
+                        <input type="checkbox" id="star-5-loc" name="rating" value="5">
+                        <label for="star-5-loc">★</label>
+                        <input type="checkbox" id="star-4-loc" name="rating" value="4">
+                        <label for="star-4-loc">★</label>
+                        <input type="checkbox" id="star-3-loc" name="rating" value="3">
+                        <label for="star-3-loc">★</label>
+                        <input type="checkbox" id="star-2-loc" name="rating" value="2">
+                        <label for="star-2-loc">★</label>
+                        <input type="checkbox" id="star-1-loc" name="rating" value="1">
+                        <label for="star-1-loc">★</label>
+                    </div>
+
+
+                </div>
+
+                <div class="button-align">
+                    <button type="button" class="btn cancel" onclick="closePopupCreateBewAbgeben()">Close</button>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div id="form-overlayCom"></div>
+        <div id="myFormCom" class="form-popup2">
+            <form id="comment-form" onsubmit="submitComment(event)">
+                <input id="Author" type="text" placeholder="Name" name="Name" required>
+                <textarea id="commenttext" name="blogtext"></textarea>
+                <div class="button-align">
+                    <button type="button" class="btn cancel" onclick="closePopupCreateCom()">Close</button>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="collapse" id="poiKommentare">
+            <div id="comments">
+                <h2 id="commentsueber">Comments</h2>
+                <ul id="commentList"></ul>
+            </div>
+        </div>
 
     <!--Input bis hier-->
     </div>
