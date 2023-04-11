@@ -340,7 +340,7 @@ function reloadIt() {
               <td>Tags: ${data.poiTags.join(", ")}</td>
             </tr>
             <tr>
-              <td>Seasons: ${data.poiCategory}</td>
+              <td>Category: ${data.poiCategory}</td>
               <td>
                 <button id="commentsliste" class="btn btn-kommentare" data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${poiId})">Show Comments</button>
                 <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
