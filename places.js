@@ -172,8 +172,6 @@ tagsSelected = tagsSelected.map((tag) => {
   return parseInt(tag) + 1;
 });
 
-
-
 var data = {
   poiTitle: title,
   poiLocation: place,

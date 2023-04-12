@@ -562,3 +562,8 @@ margin-right: 20px;
   width: 100%; /* Bilder und Videos haben die gleiche Größe */
   height: auto;
 }
+
+#poiContainer {
+  max-height: 200px;
+  overflow-y: auto;
+}

@@ -148,6 +148,288 @@ tagsSelected = tagsSelected.map((tag) => {
 });  
 }
 
+function openEdit(journeyId) {
+  console.log(journeyId);
+  document.getElementById("editForm").style.display = "block";
+  document.getElementById("form-overlay").style.display = "block";
+
+  var form = document.forms["editForm"];
+
+  const editTitle = form.editName;
+  const editText = form.editText;
+  const categoryDropdown = document.getElementById("editCategories");
+
+  fetch("http://localhost:8080/getJourneyDetails/" + journeyId)
+    .then(response => response.json())
+    .then(journey => {
+      console.log(journey.journeyTitle);
+      editTitle.value = journey.journeyTitle;
+      
+      editText.value = journey.journeyDescription;
+      //categoryDropdown.value = journey.journeyCategory;
+
+      let pois = [];
+      pois = journey.journeyPois;
+      let selectVal = 0;
+      const poiContainer = document.getElementById("editContainer");
+
+      for (let i=0; i<pois.length;i++) {
+        const newDiv = document.createElement("div");
+      
+        // Create a new select element for each POI
+        const newSelect = document.createElement("select");
+    
+        fetch('http://localhost:8080/getPOIsForJourney')
+          .then(response => response.json())
+          .then(data => {
+            // Loop through the response data and create new option elements
+            data.forEach(poi => {
+              const option = document.createElement("option");
+              option.text = poi.poiName;
+              option.value = poi.poiId;
+              newSelect.appendChild(option);
+
+              selectVal = pois[i].poisJourneysPOIId;
+              if (poi.poiId === selectVal) {
+                option.selected = true;
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            newDiv.appendChild(newSelect);
+          });
+
+          newDiv.appendChild(newSelect);
+
+          const newDateInput = document.createElement("input");
+            newDateInput.type = "text";
+            newDateInput.placeholder = "Date";
+            newDateInput.name = "journeyDate";
+            newDateInput.value = pois[i].poisJourneysTime;
+      
+            const newTimeInput = document.createElement("input");
+            newTimeInput.type = "text";
+            newTimeInput.placeholder = "Time";
+            newTimeInput.name = "journeyTime";
+            newTimeInput.value = pois[i].poisJourneysDate;
+
+                     // Create remove button for div
+  const removeButton = document.createElement("button");
+  removeButton.innerHTML = "Remove";
+  removeButton.addEventListener("click", () => {
+    poiContainer.removeChild(newDiv);
+  });
+  newDiv.appendChild(removeButton);
+      
+            newDiv.appendChild(newDateInput);
+            newDiv.appendChild(newTimeInput);
+      
+            poiContainer.appendChild(newDiv);
+      }
+
+      const addPoiButton = document.getElementById("addEditPoi");
+      
+      // Create the "Add" button
+      
+      // Add the click event listener to the "Add" button
+      addPoiButton.addEventListener("click", function() {
+        const newDiv = document.createElement("div");
+      
+        const newSelect = document.createElement("select");
+        newSelect.innerHTML = document.getElementById("pois").innerHTML;
+      
+        const newDateInput = document.createElement("input");
+        newDateInput.type = "text";
+        newDateInput.placeholder = "Date";
+        newDateInput.name = "journeyDate";
+      
+        const newTimeInput = document.createElement("input");
+        newTimeInput.type = "text";
+        newTimeInput.placeholder = "Time";
+        newTimeInput.name = "journeyTime";
+      
+        newDiv.appendChild(newSelect);
+        newDiv.appendChild(newDateInput);
+        newDiv.appendChild(newTimeInput);
+      
+        poiContainer.appendChild(newDiv);
+      });
+
+
+      // Set the value of the category dropdown to journey.journeyCategory
+      const selectedValue = journey.journeyCategory;
+      let seasonsSelected = [];
+      seasonsSelected = journey.journeySeasons;
+      console.log(seasonsSelected);
+
+      let tagsSelected = [];
+      tagsSelected = journey.journeyTags;
+
+      console.log(pois);
+      
+      fetch("http://localhost:8080/getCategories")
+          .then(response => response.json())
+          .then(categories => {
+              Object.entries(categories).forEach(([id, name]) => {
+                  const option = document.createElement("option");
+                  option.value = id;
+                  option.textContent = name;
+                  categoryDropdown.appendChild(option);
+
+                  // Check if the option value matches the value you want to set as selected
+                  if (name === selectedValue) {
+                      option.selected = true;
+                  }
+              });
+          })
+          .catch(error => console.error(error));
+
+          const seasonDiv = document.getElementById("editSeasons");    
+          
+          fetch("http://localhost:8080/getSeasons")
+          .then(response => response.json())
+          .then(seasons => {
+            seasonDiv.innerHTML = "Seasons: ";
+          Object.entries(seasons).forEach(([id, season]) => {
+            
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.name = "season";
+          checkbox.value = id;
+          const label = document.createElement("label");
+          label.innerHTML = season.displayName;
+          seasonDiv.appendChild(checkbox);
+          seasonDiv.appendChild(label);
+
+          if (seasonsSelected.includes(season.seasonName)) {
+            checkbox.checked = true;
+          }
+
+        });
+    })
+    .catch(error => console.error(error));
+
+    const tagDiv = document.getElementById("editTags");
+
+    fetch("http://localhost:8080/getTags")
+  .then(response => response.json())
+  .then(tags => {
+    tagDiv.innerHTML = "Tags: ";
+      Object.entries(tags).forEach(([id, name]) => {
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.name = "tag";
+          checkbox.value = id;
+          const label = document.createElement("label");
+          label.textContent = name;
+          tagDiv.appendChild(checkbox);
+          tagDiv.appendChild(label);
+
+          if (tagsSelected.includes(name)) { // Check if the tag is in the tagsSelected array
+            checkbox.checked = true; // Set the checkbox's checked property to true if it is
+          }
+          
+      });
+  })
+  .catch(error => console.error(error));
+  waitForSubmitUpdateClick(journeyId);
+
+})
+.catch(error => console.error(error));
+
+}
+
+
+
+function closeEdit() {
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("form-overlay").style.display = "none";
+  }
+
+
+  function waitForSubmitUpdateClick(journeyId) {
+    var button = document.getElementById("submitUpdate");
+    const keepingId = journeyId;
+    button.addEventListener("click", function() {
+      // This code will execute when the submitUpdate button is clicked
+      console.log("submitUpdate button clicked!");
+      submitEdit(keepingId);
+      // Execute the rest of the code here
+    });
+    }
+
+    const editContainer = document.getElementById("editContainer");
+
+      // Get the values of the created divs
+  function getEditValues() {
+    const values = [];
+  const poiDivs = editContainer.querySelectorAll("div");
+  poiDivs.forEach(function(div) {
+    const poiSelect = div.querySelector("select");
+    const poiDate = div.querySelector("input[name='journeyDate']");
+    const poiTime = div.querySelector("input[name='journeyTime']");
+
+    values.push([poiSelect.value, poiTime.value, poiDate.value]);
+  });
+  return values;
+  }
+
+function submitEdit(givenId) {
+  var form = document.forms["editForm"];
+
+const editTitle = form.editName.value;
+
+const editText = form.editText.value;
+
+const dropdown = document.getElementById('editCategories');
+
+var category = dropdown.value;
+
+const seasonCheckboxes = document.querySelectorAll('input[name="season"]');
+const checkedSeasons = Array.from(seasonCheckboxes)
+  .filter(checkbox => checkbox.checked)
+  .map(checkbox => parseInt(checkbox.value) + 1);
+
+const tagCheckboxes = document.querySelectorAll('input[name="tag"]');
+const checkedTags = Array.from(tagCheckboxes)
+  .filter(checkbox => checkbox.checked)
+  .map(checkbox => parseInt(checkbox.value));
+
+  var journeyArray = [];
+  journeyArray  = getEditValues();
+
+  var data = {
+    journeyId: givenId,
+    journeyTitle: editTitle,
+    journeyDescription: editText,
+    journeySeasons: checkedSeasons,
+    journeyTags: checkedTags,
+    journeyCategory: category,
+    journeyPOIs: journeyArray
+  };
+
+  console.log(data);
+
+  fetch("http://localhost:8080/updateJourney", {
+  method: 'POST',
+  body: JSON.stringify(data),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+
+})
+.catch((error) => {
+  console.error('Error:', error);
+}); 
+
+}
+
+
 // Journeys Liste
 const journeysContainer = document.querySelector("#journeys-container");
 
@@ -279,7 +561,7 @@ function displayJourneyDetail(journeyId) {
             <td>
               <button id="commentsliste"  data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayJourneyKommentare(${journeyId})">Show Comments</button>
               <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
-              <button id="editJourney"> Edit</button>
+              <button id="editJourney" onclick="openEdit(${journeyId})"> Edit</button>
               <button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button>
               <button id="Blogpostliste"  data-bs-toggle="collapse" data-bs-target="JourneyBlogposts" data-bs-parnet="poiDetails" onclick="displayJourneyBlogs(${journeyId})">Show Blogposts</button>
               <button id= "goBack" onclick="goBack()">Go Back</button>
