@@ -29,55 +29,6 @@ fetch('http://localhost:8080/getPOIsForJourney')
   });
 
 
-
-
-/*  let counter = 0;
-  function addPoiDiv(button) {
-    let count = 0;
-  
-    button.addEventListener("click", function() {
-      count++;
-  
-      const newDiv = document.createElement("div");
-  
-      const newSelect = document.createElement("select");
-      newSelect.innerHTML = document.getElementById("poiss").innerHTML;
-  
-      const newDateInput = document.createElement("input");
-      newDateInput.type = "text";
-      newDateInput.placeholder = "Date";
-      newDateInput.name = "journeyDate";
-  
-      const newTimeInput = document.createElement("input");
-      newTimeInput.type = "text";
-      newTimeInput.placeholder = "Time";
-      newTimeInput.name = "journeyTime";
-  
-      newDiv.appendChild(newSelect);
-      newDiv.appendChild(newDateInput);
-      newDiv.appendChild(newTimeInput);
-  
-      // Insert the new div element after poiContainer
-      const poiContainer = document.getElementById("poiContainer");
-      poiContainer.insertAdjacentElement('afterend', newDiv);
-  
-      // loop over the created divs
-      const allDivs = document.querySelectorAll("#poiContainer + div");
-      allDivs.forEach(function(div) {
-        const select = div.querySelector("select");
-        const dateInput = div.querySelector('input[name="journeyDate"]');
-        const timeInput = div.querySelector('input[name="journeyTime"]');
-        console.log(select.value, dateInput.value, timeInput.value);
-      });
-  
-      console.log(`Button clicked ${count} times.`);
-    });
-  }
-  */
-//counter++;
-  //return counter;
-
-
   const poiContainer = document.getElementById("poiContainer");
   const addPoiButton = document.getElementById("addPoi");
   
@@ -127,15 +78,38 @@ function postJourney () {
   var title = form.title.value;
   var text = form.blogtext.value;
 
-  const seasonsDrop = document.getElementById('seasons');
-  var seasons = seasonsDrop.value;
-
   const catDrop= document.getElementById('categories');
   var category = catDrop.value;
 
+  // get all the season checkboxes
+const seasonCheckboxes = document.querySelectorAll('input[name="season"]');
 
-  const tagsDrop= document.getElementById('tags');
-  var tags = tagsDrop.value;
+// loop through the checkboxes to check if any are checked
+let seasonsSelected = [];
+seasonCheckboxes.forEach((checkbox) => {
+  if (checkbox.checked) {
+    seasonsSelected.push(checkbox.value);
+  }
+});
+
+seasonsSelected = seasonsSelected.map((season) => {
+  return parseInt(season) + 1;
+});
+
+
+const tagCheckboxes = document.querySelectorAll('input[name="tag"]');
+
+// loop through the checkboxes to check if any are checked
+let tagsSelected = [];
+tagCheckboxes.forEach((checkbox) => {
+  if (checkbox.checked) {
+    tagsSelected.push(checkbox.value);
+  }
+});
+
+tagsSelected = tagsSelected.map((tag) => {
+  return parseInt(tag) + 1;
+});
 
   const poiDrop= document.getElementById('pois');
   var pois = poiDrop.value;
@@ -150,8 +124,8 @@ function postJourney () {
   var data = {
     journeyTitle: title,
     journeyDescription: text,
-    journeySeasons: seasons,
-    journeyTags: tags,
+    journeySeasons: seasonsSelected,
+    journeyTags: tagsSelected,
     journeyCategory: category,
     journeyPOIs: journeyArray
   };
@@ -168,7 +142,6 @@ function postJourney () {
 .then(data => {
   console.log('Success:', data);
   
-
 })
 .catch((error) => {
   console.error('Error:', error);
@@ -392,45 +365,55 @@ function displayStars(rating) {
 
 //Categorien und tags und seasons sich holen
 const categorySelect = document.getElementById("categories");
-const tagSelect = document.getElementById("tags");
+
 
 fetch("http://localhost:8080/getCategories")
   .then(response => response.json())
   .then(categories => {
-      Object.entries(categories).forEach(([id, name]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          categorySelect.appendChild(option);
-      });
+    Object.entries(categories).forEach(([id, name]) => {
+      const option = document.createElement("option");
+      option.value = id;
+      option.textContent = name;
+      categorySelect.appendChild(option);
+    });
   })
   .catch(error => console.error(error));
+
+const tagDiv = document.getElementById("tags");
+const seasonDiv = document.getElementById("seasons");
 
 fetch("http://localhost:8080/getTags")
   .then(response => response.json())
   .then(tags => {
       Object.entries(tags).forEach(([id, name]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          tagSelect.appendChild(option);
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.name = "tag";
+          checkbox.value = id;
+          const label = document.createElement("label");
+          label.textContent = name;
+          tagDiv.appendChild(checkbox);
+          tagDiv.appendChild(label);
+
       });
   })
   .catch(error => console.error(error));
-
-const seasonSelect = document.getElementById("seasons");
 
 fetch("http://localhost:8080/getSeasons")
   .then(response => response.json())
   .then(seasons => {
       Object.entries(seasons).forEach(([id, season]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.innerHTML = season.displayName;
-          seasonSelect.appendChild(option);
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.name = "season";
+          checkbox.value = id;
+          const label = document.createElement("label");
+          label.innerHTML = season.displayName;
+          seasonDiv.appendChild(checkbox);
+          seasonDiv.appendChild(label);
       });
   })
-  .catch(error => console.error(error))
+  .catch(error => console.error(error));
 // Ende Categorien und tags seasons sich holen
 
 function getReviews(journeyId) {
