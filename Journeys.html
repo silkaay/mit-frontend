@@ -45,19 +45,29 @@
 
         <div id="button-container"> <!-- Create POI Button-->
             <button id="blog-button" onclick="openForm()">+ Create Journey</button>
+
             <!-- Pop-up zum erstellen-->
             <div id="form-overlay"></div>
             <div id="myForm" class="form-popup">
-                <form action="/submit-form">
+                <form name="myForm">
                     <div class="input-container">
-                        <input id="TitleJourneys" type="text" placeholder="Title" name="Title" required>
+                        <input id="TitleJourneys" type="text" placeholder="Title" name="title" required>
                     </div>
+
+                    <div id="poiContainer">
+                        <select id="pois">
+                            <option value="">Choose a Place</option>
+                        </select>
+                        <input id="journeyDate" type="text" placeholder="Date" name="journeyDate1">
+                        <input id="journeyTime" type="text" placeholder="Time" name="journeyTime1">
+                    </div>
+                    <button type="button" class="btn" id="addPoi" >Add</button>
 
                     <div  class="container mt-5">
                         <div class="row">
                             <div class="col-md-8">
                                 <select id="seasons">
-                                    <option value="">Choose a seasons</option>
+                                    <option value="">Choose a season</option>
                                 </select>
                                 <br>
                                 <select id="categories">
@@ -77,7 +87,7 @@
                     <textarea id="blogtext" name="blogtext"></textarea>
                     <div class="button-align">
                         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                        <button type="submit" class="btn">Submit</button>
+                        <button type="button" class="btn" onclick="postJourney()">Submit</button>
                     </div>
                 </form>
             </div>

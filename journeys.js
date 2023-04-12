@@ -8,6 +8,158 @@ function closeForm() {
   document.getElementById("form-overlay").style.display = "none";
 }
 
+const poiSelect = document.getElementById("pois");
+
+fetch('http://localhost:8080/getPOIsForJourney')
+  .then(response => response.json())
+  .then(data => {
+    // Clear existing options from the select element
+    //poiSelect.innerHTML = "Choose a place";
+
+    // Loop through the response data and create new option elements
+    data.forEach(poi => {
+      const option = document.createElement("option");
+      option.text = poi.poiName;
+      option.value = poi.poiId;
+      poiSelect.appendChild(option);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+
+
+/*  let counter = 0;
+  function addPoiDiv(button) {
+    let count = 0;
+  
+    button.addEventListener("click", function() {
+      count++;
+  
+      const newDiv = document.createElement("div");
+  
+      const newSelect = document.createElement("select");
+      newSelect.innerHTML = document.getElementById("poiss").innerHTML;
+  
+      const newDateInput = document.createElement("input");
+      newDateInput.type = "text";
+      newDateInput.placeholder = "Date";
+      newDateInput.name = "journeyDate";
+  
+      const newTimeInput = document.createElement("input");
+      newTimeInput.type = "text";
+      newTimeInput.placeholder = "Time";
+      newTimeInput.name = "journeyTime";
+  
+      newDiv.appendChild(newSelect);
+      newDiv.appendChild(newDateInput);
+      newDiv.appendChild(newTimeInput);
+  
+      // Insert the new div element after poiContainer
+      const poiContainer = document.getElementById("poiContainer");
+      poiContainer.insertAdjacentElement('afterend', newDiv);
+  
+      // loop over the created divs
+      const allDivs = document.querySelectorAll("#poiContainer + div");
+      allDivs.forEach(function(div) {
+        const select = div.querySelector("select");
+        const dateInput = div.querySelector('input[name="journeyDate"]');
+        const timeInput = div.querySelector('input[name="journeyTime"]');
+        console.log(select.value, dateInput.value, timeInput.value);
+      });
+  
+      console.log(`Button clicked ${count} times.`);
+    });
+  }
+  */
+//counter++;
+  //return counter;
+
+
+  const poiContainer = document.getElementById("poiContainer");
+  const addPoiButton = document.getElementById("addPoi");
+  
+  // Create the "Add" button
+  
+  // Add the click event listener to the "Add" button
+  addPoiButton.addEventListener("click", function() {
+    const newDiv = document.createElement("div");
+  
+    const newSelect = document.createElement("select");
+    newSelect.innerHTML = document.getElementById("pois").innerHTML;
+  
+    const newDateInput = document.createElement("input");
+    newDateInput.type = "text";
+    newDateInput.placeholder = "Date";
+    newDateInput.name = "journeyDate";
+  
+    const newTimeInput = document.createElement("input");
+    newTimeInput.type = "text";
+    newTimeInput.placeholder = "Time";
+    newTimeInput.name = "journeyTime";
+  
+    newDiv.appendChild(newSelect);
+    newDiv.appendChild(newDateInput);
+    newDiv.appendChild(newTimeInput);
+  
+    poiContainer.appendChild(newDiv);
+  });
+  
+  // Get the values of the created divs
+  function getValues() {
+    const values = [];
+  const poiDivs = poiContainer.querySelectorAll("div");
+  poiDivs.forEach(function(div) {
+    const poiSelect = div.querySelector("select");
+    const poiDate = div.querySelector("input[name='journeyDate']");
+    const poiTime = div.querySelector("input[name='journeyTime']");
+    values.push([poiSelect.value, poiDate.value, poiTime.value]);
+  });
+  return values;
+  }
+  
+  
+function postJourney () {
+  var form = document.forms["myForm"];
+  // get the values of the input elements
+  var title = form.title.value;
+  var text = form.blogtext.value;
+
+  const seasonsDrop = document.getElementById('seasons');
+  var seasons = seasonsDrop.value;
+
+  const catDrop= document.getElementById('categories');
+  var category = catDrop.value;
+
+
+  const tagsDrop= document.getElementById('tags');
+  var tags = tagsDrop.value;
+
+  const poiDrop= document.getElementById('pois');
+  var pois = poiDrop.value;
+
+  var journeyDate = form.journeyDate1.value;
+  var journeyTime = form.journeyTime1.value;
+
+  
+  const valuesArray = getValues();
+  const journeyArray = [ [pois, journeyDate, journeyTime] ].concat(valuesArray);
+  
+  var data = {
+    poiTitle: title,
+    poiLocation: place,
+    poiLatitude: latitude,
+    poiLongitude: longitude,
+    poiDescription: text,
+    poiSeasons: seasonsSelected,
+    poiTags: tagsSelected,
+    poiCategory: category
+  };
+  console.log(title, text, category, seasons, tags, pois,"...", journeyDate, "...",journeyTime, getValues());
+
+}
 
 // Journeys Liste
 const journeysContainer = document.querySelector("#journeys-container");
@@ -172,7 +324,7 @@ function deleteJourney(JourneyId, button) {
       .then(response => {
           if (response.ok) {
               console.log(`Journey with id ${JourneyId} successfully deleted`);
-              location.reload(); //Seite neu laden
+              //location.reload(); //Seite neu laden
           } else {
               throw new Error('Error deleting Journey');
           }
@@ -355,7 +507,7 @@ function createComment(journeyId, commentAuthor, commentText) {
       .then((data) => {
           console.log("Antwort vom Server:", data);
           closePopupCreateCom();
-          location.reload();
+          //location.reload();
       });
 }
 
