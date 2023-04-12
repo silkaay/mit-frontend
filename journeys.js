@@ -36,28 +36,39 @@ fetch('http://localhost:8080/getPOIsForJourney')
   // Create the "Add" button
   
     // Add the click event listener to the "Add" button
-    addPoiButton.addEventListener("click", function() {
+    function addNewPoi() {
+      const poiContainer = document.getElementById("poiContainer");
       const newDiv = document.createElement("div");
-    
+      
       const newSelect = document.createElement("select");
       newSelect.innerHTML = document.getElementById("pois").innerHTML;
-    
+      
       const newDateInput = document.createElement("input");
       newDateInput.type = "text";
       newDateInput.placeholder = "Date";
       newDateInput.name = "journeyDate";
-    
+      
       const newTimeInput = document.createElement("input");
       newTimeInput.type = "text";
       newTimeInput.placeholder = "Time";
       newTimeInput.name = "journeyTime";
-    
+      
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.innerHTML = "Remove";
+      removeButton.addEventListener("click", function() {
+        poiContainer.removeChild(newDiv);
+      });
+      
       newDiv.appendChild(newSelect);
       newDiv.appendChild(newDateInput);
       newDiv.appendChild(newTimeInput);
-    
+      newDiv.appendChild(removeButton);
+      
       poiContainer.appendChild(newDiv);
-    });
+    }
+
+    addNewPoi();
 
   
   // Get the values of the created divs
