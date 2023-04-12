@@ -549,7 +549,10 @@ function displayJourneyDetail(journeyId) {
                 </td>
                 <td><button id="showpoiJourney" onclick="openPopupPoiInJourney(${poi.poisJourneysPOIId})">Show Details / Comments</button><br>
                 <br>
-                    <button id="BlogpostlistePoi"  onclick="openPopupBlogPoiInJourney(${poi.poisJourneysPOIId})">Show Blogposts</button>
+                <button id="createcomment" onclick="openPopupCreateComPoi(${poi.poisJourneysPOIId})">+ Create Comment</button> 
+                  <br>
+                  <br>
+                <button id="BlogpostlistePoi"  onclick="openPopupBlogPoiInJourney(${poi.poisJourneysPOIId})">Show Blogposts</button>
                 </td>
               </tr>
               <tr>
@@ -1022,11 +1025,7 @@ function displayPOIDetails(poiId) {
             </tr>
             <tr>
               <td>Category: ${data.poiCategory}</td>
-              <td>
-                
-                <button id="createcomment" onclick="openPopupCreateComPoi()">+ Create Comment</button> 
- 
-              </td>
+        
             </tr>
           </table>
          
@@ -1117,7 +1116,7 @@ function renderBlogposts2(blogposts) {
 
 function displayPOIKommentare(poiId) {
     // Erstelle eine Funktion, um die Kommentare abzurufen
-    currentPOIId=poiId;
+  
     function getComments() {
         // Rufe die Daten von der API ab
         fetch(`http://localhost:8080/getComments/${poiId}`)
@@ -1172,6 +1171,7 @@ function deleteCommentsPoi(commentId, button) {
                 // Entferne den gelöschten Kommentar aus der Anzeige
                 //button.parentNode.parentNode.parentNode.remove();
                 button.remove();
+                window.location.reload();
             } else {
                 console.error(`Error deleting comment with id ${commentId}: ${response.status}`);
             }
@@ -1182,11 +1182,10 @@ function deleteCommentsPoi(commentId, button) {
 //ende Poi liste mit detail bewertung
 
 // Popup für Kommentar erstellen
-function openPopupCreateComPoi() {
-    closePopupPoiInJourney();
+function openPopupCreateComPoi(poiId) {
     document.getElementById("myFormComPoi").style.display = "block";
     document.getElementById("form-overlayComPoi").style.display = "block";
-
+    currentPOIId=poiId;
 }
 
 function closePopupCreateComPoi(){
