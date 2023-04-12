@@ -547,11 +547,11 @@ function displayJourneyDetail(journeyId) {
                       
                     </li>
                 </td>
-                <td><button id="showpoiJourney" onclick="openPopupPoiInJourney(${poi.poisJourneysPOIId})">Show Details / Comments</button><br>
+                <td><button id="showpoiJourney" onclick="openPopupPoiInJourney(${poi.poisJourneysPOIId})">Show Details / Comments</button>
                 <br>
                 <button id="createcomment" onclick="openPopupCreateComPoi(${poi.poisJourneysPOIId})">+ Create Comment</button> 
                   <br>
-                  <br>
+                  
                 <button id="BlogpostlistePoi"  onclick="openPopupBlogPoiInJourney(${poi.poisJourneysPOIId})">Show Blogposts</button>
                 </td>
               </tr>
@@ -1212,8 +1212,8 @@ function createCommentPoi(poiId, commentAuthor, commentText) {
 function submitCommentPoi(event) {
     event.preventDefault();
     const poiId = currentPOIId;
-    const commentAuthor = document.getElementById("Author").value;
-    const commentText = document.getElementById("commenttext").value;
+    const commentAuthor = document.getElementById("AuthorPoi").value;
+    const commentText = document.getElementById("commenttextPoi").value;
     createCommentPoi(poiId, commentAuthor, commentText);
 
     // Reset form after submitting comment
