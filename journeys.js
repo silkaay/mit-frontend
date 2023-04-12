@@ -1216,6 +1216,7 @@ function submitCommentPoi(event) {
     const commentAuthor = document.getElementById("AuthorPoi").value;
     const commentText = document.getElementById("commenttextPoi").value;
     createCommentPoi(poiId, commentAuthor, commentText);
+    window.location.reload();
 
     // Reset form after submitting comment
     const form = event.target.closest('form');
