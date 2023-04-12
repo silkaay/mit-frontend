@@ -35,29 +35,30 @@ fetch('http://localhost:8080/getPOIsForJourney')
   
   // Create the "Add" button
   
-  // Add the click event listener to the "Add" button
-  addPoiButton.addEventListener("click", function() {
-    const newDiv = document.createElement("div");
-  
-    const newSelect = document.createElement("select");
-    newSelect.innerHTML = document.getElementById("pois").innerHTML;
-  
-    const newDateInput = document.createElement("input");
-    newDateInput.type = "text";
-    newDateInput.placeholder = "Date";
-    newDateInput.name = "journeyDate";
-  
-    const newTimeInput = document.createElement("input");
-    newTimeInput.type = "text";
-    newTimeInput.placeholder = "Time";
-    newTimeInput.name = "journeyTime";
-  
-    newDiv.appendChild(newSelect);
-    newDiv.appendChild(newDateInput);
-    newDiv.appendChild(newTimeInput);
-  
-    poiContainer.appendChild(newDiv);
-  });
+    // Add the click event listener to the "Add" button
+    addPoiButton.addEventListener("click", function() {
+      const newDiv = document.createElement("div");
+    
+      const newSelect = document.createElement("select");
+      newSelect.innerHTML = document.getElementById("pois").innerHTML;
+    
+      const newDateInput = document.createElement("input");
+      newDateInput.type = "text";
+      newDateInput.placeholder = "Date";
+      newDateInput.name = "journeyDate";
+    
+      const newTimeInput = document.createElement("input");
+      newTimeInput.type = "text";
+      newTimeInput.placeholder = "Time";
+      newTimeInput.name = "journeyTime";
+    
+      newDiv.appendChild(newSelect);
+      newDiv.appendChild(newDateInput);
+      newDiv.appendChild(newTimeInput);
+    
+      poiContainer.appendChild(newDiv);
+    });
+
   
   // Get the values of the created divs
   function getValues() {
@@ -67,7 +68,7 @@ fetch('http://localhost:8080/getPOIsForJourney')
     const poiSelect = div.querySelector("select");
     const poiDate = div.querySelector("input[name='journeyDate']");
     const poiTime = div.querySelector("input[name='journeyTime']");
-    values.push([poiSelect.value, poiTime.value, poiDate.value]);
+    values.push([poiSelect.value, poiDate.value, poiTime.value]);
   });
   return values;
   }
@@ -75,6 +76,8 @@ fetch('http://localhost:8080/getPOIsForJourney')
   
 function postJourney () {
   var form = document.forms["myForm"];
+  
+
   // get the values of the input elements
   var title = form.title.value;
   var text = form.blogtext.value;
@@ -119,8 +122,9 @@ tagsSelected = tagsSelected.map((tag) => {
   var journeyTime = form.journeyTime1.value;
 
   
+
   const valuesArray = getValues();
-  const journeyArray = [ [pois, journeyTime, journeyDate,] ].concat(valuesArray);
+  const journeyArray = [ [pois, journeyDate, journeyTime] ].concat(valuesArray);
   
   var data = {
     journeyTitle: title,
@@ -142,6 +146,7 @@ tagsSelected = tagsSelected.map((tag) => {
 .then(response => response.json())
 .then(data => {
   console.log('Success:', data);
+  window.location.reload();
   
 })
 .catch((error) => {
