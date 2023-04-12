@@ -6,6 +6,7 @@ function openForm() {
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
   document.getElementById("form-overlay").style.display = "none";
+  window.location.reload();
 }
 
 const poiSelect = document.getElementById("pois");
@@ -345,6 +346,7 @@ function openEdit(journeyId) {
 function closeEdit() {
   document.getElementById("editForm").style.display = "none";
   document.getElementById("form-overlay").style.display = "none";
+  window.location.reload();
   }
 
 
@@ -428,6 +430,8 @@ const checkedTags = Array.from(tagCheckboxes)
 }); 
 
 }
+
+
 
 
 // Journeys Liste
@@ -541,11 +545,13 @@ function displayJourneyDetail(journeyId) {
           `).join("")}
         </ul>
         <table>
+        <br>
+      
           <tr>
             <td colspan="3">${displayStars(journey.journeyReviewAvg)} <button id="bewertungenansehen" type="button" data-bs-toggle="offcanvas" data-bs-target="#BewertungenDetails" onclick="getReviews(${journeyId})">${journey.journeyReviewCount} Reviews / Rate</button></td>
           </tr>
           <tr>
-            <td style="width: 25%">Seasons: ${journey.journeySeasons.join(", ")}</td>
+            <td style="width: 30%">Seasons: ${journey.journeySeasons.join(", ")}</td>
             <td colspan="3">Description: ${journey.journeyDescription}</td>
           </tr>
           <tr>
@@ -639,48 +645,57 @@ function displayStars(rating) {
 }
 
 // Journey Liste ende
-
 //Categorien und tags und seasons sich holen
 const categorySelect = document.getElementById("categories");
-const tagSelect = document.getElementById("tags");
+
 
 fetch("http://localhost:8080/getCategories")
   .then(response => response.json())
   .then(categories => {
-      Object.entries(categories).forEach(([id, name]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          categorySelect.appendChild(option);
-      });
+    Object.entries(categories).forEach(([id, name]) => {
+      const option = document.createElement("option");
+      option.value = id;
+      option.textContent = name;
+      categorySelect.appendChild(option);
+    });
   })
   .catch(error => console.error(error));
+
+const tagDiv = document.getElementById("tags");
+const seasonDiv = document.getElementById("seasons");
 
 fetch("http://localhost:8080/getTags")
   .then(response => response.json())
   .then(tags => {
       Object.entries(tags).forEach(([id, name]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          tagSelect.appendChild(option);
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.name = "tag";
+          checkbox.value = id;
+          const label = document.createElement("label");
+          label.textContent = name;
+          tagDiv.appendChild(checkbox);
+          tagDiv.appendChild(label);
+
       });
   })
   .catch(error => console.error(error));
-
-const seasonSelect = document.getElementById("seasons");
 
 fetch("http://localhost:8080/getSeasons")
   .then(response => response.json())
   .then(seasons => {
       Object.entries(seasons).forEach(([id, season]) => {
-          const option = document.createElement("option");
-          option.value = id;
-          option.innerHTML = season.displayName;
-          seasonSelect.appendChild(option);
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.name = "season";
+          checkbox.value = id;
+          const label = document.createElement("label");
+          label.innerHTML = season.displayName;
+          seasonDiv.appendChild(checkbox);
+          seasonDiv.appendChild(label);
       });
   })
-  .catch(error => console.error(error))
+  .catch(error => console.error(error));
 // Ende Categorien und tags seasons sich holen
 
 
