@@ -470,7 +470,7 @@ function createJourneyElement(journey) {
       <td>Tags: ${journey.journeyTags.join(", ")}</td>
       </tr>
       <tr>
-          <td><button id="view-detailbtn"onclick="displayJourneyDetail(${journey.journeyId})">View Details</button></td>
+          <td><button id="view-detailbtn" onclick="displayJourneyDetail(${journey.journeyId})">View Details</button></td>
       </tr>
     </table>
   </div>
@@ -520,25 +520,20 @@ function displayJourneyDetail(journeyId) {
                 <td> 
                     <li>
                           <h4>${poi.poiTitle} (${poi.poiLocation})</h4>
-                          <li>Date:${poi.poisJourneysTime} </li>
-                           <li>Time:${poi.poisJourneysDate} </li>
+                          <li>Date: ${poi.poisJourneysTime} </li>
+                           <li>Time: ${poi.poisJourneysDate} </li>
                            
-                          <!-- <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li> -->
+                         
                       
                     </li>
                 </td>
-                <td><button id="showpoiJourney" onclick="openPopupPoiInJourney(${poi.poisJourneysPOIId})">Show Details</button><br>
+                <td><button id="showpoiJourney" onclick="openPopupPoiInJourney(${poi.poisJourneysPOIId})">Show Details / Comments</button><br>
                 <br>
-                    <button id="BlogpostlistePoi"  data-bs-toggle="collapse" data-bs-target="poiblogposts"  onclick="displaypoiBlogs(currentjourneyId)">Show Blogposts</button>
+                    <button id="BlogpostlistePoi"  onclick="openPopupBlogPoiInJourney(${poi.poisJourneysPOIId})">Show Blogposts</button>
                 </td>
               </tr>
               <tr>
-                <div class="collapse" id="poiblogposts">
-                    <div id="poiBlogposts">
-                        <h2 id="poiblogsueber">Blogposts</h2>
-                        <ul id="poiBlogsList"></ul>
-                    </div>
-                </div>
+                
                 
                 </tr>
           </table>
@@ -561,9 +556,9 @@ function displayJourneyDetail(journeyId) {
             <td>
               <button id="commentsliste"  data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayJourneyKommentare(${journeyId})">Show Comments</button>
               <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
+              <button id="Blogpostliste"  data-bs-toggle="collapse" data-bs-target="JourneyBlogposts" data-bs-parnet="poiDetails" onclick="displayJourneyBlogs(${journeyId})">Show Blogposts</button>
               <button id="editJourney" onclick="openEdit(${journeyId})"> Edit</button>
               <button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button>
-              <button id="Blogpostliste"  data-bs-toggle="collapse" data-bs-target="JourneyBlogposts" data-bs-parnet="poiDetails" onclick="displayJourneyBlogs(${journeyId})">Show Blogposts</button>
               <button id= "goBack" onclick="goBack()">Go Back</button>
               
             </td>
@@ -612,7 +607,7 @@ function deleteJourney(JourneyId, button) {
       .then(response => {
           if (response.ok) {
               console.log(`Journey with id ${JourneyId} successfully deleted`);
-              //location.reload(); //Seite neu laden
+              location.reload(); //Seite neu laden
           } else {
               throw new Error('Error deleting Journey');
           }
@@ -647,56 +642,50 @@ function displayStars(rating) {
 
 //Categorien und tags und seasons sich holen
 const categorySelect = document.getElementById("categories");
-
+const tagSelect = document.getElementById("tags");
 
 fetch("http://localhost:8080/getCategories")
   .then(response => response.json())
   .then(categories => {
-    Object.entries(categories).forEach(([id, name]) => {
-      const option = document.createElement("option");
-      option.value = id;
-      option.textContent = name;
-      categorySelect.appendChild(option);
-    });
+      Object.entries(categories).forEach(([id, name]) => {
+          const option = document.createElement("option");
+          option.value = id;
+          option.textContent = name;
+          categorySelect.appendChild(option);
+      });
   })
   .catch(error => console.error(error));
-
-const tagDiv = document.getElementById("tags");
-const seasonDiv = document.getElementById("seasons");
 
 fetch("http://localhost:8080/getTags")
   .then(response => response.json())
   .then(tags => {
       Object.entries(tags).forEach(([id, name]) => {
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.name = "tag";
-          checkbox.value = id;
-          const label = document.createElement("label");
-          label.textContent = name;
-          tagDiv.appendChild(checkbox);
-          tagDiv.appendChild(label);
-
+          const option = document.createElement("option");
+          option.value = id;
+          option.textContent = name;
+          tagSelect.appendChild(option);
       });
   })
   .catch(error => console.error(error));
+
+const seasonSelect = document.getElementById("seasons");
 
 fetch("http://localhost:8080/getSeasons")
   .then(response => response.json())
   .then(seasons => {
       Object.entries(seasons).forEach(([id, season]) => {
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.name = "season";
-          checkbox.value = id;
-          const label = document.createElement("label");
-          label.innerHTML = season.displayName;
-          seasonDiv.appendChild(checkbox);
-          seasonDiv.appendChild(label);
+          const option = document.createElement("option");
+          option.value = id;
+          option.innerHTML = season.displayName;
+          seasonSelect.appendChild(option);
       });
   })
-  .catch(error => console.error(error));
+  .catch(error => console.error(error))
 // Ende Categorien und tags seasons sich holen
+
+
+
+
 
 function getReviews(journeyId) {
   // Hier rufen wir die Daten über einen API-Endpoint ab
@@ -750,6 +739,7 @@ function displayJourneyKommentare(journeyId) {
                   // Erstelle ein neues Listenelement für den Kommentar
                   const li = document.createElement('li');
                   li.innerHTML = `
+                    <div id="commentelements">
                 <table>
                     <tr>
                         <td>${commentAuthor},${commentDate}</td>
@@ -761,6 +751,7 @@ function displayJourneyKommentare(journeyId) {
                         <td><button type="submit" id="deletecomments" onclick="deleteComment(${commentId}, this)">Delete this Comment</button></td>
                     </tr>
                 </table>
+                </div>
                 <br>
 
                 `;
@@ -972,7 +963,6 @@ function displayPOIDetails(poiId) {
         .then(response => response.json())
         .then(data => {
             // Add or remove the 'show' class to display or hide the POI details section
-            poiDetails.classList.add('show');
 
 
             poiDetails.innerHTML = `
@@ -1000,33 +990,35 @@ function displayPOIDetails(poiId) {
               <td>Tags: ${data.poiTags.join(", ")}</td>
             </tr>
             <tr>
-              <td>Seasons: ${data.poiCategory}</td>
+              <td>Category: ${data.poiCategory}</td>
               <td>
                 
-                <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
-                
-                
+                <button id="createcomment" onclick="openPopupCreateComPoi()">+ Create Comment</button> 
+ 
               </td>
             </tr>
           </table>
          
-          <div id="poiKommentare">
-                        <div id="comments">
-                            <h2 id="commentsueber">Comments</h2>
-                            <ul id="commentListe"></ul>
-                        </div>
-              </div>
+        
+             
         `;
             displayPOIKommentare(poiId);
-            const commentBtn = poiDetails.querySelector('.btn-kommentare');
-            if (document.querySelector('#poiKommentare').classList.contains('show')) {
-                commentBtn.click();
-            }
+
         })
         .catch(error => console.error(error));
 }
 
+function openPopupBlogPoiInJourney(journeyId) {
+    document.getElementById("myFormBlogPoiInJourney").style.display = "block";
+    document.getElementById("form-overlayBlogPoiInJourney").style.display = "block";
+    displaypoiBlogs(journeyId);
 
+}
+
+function closePopupBlogPoiInJourney() {
+    document.getElementById("myFormBlogPoiInJourney").style.display = "none";
+    document.getElementById("form-overlayBlogPoiInJourney").style.display = "none";
+}
 function displaypoiBlogs(journeyId) {
     // Define a function to retrieve the comments
     // Fetch data from the API
@@ -1036,7 +1028,7 @@ function displaypoiBlogs(journeyId) {
             const poiJourneysBlogpostIds = data.journeyPois
                 .flatMap(poi => poi.poiJourneysBlogpostIds);
 
-            function viewJourneyBlogs() {
+            function viewJourneyPoiBlogs() {
                 const blogpostPromises = poiJourneysBlogpostIds.map(blogpostId => {
                     return fetch(`http://localhost:8080/getBlogpostById/${blogpostId}`)
                         .then(response => response.json())
@@ -1052,7 +1044,7 @@ function displaypoiBlogs(journeyId) {
             }
 
             // Call the function to load the comments
-            viewJourneyBlogs();
+            viewJourneyPoiBlogs();
         })
         .catch(error => console.error(error));
 }
@@ -1087,15 +1079,14 @@ function renderBlogposts2(blogposts) {
         blogpostsList.appendChild(div);
     });
 
-    // show the blogposts section
-    const blogpostsSection = document.querySelector('#poiblogposts');
-    blogpostsSection.classList.add('show');
+
 }
 
 
 
 function displayPOIKommentare(poiId) {
     // Erstelle eine Funktion, um die Kommentare abzurufen
+    currentPOIId=poiId;
     function getComments() {
         // Rufe die Daten von der API ab
         fetch(`http://localhost:8080/getComments/${poiId}`)
@@ -1148,7 +1139,8 @@ function deleteCommentsPoi(commentId, button) {
         .then(response => {
             if (response.ok) {
                 // Entferne den gelöschten Kommentar aus der Anzeige
-                button.parentNode.parentNode.parentNode.remove();
+                //button.parentNode.parentNode.parentNode.remove();
+                button.remove();
             } else {
                 console.error(`Error deleting comment with id ${commentId}: ${response.status}`);
             }
@@ -1159,17 +1151,19 @@ function deleteCommentsPoi(commentId, button) {
 //ende Poi liste mit detail bewertung
 
 // Popup für Kommentar erstellen
-function openPopupCreateCom() {
-    document.getElementById("myFormCom").style.display = "block";
-    document.getElementById("form-overlayCom").style.display = "block";
+function openPopupCreateComPoi() {
+    closePopupPoiInJourney();
+    document.getElementById("myFormComPoi").style.display = "block";
+    document.getElementById("form-overlayComPoi").style.display = "block";
+
 }
 
-function closePopupCreateCom(){
-    document.getElementById("myFormCom").style.display = "none";
-    document.getElementById("form-overlayCom").style.display = "none";
+function closePopupCreateComPoi(){
+    document.getElementById("myFormComPoi").style.display = "none";
+    document.getElementById("form-overlayComPoi").style.display = "none";
 }
 
-function createComment(poiId, commentAuthor, commentText) {
+function createCommentPoi(poiId, commentAuthor, commentText) {
     const data = { poiId, commentAuthor, commentText };
     let url = "http://localhost:8080/createComment";
     let request = new Request(url, {
@@ -1181,17 +1175,16 @@ function createComment(poiId, commentAuthor, commentText) {
         .then((response) => response.json())
         .then((data) => {
             console.log("Antwort vom Server:", data);
-            closePopupCreateCom();
-            location.reload();
+
         });
 }
 
-function submitComment(event) {
+function submitCommentPoi(event) {
     event.preventDefault();
     const poiId = currentPOIId;
     const commentAuthor = document.getElementById("Author").value;
     const commentText = document.getElementById("commenttext").value;
-    createComment(poiId, commentAuthor, commentText);
+    createCommentPoi(poiId, commentAuthor, commentText);
 
     // Reset form after submitting comment
     const form = event.target.closest('form');
