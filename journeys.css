@@ -426,3 +426,25 @@ video {
     max-height: 200px;
     overflow-y: auto;
   }
+  #blogtext2 {
+    width: 100%;
+    }
+
+    #editContainer{
+        max-height: 200px;
+    overflow-y: auto;
+
+    }
+
+    .remove-button{
+        border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 6px 20px;
+    background-color: darkgreen;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+
+    }

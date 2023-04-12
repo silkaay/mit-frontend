@@ -233,6 +233,7 @@ function openEdit(journeyId) {
 
                      // Create remove button for div
   const removeButton = document.createElement("button");
+  removeButton.className = "remove-button";
   removeButton.innerHTML = "Remove";
   removeButton.addEventListener("click", () => {
     poiContainer.removeChild(newDiv);
