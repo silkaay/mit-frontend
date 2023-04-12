@@ -192,8 +192,37 @@
         <div id="myFormPoiInJourney" class="form-popup2">
             <form id="poi-form">
                 <div id="poiDetails"></div>
+                <div id="comments">
+                    <h2 id="commentsueber">Comments</h2>
+                    <ul id="commentListe"></ul>
+                </div>
                 <div class="button-align">
                     <button type="button" class="btn cancel" onclick="closePopupPoiInJourney()">Close</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="form-overlayBlogPoiInJourney"></div>
+        <div id="myFormBlogPoiInJourney" class="form-popup2">
+            <form id="poi-form">
+                    <div id="poiBlogposts">
+                        <h2 id="poiblogsueber">Blogposts of all Places</h2>
+                        <ul id="poiBlogsList"></ul>
+                    </div>
+                <div class="button-align">
+                    <button type="button" class="btn cancel" onclick="closePopupBlogPoiInJourney()">Close</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="form-overlayComPoi"></div>
+        <div id="myFormComPoi" class="form-popup2">
+            <form id="comment-formPoi" onsubmit="submitCommentPoi(event)">
+                <input id="Author" type="text" placeholder="Name" name="Name" required>
+                <textarea id="commenttext" name="blogtext"></textarea>
+                <div class="button-align">
+                    <button type="button" class="btn cancel" onclick="closePopupCreateComPoi()">Close</button>
+                    <button type="submit" class="btn">Submit</button>
                 </div>
             </form>
         </div>
