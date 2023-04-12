@@ -50,7 +50,7 @@ function closeForm() {
 
     
 
-    const poiSelect2 = document.getElementById("pois");
+    const poiSelect2 = document.getElementById("pois2");
 
 fetch('http://localhost:8080/getPOIsForJourney')
   .then(response => response.json())
@@ -70,7 +70,7 @@ fetch('http://localhost:8080/getPOIsForJourney')
     console.error('Error:', error);
   });
 
-  const poiSelect = document.getElementById("pois2");
+  const poiSelect = document.getElementById("pois");
   fetch('http://localhost:8080/getPOIsForJourney')
   .then(response => response.json())
   .then(data => {
@@ -144,7 +144,7 @@ tagsSelected = tagsSelected.map((tag) => {
 });
 
   const poiDrop1= document.getElementById('pois2');
-  var pois1 = poiDrop.value;
+  var pois1 = poiDrop1.value;
 
   var journeyDate1 = form.journeyDate2.value;
   var journeyTime1 = form.journeyTime2.value;
@@ -157,8 +157,8 @@ tagsSelected = tagsSelected.map((tag) => {
   
 
   const valuesArray = getValues();
-  const journeyArray = [ [pois1, journeyDate1, journeyTime1] ,[pois, journeyDate, journeyTime]].concat(valuesArray);
-  
+  const journeyArray = [ [pois1, journeyDate1, journeyTime1], [pois, journeyDate, journeyTime]].concat(valuesArray);
+  console.log(journeyArray);
   var data = {
     journeyTitle: title,
     journeyDescription: text,
