@@ -9,26 +9,6 @@ function closeForm() {
   window.location.reload();
 }
 
-const poiSelect = document.getElementById("pois");
-
-fetch('http://localhost:8080/getPOIsForJourney')
-  .then(response => response.json())
-  .then(data => {
-    // Clear existing options from the select element
-    //poiSelect.innerHTML = "Choose a place";
-
-    // Loop through the response data and create new option elements
-    data.forEach(poi => {
-      const option = document.createElement("option");
-      option.text = poi.poiName;
-      option.value = poi.poiId;
-      poiSelect.appendChild(option);
-    });
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-
 
   const poiContainer = document.getElementById("poiContainer");
   const addPoiButton = document.getElementById("addPoi");
@@ -68,9 +48,46 @@ fetch('http://localhost:8080/getPOIsForJourney')
       poiContainer.appendChild(newDiv);
     }
 
-    addNewPoi();
+    
 
-  
+    const poiSelect2 = document.getElementById("pois");
+
+fetch('http://localhost:8080/getPOIsForJourney')
+  .then(response => response.json())
+  .then(data => {
+    // Clear existing options from the select element
+    //poiSelect.innerHTML = "Choose a place";
+
+    // Loop through the response data and create new option elements
+    data.forEach(poi => {
+      const option = document.createElement("option");
+      option.text = poi.poiName;
+      option.value = poi.poiId;
+      poiSelect2.appendChild(option);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+  const poiSelect = document.getElementById("pois2");
+  fetch('http://localhost:8080/getPOIsForJourney')
+  .then(response => response.json())
+  .then(data => {
+    // Clear existing options from the select element
+    //poiSelect.innerHTML = "Choose a place";
+
+    // Loop through the response data and create new option elements
+    data.forEach(poi => {
+      const option = document.createElement("option");
+      option.text = poi.poiName;
+      option.value = poi.poiId;
+      poiSelect.appendChild(option);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
   // Get the values of the created divs
   function getValues() {
     const values = [];
@@ -126,16 +143,21 @@ tagsSelected = tagsSelected.map((tag) => {
   return parseInt(tag) + 1;
 });
 
+  const poiDrop1= document.getElementById('pois2');
+  var pois1 = poiDrop.value;
+
+  var journeyDate1 = form.journeyDate2.value;
+  var journeyTime1 = form.journeyTime2.value;
+
   const poiDrop= document.getElementById('pois');
   var pois = poiDrop.value;
 
   var journeyDate = form.journeyDate1.value;
   var journeyTime = form.journeyTime1.value;
-
   
 
   const valuesArray = getValues();
-  const journeyArray = [ [pois, journeyDate, journeyTime] ].concat(valuesArray);
+  const journeyArray = [ [pois1, journeyDate1, journeyTime1] ,[pois, journeyDate, journeyTime]].concat(valuesArray);
   
   var data = {
     journeyTitle: title,
