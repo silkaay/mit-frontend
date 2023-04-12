@@ -560,7 +560,7 @@ function releasePOI(poiId) {
       const releaseButton = document.getElementById('releasePoi');
       releaseButton.parentNode.removeChild(releaseButton);
       //läd seite neu um schloss zu entfernen bei getAll
-      //window.location.reload();
+      window.location.reload();
     } else {
       throw new Error('Failed to release POI.');
     }
