@@ -115,7 +115,7 @@ fetch('http://localhost:8080/getPOIsForJourney')
     const poiSelect = div.querySelector("select");
     const poiDate = div.querySelector("input[name='journeyDate']");
     const poiTime = div.querySelector("input[name='journeyTime']");
-    values.push([poiSelect.value, poiDate.value, poiTime.value]);
+    values.push([poiSelect.value, poiTime.value, poiDate.value]);
   });
   return values;
   }
@@ -145,20 +145,34 @@ function postJourney () {
 
   
   const valuesArray = getValues();
-  const journeyArray = [ [pois, journeyDate, journeyTime] ].concat(valuesArray);
+  const journeyArray = [ [pois, journeyTime, journeyDate,] ].concat(valuesArray);
   
   var data = {
-    poiTitle: title,
-    poiLocation: place,
-    poiLatitude: latitude,
-    poiLongitude: longitude,
-    poiDescription: text,
-    poiSeasons: seasonsSelected,
-    poiTags: tagsSelected,
-    poiCategory: category
+    journeyTitle: title,
+    journeyDescription: text,
+    journeySeasons: seasons,
+    journeyTags: tags,
+    journeyCategory: category,
+    journeyPOIs: journeyArray
   };
-  console.log(title, text, category, seasons, tags, pois,"...", journeyDate, "...",journeyTime, getValues());
+  console.log(data);
 
+  fetch("http://localhost:8080/createJourney", {
+  method: 'POST',
+  body: JSON.stringify(data),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+  
+
+})
+.catch((error) => {
+  console.error('Error:', error);
+});  
 }
 
 // Journeys Liste
