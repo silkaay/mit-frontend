@@ -63,12 +63,14 @@ function displayJourneyDetail(journeyId) {
   // Hide all journeys before displaying the detail of a specific journey
   hideAllJourneys();
   currentjourneyId=journeyId;
+
   fetch(`http://localhost:8080/getJourneyDetails/${journeyId}`)
       .then(response => {
           console.log(`Response status: ${response.status}`);
           return response.json();
       })
       .then(journey => {
+
           console.log(`Received journey: ${JSON.stringify(journey)}`);
           const journeyDetailElement = `
       <div class="journey-detail">
@@ -76,6 +78,7 @@ function displayJourneyDetail(journeyId) {
         
         <ul>
           ${journey.journeyPois.map(poi => `
+          
           <div id="poiinJourneys">
           <table>
               <tr>
@@ -96,13 +99,27 @@ function displayJourneyDetail(journeyId) {
                 <td> 
                     <li>
                           <h4>${poi.poiTitle} (${poi.poiLocation})</h4>
-                          <li>Time: ${poi.poisJourneysDate}</li>
-                           <li>Date: ${poi.poisJourneysTime}</li>
+                          <li>Date:${poi.poisJourneysTime} </li>
+                           <li>Time:${poi.poisJourneysDate} </li>
+                           
                           <!-- <li>Blogpost IDs: ${poi.poiJourneysBlogpostIds.join(", ")}</li> -->
                       
                     </li>
                 </td>
+                <td><button id="showpoiJourney" onclick="openPopupPoiInJourney(${poi.poisJourneysPOIId})">Show Details</button><br>
+                <br>
+                    <button id="BlogpostlistePoi"  data-bs-toggle="collapse" data-bs-target="poiblogposts"  onclick="displaypoiBlogs(currentjourneyId)">Show Blogposts</button>
+                </td>
               </tr>
+              <tr>
+                <div class="collapse" id="poiblogposts">
+                    <div id="poiBlogposts">
+                        <h2 id="poiblogsueber">Blogposts</h2>
+                        <ul id="poiBlogsList"></ul>
+                    </div>
+                </div>
+                
+                </tr>
           </table>
         </div>
           `).join("")}
@@ -121,11 +138,13 @@ function displayJourneyDetail(journeyId) {
           <tr>
             <td>Category: ${journey.journeyCategory}</td>
             <td>
-              <button id="commentsliste"  data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayPOIKommentare(${journeyId})">Show Comments</button>
+              <button id="commentsliste"  data-bs-toggle="collapse" data-bs-target="#poiKommentare" data-bs-parnet="poiDetails" onclick="displayJourneyKommentare(${journeyId})">Show Comments</button>
               <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
               <button id="editJourney"> Edit</button>
               <button id="deleteJourney" onclick="deleteJourney(${journeyId}, this)" > Delete</button>
+              <button id="Blogpostliste"  data-bs-toggle="collapse" data-bs-target="JourneyBlogposts" data-bs-parnet="poiDetails" onclick="displayJourneyBlogs(${journeyId})">Show Blogposts</button>
               <button id= "goBack" onclick="goBack()">Go Back</button>
+              
             </td>
           </tr>
         </table>
@@ -282,7 +301,7 @@ function getReviews(journeyId) {
 
 
 
-function displayPOIKommentare(journeyId) {
+function displayJourneyKommentare(journeyId) {
   // Erstelle eine Funktion, um die Kommentare abzurufen
   function getComments() {
       // Rufe die Daten von der API ab
@@ -325,6 +344,71 @@ function displayPOIKommentare(journeyId) {
   // Rufe die Funktion auf, um die Kommentare zu laden
   getComments();
 }
+
+function displayJourneyBlogs(journeyId) {
+    // Erstelle eine Funktion, um die Kommentare abzurufen
+    // Rufe die Daten von der API ab
+    let journeyIds = [];
+    fetch(`http://localhost:8080/getJourneyDetails/${journeyId}`)
+        .then(response => response.json())
+        .then(data => {
+            journeyIds = data.journeyBlogpostIds;
+
+            function viewJourneyBlogs() {
+                const blogpostPromises = journeyIds.map(blogpostId => {
+                    return fetch(`http://localhost:8080/getBlogpostById/${blogpostId}`)
+                        .then(response => response.json())
+                        .then(data => data);
+                });
+
+                Promise.all(blogpostPromises)
+                    .then(blogposts => {
+                        renderBlogposts(blogposts);
+                    })
+                    .catch(error => console.error(error));
+            }
+            // Rufe die Funktion auf, um die Kommentare zu laden
+            viewJourneyBlogs();
+        })
+        .catch(error => console.error(error));
+}
+
+function renderBlogposts(blogposts) {
+    const blogpostsList = document.querySelector('#JourneyBlogsList');
+
+    // clear existing blogposts
+    blogpostsList.innerHTML = '';
+
+    // create new list items for each blogpost
+    blogposts.forEach(blogpost => {
+        const div = document.createElement('div');
+        div.classList.add('blogpost');
+
+        const author = document.createElement('h3');
+        author.textContent = blogpost.blogpostAuthor;
+        div.appendChild(author);
+
+        const title = document.createElement('h4');
+        title.textContent = blogpost.blogpostTitle;
+        div.appendChild(title);
+
+        const creationDate = document.createElement('p');
+        creationDate.textContent = `Created on ${blogpost.blogpostCreationDate}`;
+        div.appendChild(creationDate);
+
+        const text = document.createElement('p');
+        text.textContent = blogpost.blogpostText;
+        div.appendChild(text);
+
+        blogpostsList.appendChild(div);
+    });
+
+    // show the blogposts section
+    const blogpostsSection = document.querySelector('#JourneyBlogposts');
+    blogpostsSection.classList.add('show');
+}
+
+
 
 function deleteComment(commentId, button) {
   // Sende DELETE-Request an den Server
@@ -434,4 +518,251 @@ function submitReview() {
       .catch((error) => {
           console.error("Fehler beim Erstellen der Review:", error);
       });
+}
+
+
+//Popup Pois in journeys
+function openPopupPoiInJourney(poiId) {
+    document.getElementById("myFormPoiInJourney").style.display = "block";
+    document.getElementById("form-overlayPoiInJourney").style.display = "block";
+    displayPOIDetails(poiId);
+    displayPOIKommentare(poiId)
+}
+
+function closePopupPoiInJourney() {
+    document.getElementById("myFormPoiInJourney").style.display = "none";
+    document.getElementById("form-overlayPoiInJourney").style.display = "none";
+}
+
+
+function displayPOIDetails(poiId) {
+
+    fetch("http://localhost:8080/getPOIDetails/" + poiId)
+        .then(response => response.json())
+        .then(data => {
+            // Add or remove the 'show' class to display or hide the POI details section
+            poiDetails.classList.add('show');
+
+
+            poiDetails.innerHTML = `
+          <table>
+            <tr>
+              <th style="width:30%">${data.poiTitle}</th>
+            </tr>
+            <tr>
+                <td></td>
+              <td rowspan="5">Description: ${data.poiDescription}</td>
+            </tr>
+            <tr>
+              <td>${data.poiLocation}</td>
+            </tr>
+            <tr>
+              <td>${displayStars(data.poiReviewAvg)}</td>
+            </tr>
+            <tr>
+              <td>GPS: ${data.poiLatitude},${data.poiLongitude}</td>
+            </tr>
+            <tr>
+              <td>Seasons: ${data.poiSeasons.join(", ")}</td>
+            </tr>
+            <tr>
+              <td>Tags: ${data.poiTags.join(", ")}</td>
+            </tr>
+            <tr>
+              <td>Seasons: ${data.poiCategory}</td>
+              <td>
+                
+                <button id="createcomment" onclick="openPopupCreateCom()">+ Create Comment</button> 
+                
+                
+              </td>
+            </tr>
+          </table>
+         
+          <div id="poiKommentare">
+                        <div id="comments">
+                            <h2 id="commentsueber">Comments</h2>
+                            <ul id="commentListe"></ul>
+                        </div>
+              </div>
+        `;
+            displayPOIKommentare(poiId);
+            const commentBtn = poiDetails.querySelector('.btn-kommentare');
+            if (document.querySelector('#poiKommentare').classList.contains('show')) {
+                commentBtn.click();
+            }
+        })
+        .catch(error => console.error(error));
+}
+
+
+function displaypoiBlogs(journeyId) {
+    // Define a function to retrieve the comments
+    // Fetch data from the API
+    fetch(`http://localhost:8080/getJourneyDetails/${journeyId}`)
+        .then(response => response.json())
+        .then(data => {
+            const poiJourneysBlogpostIds = data.journeyPois
+                .flatMap(poi => poi.poiJourneysBlogpostIds);
+
+            function viewJourneyBlogs() {
+                const blogpostPromises = poiJourneysBlogpostIds.map(blogpostId => {
+                    return fetch(`http://localhost:8080/getBlogpostById/${blogpostId}`)
+                        .then(response => response.json())
+                        .then(data => data);
+                    console.log(data);
+                });
+
+                Promise.all(blogpostPromises)
+                    .then(blogposts => {
+                        renderBlogposts2(blogposts);
+                    })
+                    .catch(error => console.error(error));
+            }
+
+            // Call the function to load the comments
+            viewJourneyBlogs();
+        })
+        .catch(error => console.error(error));
+}
+
+function renderBlogposts2(blogposts) {
+    const blogpostsList = document.querySelector('#poiBlogsList');
+
+    // clear existing blogposts
+    blogpostsList.innerHTML = '';
+
+    // create new list items for each blogpost
+    blogposts.forEach(blogpost => {
+        const div = document.createElement('div');
+        div.classList.add('blogpost');
+
+        const author = document.createElement('h3');
+        author.textContent = blogpost.blogpostAuthor;
+        div.appendChild(author);
+
+        const title = document.createElement('h4');
+        title.textContent = blogpost.blogpostTitle;
+        div.appendChild(title);
+
+        const creationDate = document.createElement('p');
+        creationDate.textContent = `Created on ${blogpost.blogpostCreationDate}`;
+        div.appendChild(creationDate);
+
+        const text = document.createElement('p');
+        text.textContent = blogpost.blogpostText;
+        div.appendChild(text);
+
+        blogpostsList.appendChild(div);
+    });
+
+    // show the blogposts section
+    const blogpostsSection = document.querySelector('#poiblogposts');
+    blogpostsSection.classList.add('show');
+}
+
+
+
+function displayPOIKommentare(poiId) {
+    // Erstelle eine Funktion, um die Kommentare abzurufen
+    function getComments() {
+        // Rufe die Daten von der API ab
+        fetch(`http://localhost:8080/getComments/${poiId}`)
+            .then(response => response.json())
+            .then(comments => {
+                // Leere die Kommentar-Liste
+                const commentListe = document.getElementById('commentListe');
+                commentListe.innerHTML = '';
+
+                // Durchlaufe die Kommentare und füge sie zur Liste hinzu
+                comments.forEach(comment => {
+                    const { commentAuthor, commentDate, commentText, commentId } = comment;
+
+                    // Erstelle ein neues Listenelement für den Kommentar
+                    const li2 = document.createElement('li');
+                    li2.innerHTML = `
+                    <table>
+                        <tr>
+                            <td>${commentAuthor},${commentDate}</td>
+                        </tr>
+                        <tr>
+                            <td>Text: ${commentText}</td>
+                        </tr>
+                        <tr>
+                            <td><button type="submit" id="deletecomments" onclick="deleteCommentsPoi(${commentId}, this)">Delete this Comment</button></td>
+                        </tr>
+                    </table>
+                    <br>
+                    
+                    
+
+                    `;
+
+                    // Füge das Listenelement zur Liste hinzu
+                    commentListe.appendChild(li2);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Rufe die Funktion auf, um die Kommentare zu laden
+    getComments();
+}
+
+function deleteCommentsPoi(commentId, button) {
+    // Sende DELETE-Request an den Server
+    fetch(`http://localhost:8080/deleteComment/${commentId}`, {
+        method: 'DELETE',
+    })
+        .then(response => {
+            if (response.ok) {
+                // Entferne den gelöschten Kommentar aus der Anzeige
+                button.parentNode.parentNode.parentNode.remove();
+            } else {
+                console.error(`Error deleting comment with id ${commentId}: ${response.status}`);
+            }
+        })
+        .catch(error => console.error(`Error deleting comment with id ${commentId}: ${error}`));
+}
+
+//ende Poi liste mit detail bewertung
+
+// Popup für Kommentar erstellen
+function openPopupCreateCom() {
+    document.getElementById("myFormCom").style.display = "block";
+    document.getElementById("form-overlayCom").style.display = "block";
+}
+
+function closePopupCreateCom(){
+    document.getElementById("myFormCom").style.display = "none";
+    document.getElementById("form-overlayCom").style.display = "none";
+}
+
+function createComment(poiId, commentAuthor, commentText) {
+    const data = { poiId, commentAuthor, commentText };
+    let url = "http://localhost:8080/createComment";
+    let request = new Request(url, {
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        method: "POST",
+    });
+    fetch(request)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Antwort vom Server:", data);
+            closePopupCreateCom();
+            location.reload();
+        });
+}
+
+function submitComment(event) {
+    event.preventDefault();
+    const poiId = currentPOIId;
+    const commentAuthor = document.getElementById("Author").value;
+    const commentText = document.getElementById("commenttext").value;
+    createComment(poiId, commentAuthor, commentText);
+
+    // Reset form after submitting comment
+    const form = event.target.closest('form');
+    form.reset();
 }
