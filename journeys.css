@@ -123,7 +123,7 @@ video {
 }
 
 .form-popup input[type=text], .form-popup input[type=date] {
-    width: 32%;
+    width: 25%;
     padding: 6px 6px;
     margin: 8px 0;
     border: 1px solid #ccc;
